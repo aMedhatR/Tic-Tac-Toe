@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="780.0" style="-fx-background-color: Black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="261.0" layoutY="32.0" text="Welcome To " textOverrun="WORD_ELLIPSIS">
+         <font>
+            <Font name="French Script MT" size="58.0" />
+         </font>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="0.15238095238095234">
+               <stops>
+                  <Stop color="#d61111" />
+                  <Stop color="#d61111" offset="0.007662835249042145" />
+                  <Stop color="#ff20c7" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Text layoutX="79.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Fabulous">
+         <font>
+            <Font name="Broadway" size="57.0" />
+         </font>
+         <effect>
+            <Bloom />
+         </effect>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0" startX="0.4714285714285714">
+               <stops>
+                  <Stop color="#53d336" />
+                  <Stop color="#34bcdd" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Text layoutX="429.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tic Tac Toe" textAlignment="CENTER">
+         <font>
+            <Font name="Brush Script MT Italic" size="67.0" />
+         </font>
+         <effect>
+            <Glow />
+         </effect>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0" startX="0.15238095238095234">
+               <stops>
+                  <Stop color="#1e11d7" />
+                  <Stop color="#ff20c7" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Button layoutX="221.0" layoutY="315.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="154.0" text="Sign In" />
+      <Button layoutX="736.0" layoutY="7.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="36.0" text="X" />
+      <Button layoutX="406.0" layoutY="316.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="154.0" text="Sign Up" />
+   </children>
+</AnchorPane>
