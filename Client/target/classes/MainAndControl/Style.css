@@ -1,0 +1,11 @@
+.WelcomePagePaneclass
+{
+    -fx-background-image:url("../Images/WelcomePageBackground.jpg");
+    -fx-background-size: cover;
+}
+
+
+.welcomePageCloseButtonClass
+{
+-fx-background-color: #46cbfe;
+}
