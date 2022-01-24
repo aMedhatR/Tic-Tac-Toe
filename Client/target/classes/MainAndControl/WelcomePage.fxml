@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="WelcomeScenePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="780.0" style="-fx-background-color: black;" styleClass="WelcomePagePaneclass" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainAndControl.WelcomePageControl">
+<AnchorPane fx:id="WelcomeScenePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="780.0" style="-fx-background-color: black;" styleClass="WelcomePagePaneclass" stylesheets="@Styling.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainAndControl.WelcomePageControl">
    <children>
       <Text layoutX="65.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Fabulous">
          <font>
@@ -38,12 +38,18 @@
             <Glow />
          </effect>
       </Text>
-      <Button layoutX="221.0" layoutY="315.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="154.0" text="Sign In" />
+      <Button layoutX="221.0" layoutY="315.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="154.0" styleClass="entry-btn" text="Sign In">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <Button fx:id="welcomePageExitButton" layoutX="736.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#onWelcomeCloseButtonClick" prefHeight="25.0" prefWidth="36.0" styleClass="welcomePageCloseButtonClass" text="X">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button layoutX="406.0" layoutY="316.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="154.0" text="Sign Up" />
+      <Button layoutX="406.0" layoutY="316.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="154.0" styleClass="entry-btn" stylesheets="@Styling.css" text="Sign Up">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <Label fx:id="welcomeText" layoutX="247.0" layoutY="242.0" text="Label" />
    </children>
 </AnchorPane>
