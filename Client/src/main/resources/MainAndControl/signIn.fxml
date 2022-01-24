@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="515.0" prefWidth="782.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="SignInPaneScene" prefHeight="515.0" prefWidth="782.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainAndControl.signInController">
    <right>
       <VBox alignment="CENTER" prefHeight="500.0" prefWidth="293.0" BorderPane.alignment="CENTER">
          <children>
@@ -21,7 +21,7 @@
                   <Image url="@../Images/518215.png" />
                </image>
             </ImageView>
-            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="116.0" style="-fx-border-radius: 25px; -fx-border-color: #7178d6; -fx-background-color: transparent; -fx-border-width: 2px;" styleClass="entry-btn" stylesheets="@Styling.css" text="Sign Up" textAlignment="CENTER" textFill="#7178d6">
+            <Button mnemonicParsing="false" onMouseClicked="#onSignInSignUpButton" prefHeight="30.0" prefWidth="116.0" style="-fx-border-radius: 25px; -fx-border-color: #7178d6; -fx-background-color: transparent; -fx-border-width: 2px;" styleClass="entry-btn" stylesheets="@Styling.css" text="Sign Up" textAlignment="CENTER" textFill="#7178d6">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="483.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SignupController">
+<BorderPane fx:id="SignUpScenePane" prefHeight="483.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainAndControl.SignupController">
    <top>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="700.0" BorderPane.alignment="CENTER">
          <children>
@@ -28,13 +28,16 @@
                   <Image url="@../Images/518215.png" />
                </image>
             </ImageView>
-            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="116.0" style="-fx-border-radius: 25px; -fx-border-color: #7178d6; -fx-background-color: transparent; -fx-border-width: 2px;" styleClass="entry-btn" stylesheets="@Styling.css" text="Sign In" textAlignment="CENTER" textFill="#7178d6">
+            <Button mnemonicParsing="false" onMouseClicked="#onSignUpPageSignInButton" prefHeight="30.0" prefWidth="116.0" style="-fx-border-radius: 25px; -fx-border-color: #7178d6; -fx-background-color: transparent; -fx-border-width: 2px;" styleClass="entry-btn" stylesheets="@Styling.css" text="Sign In" textAlignment="CENTER" textFill="#7178d6">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
                <VBox.margin>
                   <Insets top="60.0" />
                </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children>
       </VBox>
@@ -82,7 +85,7 @@
                   <TextField prefWidth="250.0" promptText="Confirm Password" />
                </children>
             </HBox>
-            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="116.0" style="-fx-border-radius: 25px; -fx-border-color: #7178d6; -fx-background-color: transparent; -fx-border-width: 2px;" styleClass="entry-btn" text="Sign Up" textAlignment="CENTER" textFill="#7178d6">
+            <Button mnemonicParsing="false" onMouseClicked="#onSignUpPageSignUpButton" prefHeight="30.0" prefWidth="116.0" style="-fx-border-radius: 25px; -fx-border-color: #7178d6; -fx-background-color: transparent; -fx-border-width: 2px;" styleClass="entry-btn" text="Sign Up" textAlignment="CENTER" textFill="#7178d6">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
