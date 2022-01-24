@@ -1,9 +1,7 @@
-module com.ticclient.client {
+module com.mycompany.mavenprojettest {
     requires javafx.controls;
     requires javafx.fxml;
 
-    requires org.controlsfx.controls;
-
-    opens MainAndControl to javafx.fxml;
-    exports MainAndControl;
+    opens com.mycompany.mavenprojettest to javafx.fxml;
+    exports com.mycompany.mavenprojettest;
 }
