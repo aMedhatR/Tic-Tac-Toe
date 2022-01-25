@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="cf4f13d2-9853-4765-affa-a1f28285643e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TicTacToeServer/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TicTacToeServer/.idea/ant.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TicTacToeServer/.idea/dbnavigator.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TicTacToeServer/.idea/libraries/TicTacToeServer.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TicTacToeServer/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TicTacToeServer/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TicTacToeServer/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TicTacToeServer/TicTacToeServer.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TicTacToeServer/build/classes/tictactoedb/PlayerM.class" beforeDir="false" afterPath="$PROJECT_DIR$/../TicTacToeServer/build/classes/tictactoedb/PlayerM.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TicTacToeServer/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../TicTacToeServer/nbproject/private/private.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TicTacToeServer/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TicTacToeServer/nbproject/private/private.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TicTacToeServer/nbproject/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../TicTacToeServer/nbproject/project.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TicTacToeServer/src/tictactoedb/PlayerM.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TicTacToeServer/src/tictactoedb/PlayerM.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="24Ca30aFtnq8wu1cNyt0GUU5CtN" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MainAndControl.MainApp" />
+      <module name="Client" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="MainAndControl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MainApp" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cf4f13d2-9853-4765-affa-a1f28285643e" name="Changes" comment="" />
+      <created>1643136854881</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1643136854881</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
