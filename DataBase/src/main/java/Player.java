@@ -1,12 +1,10 @@
-package tictactoedb;
+public class Player {
 
-class Player {
-
-private int id;
-private String name;
-private String password;
-private String email;
-private int score;
+    private int id;
+    private String name;
+    private String password;
+    private String email;
+    private int score;
 
     public Player(String name, String password, String email, int score) {
         this.name = name;

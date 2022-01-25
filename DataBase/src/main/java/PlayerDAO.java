@@ -1,4 +1,3 @@
-package tictactoedb;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-public class PlayerM {
+public class PlayerDAO {
 
     public Connection c;
     public PreparedStatement stmt;
@@ -16,10 +15,10 @@ public class PlayerM {
         try {
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/tictactoe",
-                    "postgres", "E$$r@@");
-            System.out.println("javadb.JavaDB.Connect()");
+                    "postgres", "root");
+            System.out.println("connected");
         } catch (Exception e) {
-            System.out.println("javadb.JavaDB");
+            System.out.println("javadb.JavaDB"+e);
         }
 
     }
@@ -88,27 +87,27 @@ public class PlayerM {
                         rs.getString("password"),
                         rs.getString("email"),
                         rs.getInt("score"));
-                v.add(player);
+                //v.add(player);
                 rs.close();
                 stmt.close();
                 c.close();
+                System.out.println(rs.getString("name"));
 
             }
         } catch (SQLException ex) {
 //            Logger.getLogger(PlayerModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("tictactoedb.PlayerM.getPlayer()");
-
+        System.out.println("signed in successfully ! yay!");
         return v;
 
     }
 
     public static void main(String[] args) throws SQLException, Exception {
         Player player = new Player("eee", "234", "asdsd", 22);
-        PlayerM tic = new PlayerM();
-        tic.getPlayer("eee", "234");
+        PlayerDAO tic = new PlayerDAO();
         tic.Connect();
-//        tic.CreateDBT();
-        tic.CreatePlayer(player);
+        //tic.CreateDBT();
+        tic.getPlayer("eee", "234");
+        //tic.CreatePlayer(player);
     }
 }
