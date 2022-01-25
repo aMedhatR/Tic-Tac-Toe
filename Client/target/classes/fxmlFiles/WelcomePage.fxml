@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="WelcomeScenePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="780.0" style="-fx-background-color: black;" styleClass="WelcomePagePaneclass" stylesheets="@Styling.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainAndControl.WelcomePageControl">
+<AnchorPane fx:id="WelcomeScenePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="780.0" style="-fx-background-color: black;" styleClass="WelcomePagePaneclass" stylesheets="@../cssFiles/Styling.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WelcomePageControl">
    <children>
       <Text layoutX="65.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Fabulous">
          <font>
@@ -38,7 +38,7 @@
             <Glow />
          </effect>
       </Text>
-      <Button layoutX="221.0" layoutY="315.0" mnemonicParsing="false" onMouseClicked="#onWelcomeSignInButtonClick" prefHeight="25.0" prefWidth="154.0" style="-fx-background-color: #46cbfe;" styleClass="entry-btn" stylesheets="@Styling.css" text="Sign In">
+      <Button layoutX="221.0" layoutY="315.0" mnemonicParsing="false" onMouseClicked="#onWelcomeSignInButtonClick" prefHeight="25.0" prefWidth="154.0" style="-fx-background-color: #46cbfe;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css" text="Sign In">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
@@ -46,12 +46,12 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button layoutX="406.0" layoutY="316.0" mnemonicParsing="false" onMouseClicked="#onWelcomeSignUpButtonClick" prefHeight="25.0" prefWidth="154.0" style="-fx-background-color: #46cbfe;" styleClass="entry-btn" stylesheets="@Styling.css" text="Sign Up">
+      <Button layoutX="406.0" layoutY="316.0" mnemonicParsing="false" onMouseClicked="#onWelcomeSignUpButtonClick" prefHeight="25.0" prefWidth="154.0" style="-fx-background-color: #46cbfe;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css" text="Sign Up">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
       <Label fx:id="welcomeText" layoutX="247.0" layoutY="242.0" text="Label" />
-      <Button layoutX="313.0" layoutY="360.0" mnemonicParsing="false" onMouseClicked="#onWelcomeGuestButtonClick" prefHeight="25.0" prefWidth="154.0" style="-fx-background-color: #46cbfe;" styleClass="entry-btn" stylesheets="@Styling.css" text="Sign In As a Guest">
+      <Button layoutX="313.0" layoutY="360.0" mnemonicParsing="false" onMouseClicked="#onWelcomeGuestButtonClick" prefHeight="25.0" prefWidth="154.0" style="-fx-background-color: #46cbfe;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css" text="Sign In As a Guest">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

@@ -6,4 +6,6 @@ module com.ticclient.client {
 
     opens MainAndControl to javafx.fxml;
     exports MainAndControl;
+    exports controllers;
+    opens controllers to javafx.fxml;
 }

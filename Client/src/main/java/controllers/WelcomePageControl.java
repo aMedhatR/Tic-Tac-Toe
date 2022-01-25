@@ -1,5 +1,6 @@
-package MainAndControl;
+package controllers;
 
+import MainAndControl.MainApp;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,6 +21,7 @@ public class WelcomePageControl {
     @FXML
     private AnchorPane WelcomeScenePane;
 
+
     Stage stage;
     Scene scene;
     @FXML
@@ -35,11 +37,12 @@ public class WelcomePageControl {
         }
 
     }
+
     @FXML
     protected void onWelcomeSignInButtonClick() {
 
         stage = (Stage) WelcomeScenePane.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("signIn.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlFiles/signIn.fxml"));
         try {
            scene = new Scene(fxmlLoader.load());
         } catch (IOException e) {
@@ -51,7 +54,7 @@ public class WelcomePageControl {
     protected void onWelcomeSignUpButtonClick() {
 
         stage = (Stage) WelcomeScenePane.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("signup.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlFiles/signup.fxml"));
         try {
             scene = new Scene(fxmlLoader.load());
         } catch (IOException e) {
@@ -63,7 +66,7 @@ public class WelcomePageControl {
     protected void onWelcomeGuestButtonClick() {
 
         stage = (Stage) WelcomeScenePane.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("Home.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlFiles/Home.fxml"));
         try {
             scene = new Scene(fxmlLoader.load());
         } catch (IOException e) {

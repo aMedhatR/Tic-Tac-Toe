@@ -8,13 +8,6 @@
 -fx-background-color : #538bd9 ;
 -fx-background-radius :  20;
 }
-.ButtonsClass
-{
-    -fx-border-radius: 25px;
-    -fx-border-color: #7178d6;
-    -fx-background-color: transparent;
-    -fx-border-width: 2px;
-}
 .entry-btn:pressed
 {
 -fx-background-color : #3e97db ;
@@ -31,4 +24,3 @@
 {
 -fx-background-color: #46cbfe;
 }
-
