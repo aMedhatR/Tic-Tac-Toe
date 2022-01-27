@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -13,7 +20,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="SignUpScenePane" prefHeight="450.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignupController">
+<BorderPane fx:id="SignUpScenePane" prefHeight="450.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignupController">
    <top>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="700.0" BorderPane.alignment="CENTER">
          <children>
@@ -56,49 +63,88 @@
       </VBox>
    </right>
    <center>
-      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="400.0" spacing="20.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="400.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" spacing="20.0">
+            <VBox alignment="CENTER">
                <children>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/email.png" />
-                     </image>
-                  </ImageView>
-                  <TextField prefWidth="250.0" promptText="Email" />
+                  <HBox alignment="CENTER" spacing="20.0">
+                     <children>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/email.png" />
+                           </image>
+                        </ImageView>
+                        <TextField fx:id="email" prefWidth="250.0" promptText="Email" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="errorEmail" textFill="RED">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
                </children>
-            </HBox>
-            <HBox alignment="CENTER" spacing="20.0">
+            </VBox>
+            <VBox alignment="CENTER">
                <children>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/user.png" />
-                     </image>
-                  </ImageView>
-                  <TextField prefWidth="250.0" promptText="Username" />
+                  <HBox alignment="CENTER" spacing="20.0">
+                     <children>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/user.png" />
+                           </image>
+                        </ImageView>
+                        <TextField fx:id="username" prefWidth="250.0" promptText="Username" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="errorUsername" textFill="RED">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
                </children>
-            </HBox>
-            <HBox alignment="CENTER" spacing="20.0">
+            </VBox>
+            <VBox alignment="CENTER">
                <children>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/locked.png" />
-                     </image>
-                  </ImageView>
-                  <TextField prefWidth="250.0" promptText="Password" />
+                  <HBox alignment="CENTER" spacing="20.0">
+                     <children>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/locked.png" />
+                           </image>
+                        </ImageView>
+                        <TextField fx:id="password" prefWidth="250.0" promptText="Password" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="errorPassword" textFill="RED">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
                </children>
-            </HBox>
-            <HBox alignment="CENTER" spacing="20.0">
+            </VBox>
+            <VBox alignment="CENTER">
                <children>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/synchronize.png" />
-                     </image>
-                  </ImageView>
-                  <TextField prefWidth="250.0" promptText="Confirm Password" />
+                  <HBox alignment="CENTER" spacing="20.0">
+                     <children>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/synchronize.png" />
+                           </image>
+                        </ImageView>
+                        <TextField fx:id="confirmPassword" prefWidth="250.0" promptText="Confirm Password" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="errorConfirmPassword" textFill="RED">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
                </children>
-            </HBox>
-            <Button mnemonicParsing="false" onMouseClicked="#onSignUpPageSignUpButton" prefHeight="30.0" prefWidth="116.0" style="-fx-border-radius: 25px; -fx-border-color: #7178d6; -fx-background-color: transparent; -fx-border-width: 2px;" styleClass="entry-btn" text="Sign Up" textAlignment="CENTER" textFill="#7178d6">
+            </VBox>
+            <Button fx:id="signUp" mnemonicParsing="false" onMouseClicked="#onSignUpPageSignUpButton" prefHeight="30.0" prefWidth="116.0" style="-fx-border-radius: 25px; -fx-border-color: #7178d6; -fx-background-color: transparent; -fx-border-width: 2px;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css" text="Sign Up" textAlignment="CENTER" textFill="#7178d6">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
