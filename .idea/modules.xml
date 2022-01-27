@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Client/Client.iml" filepath="$PROJECT_DIR$/Client/Client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/Tic-Tac-Toe.iml" filepath="$PROJECT_DIR$/.idea/Tic-Tac-Toe.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Server/Server.iml" filepath="$PROJECT_DIR$/Server/Server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/tobeaddedToMainRepo.iml" filepath="$PROJECT_DIR$/.idea/tobeaddedToMainRepo.iml" />
     </modules>
   </component>
 </project>
