@@ -68,14 +68,7 @@ public class SignupController implements Initializable {
     @FXML
     protected void goToHome() {
 
-        stage = (Stage) SignUpScenePane.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlFiles/WelcomePage.fxml"));
-        try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        stage.setScene(scene);
+        CommonControllers.goToHome(SignUpScenePane);
     }
 
     @FXML
@@ -254,16 +247,7 @@ public class SignupController implements Initializable {
 
     @FXML
     protected void onWelcomeCloseButtonClick() {
-        Alert WelcomeExitAlert = new Alert(Alert.AlertType.CONFIRMATION);
-        WelcomeExitAlert.setTitle("Exit");
-        WelcomeExitAlert.setHeaderText("you're about to logout!");
-        WelcomeExitAlert.setContentText("Are You Sure you want to Exit ?");
-        if (WelcomeExitAlert.showAndWait().get() == ButtonType.OK) {
-            stage = (Stage) SignUpScenePane.getScene().getWindow();
-            System.out.println("you logout");
-            stage.close();
-        }
-
+        CommonControllers.closeWindow(SignUpScenePane);
     }
 
 

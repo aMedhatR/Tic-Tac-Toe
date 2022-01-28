@@ -26,15 +26,7 @@ public class WelcomePageControl {
     Scene scene;
     @FXML
     protected void onWelcomeCloseButtonClick() {
-        Alert WelcomeExitAlert= new Alert(Alert.AlertType.CONFIRMATION);
-        WelcomeExitAlert.setTitle("Exit");
-        WelcomeExitAlert.setHeaderText("you're about to logout!");
-        WelcomeExitAlert.setContentText("Are You Sure you want to Exit ?");
-        if (WelcomeExitAlert.showAndWait().get()== ButtonType.OK) {
-            stage = (Stage) WelcomeScenePane.getScene().getWindow();
-            System.out.println("you logout");
-            stage.close();
-        }
+        CommonControllers.closeWindow(WelcomeScenePane);
 
     }
 
