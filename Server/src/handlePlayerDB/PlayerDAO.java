@@ -53,7 +53,6 @@ public class PlayerDAO {
 
     public String CreatePlayer(Player player) throws SQLException {
         String res = "";
-
         try {
             stmt = c.prepareStatement("INSERT INTO Players (name , password , email , score) VALUES (? , ? , ? , ?)", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             stmt.setString(1, player.getName());
@@ -101,7 +100,6 @@ public class PlayerDAO {
                 //rs.close();
                 //stmt.close();
                 //c.close();
-                System.out.println(rs.getString("name"));
 
             }
         } catch (SQLException ex) {

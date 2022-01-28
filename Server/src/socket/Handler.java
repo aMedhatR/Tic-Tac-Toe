@@ -16,10 +16,13 @@ public class Handler extends Thread {
 
     DataInputStream dis;
     PrintStream ps;
+    Socket socketTo;
+
     static Vector<Handler> handleVector = new Vector<Handler>();
 
     public Handler(Socket s) {
         try {
+            socketTo = s;
             dis = new DataInputStream(s.getInputStream());
             ps = new PrintStream(s.getOutputStream());
             handleVector.add(this);
@@ -40,8 +43,17 @@ public class Handler extends Thread {
                         break;
                 }
             } catch (IOException ioEs) {
-                System.out.println(ioEs);
-            } 
+                try {
+                    dis.close();
+                    socketTo.close();
+                    ps.close();
+                    break;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(" : "+ioEs);
+            }
+
         }
     }
     
