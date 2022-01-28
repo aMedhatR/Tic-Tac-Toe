@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -20,11 +15,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="SignUpScenePane" prefHeight="450.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignupController">
+<BorderPane fx:id="SignUpScenePane" prefHeight="450.0" prefWidth="780.0" style="-fx-background-color: #1c2e4a;" styleClass="signInBack" stylesheets="@../cssFiles/Styling.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignupController">
    <top>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="700.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="37.0" fitWidth="58.0" layoutX="21.0" layoutY="11.0" onMouseClicked="#goToHome" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/home.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children></AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" />
             <Text fill="#4856cf" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #7178d6; -fx-font-size: 50px; -fx-font-weight: bolder;" text="Tic Tac Toe" wrappingWidth="271.286376953125" />
             <AnchorPane prefHeight="200.0" prefWidth="200.0" />
@@ -48,7 +53,7 @@
                   <Image url="@../Images/518215.png" />
                </image>
             </ImageView>
-            <Button mnemonicParsing="false" onMouseClicked="#onSignUpPageSignInButton" prefHeight="30.0" prefWidth="116.0" style="-fx-border-radius: 25px; -fx-border-color: #7178d6; -fx-background-color: transparent; -fx-border-width: 2px;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css" text="Sign In" textAlignment="CENTER" textFill="#7178d6">
+            <Button mnemonicParsing="false" onMouseClicked="#onSignUpPageSignInButton" prefHeight="30.0" prefWidth="116.0" style="-fx-border-radius: 25px; -fx-border-color: #7178d6; -fx-background-color: transparent; -fx-border-width: 2px;" stylesheets="@../cssFiles/Styling.css" text="Sign In" textAlignment="CENTER" textFill="#7178d6">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -74,7 +79,7 @@
                               <Image url="@../Images/email.png" />
                            </image>
                         </ImageView>
-                        <TextField fx:id="email" prefWidth="250.0" promptText="Email" />
+                        <TextField fx:id="email" prefWidth="250.0" promptText="Email" styleClass="inputfields" stylesheets="@../cssFiles/Styling.css" />
                      </children>
                   </HBox>
                   <Label fx:id="errorEmail" textFill="RED">
@@ -96,7 +101,7 @@
                               <Image url="@../Images/user.png" />
                            </image>
                         </ImageView>
-                        <TextField fx:id="username" prefWidth="250.0" promptText="Username" />
+                        <TextField fx:id="username" prefWidth="250.0" promptText="Username" styleClass="inputfields" stylesheets="@../cssFiles/Styling.css" />
                      </children>
                   </HBox>
                   <Label fx:id="errorUsername" textFill="RED">
@@ -115,7 +120,7 @@
                               <Image url="@../Images/locked.png" />
                            </image>
                         </ImageView>
-                        <TextField fx:id="password" prefWidth="250.0" promptText="Password" />
+                        <PasswordField fx:id="password" prefHeight="25.0" prefWidth="250.0" promptText="Password" styleClass="inputfields" stylesheets="@../cssFiles/Styling.css" />
                      </children>
                   </HBox>
                   <Label fx:id="errorPassword" textFill="RED">
@@ -134,7 +139,7 @@
                               <Image url="@../Images/synchronize.png" />
                            </image>
                         </ImageView>
-                        <TextField fx:id="confirmPassword" prefWidth="250.0" promptText="Confirm Password" />
+                        <PasswordField fx:id="confirmPassword" prefHeight="25.0" prefWidth="250.0" promptText="Confirm Password" styleClass="inputfields" stylesheets="@../cssFiles/Styling.css" />
                      </children>
                   </HBox>
                   <Label fx:id="errorConfirmPassword" textFill="RED">

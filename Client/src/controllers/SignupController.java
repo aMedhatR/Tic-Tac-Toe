@@ -62,7 +62,18 @@ public class SignupController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
+    @FXML
+    protected void goToHome() {
 
+        stage = (Stage) SignUpScenePane.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlFiles/WelcomePage.fxml"));
+        try {
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.setScene(scene);
+    }
 
     @FXML
     protected void onSignUpPageSignUpButton() throws IOException {

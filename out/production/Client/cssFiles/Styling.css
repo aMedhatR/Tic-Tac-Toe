@@ -24,3 +24,27 @@
 {
 -fx-background-color: #46cbfe;
 }
+.signInBack
+{
+    -fx-background-image:url("../Images/signInBG3.jpg");
+    -fx-background-size: cover;
+}
+.inputfields
+{
+    -fx-background-color: #0b1324;
+    -fx-border-color: #21f9fb;
+    -fx-text-fill:#21f9fb;
+}
+.specialButtons
+{
+    -fx-border-radius: 25px;
+    -fx-border-color: #21f9fb;
+    -fx-background-color: transparent;
+    -fx-border-width: 2px;
+    -fx-text-fill:#21f9fb;
+    -fx-font-size: 14px;
+}
+.specialButtons:hover
+{
+    -fx-background-color: #242424;
+}

@@ -48,6 +48,18 @@ public class HomeController implements Initializable {
         stage.setScene(scene);
     }
     @FXML
+    protected void goToHome() {
+
+        stage = (Stage) HomePagepaneScene.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlFiles/WelcomePage.fxml"));
+        try {
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.setScene(scene);
+    }
+    @FXML
     protected void onWelcomeCloseButtonClick() {
         Alert WelcomeExitAlert= new Alert(Alert.AlertType.CONFIRMATION);
         WelcomeExitAlert.setTitle("Exit");
