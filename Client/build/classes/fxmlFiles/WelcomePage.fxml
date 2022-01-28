@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="WelcomeScenePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="780.0" style="-fx-background-color: black;" styleClass="WelcomePagePaneclass" stylesheets="@../cssFiles/Styling.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WelcomePageControl">
+   <children>
+      <Text layoutX="65.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Fabulous">
+         <font>
+            <Font name="Broadway" size="57.0" />
+         </font>
+         <effect>
+            <Bloom />
+         </effect>
+         <fill>
+            <LinearGradient endX="0.8714285714285714" endY="0.4333333333333334" startX="0.23809523809523805" startY="0.2095238095238095">
+               <stops>
+                  <Stop color="WHITE" />
+                  <Stop color="WHITE" offset="0.007662835249042145" />
+                  <Stop color="#0bff00" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Text fill="#00ff3c" layoutX="390.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tic Tac Toe" textAlignment="CENTER">
+         <font>
+            <Font name="Brush Script MT Italic" size="67.0" />
+         </font>
+         <effect>
+            <Glow />
+         </effect>
+      </Text>
+      <Button layoutX="221.0" layoutY="315.0" mnemonicParsing="false" onMouseClicked="#onWelcomeSignInButtonClick" prefHeight="25.0" prefWidth="154.0" style="-fx-background-color: #46cbfe;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css" text="Sign In">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button fx:id="welcomePageExitButton" layoutX="736.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#onWelcomeCloseButtonClick" prefHeight="25.0" prefWidth="36.0" styleClass="welcomePageCloseButtonClass" text="X">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button layoutX="406.0" layoutY="316.0" mnemonicParsing="false" onMouseClicked="#onWelcomeSignUpButtonClick" prefHeight="25.0" prefWidth="154.0" style="-fx-background-color: #46cbfe;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css" text="Sign Up">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Label fx:id="welcomeText" layoutX="247.0" layoutY="242.0" text="Label" />
+      <Button layoutX="313.0" layoutY="360.0" mnemonicParsing="false" onMouseClicked="#onWelcomeGuestButtonClick" prefHeight="25.0" prefWidth="154.0" style="-fx-background-color: #46cbfe;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css" text="Sign In As a Guest">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

@@ -1,19 +1,20 @@
 package startServer;
 
 import handlePlayerDB.PlayerDAO;
+import java.net.ServerSocket;
 import socket.SocketServer;
 
 public class App {
 
     private static PlayerDAO db;
-    private static SocketServer serverSocket;
+    private static ServerSocket serverSocket;
 
-    public static void setDb()
+    public static void setDB()
     {
         db = new PlayerDAO();
     }
 
-    public static void setServerSocket(SocketServer serverSocket1)
+    public static void setServerSocket(ServerSocket serverSocket1)
     {
         serverSocket = serverSocket1;
     }
@@ -23,7 +24,7 @@ public class App {
         return db;
     }
 
-    public static SocketServer getServerSocket() {
+    public static ServerSocket getServerSocket() {
         return serverSocket;
     }
 

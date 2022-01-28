@@ -12,10 +12,10 @@ public class SocketServer {
 
     public SocketServer() {
         try {
-            serverSocket = new java.net.ServerSocket(5005);
-     //       App.setServerSocket(serverSocket);
-     //       App.getDB();
-
+            serverSocket = new ServerSocket(5070);
+            App.setServerSocket(serverSocket);
+            App.setDB();
+            
             while (true) {
                 Socket s = serverSocket.accept();
                 new Handler(s);

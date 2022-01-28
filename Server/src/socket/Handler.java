@@ -7,9 +7,12 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class Handler extends Thread{
+public class Handler extends Thread {
 
     DataInputStream dis;
     PrintStream ps;
@@ -30,19 +33,27 @@ public class Handler extends Thread{
         while (true) {
             try {
                 String msg = dis.readLine();
-               String[] allMsg =  msg.split("___");
-               switch (allMsg[0]) {
-                   case "signUp":
-      //                 App.getDB(.CreatePlayer();
-                       break;
-               }
-                System.out.println(msg);
-
-
-
+                String[] allMsg = msg.split("___");
+                switch (allMsg[0]) {
+                    case "signUp":
+                        signUp(allMsg);
+                        break;
+                }
             } catch (IOException ioEs) {
                 System.out.println(ioEs);
-            }
+            } 
         }
     }
+    
+    
+    public void signUp(String[] allMsg)
+    {
+        Player player = new Player(allMsg[1],allMsg[3],allMsg[2],10);
+        try {
+            App.getDB().CreatePlayer(player);
+        } catch (SQLException ex2) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex2);
+        }
+    }
+    
 }

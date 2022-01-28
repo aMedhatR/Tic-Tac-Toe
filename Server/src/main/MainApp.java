@@ -11,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
+import socket.SocketServer;
+import startServer.App;
 
 /**
  *
@@ -33,6 +35,6 @@ public class MainApp extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException, Exception {
-
+            new SocketServer();
     }
 }

@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
+import socket.SocketServer;
 
 public class PlayerDAO {
 
@@ -51,7 +52,7 @@ public class PlayerDAO {
     }
 
     public boolean CreatePlayer(Player player) throws SQLException {
-
+        
         try {
 //            c.setAutoCommit(false);
             stmt = c.prepareStatement("INSERT INTO Players (name , password , email , score) VALUES (? , ? , ? , ?)", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -67,10 +68,9 @@ public class PlayerDAO {
 
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
-            System.out.println("code: "+e.getErrorCode());
-            System.out.println("message: "+ e.getMessage());
-
-            return false;
+//            System.out.println("code: "+e.getErrorCode());
+//            System.out.println("message: "+ e.getMessage());
+              return false;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -115,7 +115,7 @@ public class PlayerDAO {
     }
 
 //    public static void main(String[] args) throws SQLException, Exception {
-//        new ServerSocket();
+//        new SocketServer();
 //        Player player = new Player("nora", "234", "alaa", 22);
 //        PlayerDAO tic = new PlayerDAO();
 //        tic.Connect();

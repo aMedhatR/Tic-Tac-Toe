@@ -142,10 +142,10 @@ public class SignupController implements Initializable {
             DataInputStream dis;
             PrintStream ps;
 
-            mySocket = new Socket("127.0.0.1", 5005);
+            mySocket = new Socket("127.0.0.1", 5070);
             dis = new DataInputStream(mySocket.getInputStream());
             ps = new PrintStream(mySocket.getOutputStream());
-
+            System.out.println("client");
             ps.println("signUp___"+userNameTxt+"___"+emailTxt+"___"+passwordTxt);
 
             new Thread(new Runnable() {
