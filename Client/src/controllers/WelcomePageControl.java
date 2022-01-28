@@ -50,6 +50,7 @@ public class WelcomePageControl {
         }
         stage.setScene(scene);
     }
+
     @FXML
     protected void onWelcomeSignUpButtonClick() {
 
@@ -62,6 +63,7 @@ public class WelcomePageControl {
         }
         stage.setScene(scene);
     }
+
     @FXML
     protected void onWelcomeGuestButtonClick() {
 

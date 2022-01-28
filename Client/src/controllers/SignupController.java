@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
+import mainPk.HandleOnlineSocket;
 import mainPk.MainApp;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -57,6 +58,8 @@ public class SignupController implements Initializable {
     private TextField password;
     @FXML
     private TextField confirmPassword;
+
+    Thread thread;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -150,25 +153,17 @@ public class SignupController implements Initializable {
 
         if (checkValid) {
 
-            //////////////////////////////////////////////////////////////////////////////////////
-            Socket mySocket;
-            DataInputStream dis;
-            PrintStream ps;
+            // send data to server
+            HandleOnlineSocket.getSendStream().println("signUp___"+userNameTxt+"___"+emailTxt+"___"+passwordTxt);
 
-            mySocket = new Socket("127.0.0.1", 5200);
-            dis = new DataInputStream(mySocket.getInputStream());
-            ps = new PrintStream(mySocket.getOutputStream());
-            //////////////////////////////////////////////////////////////////////////////////////
-            
-            ps.println("signUp___"+userNameTxt+"___"+emailTxt+"___"+passwordTxt);
-
-            new Thread(new Runnable() {
+            // get data from server
+            // to not hold the screen in gui client => open it in anther thread
+             thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    while (true) {
                         String replyMsg;
                         try {
-                            replyMsg = dis.readLine();
+                            replyMsg = HandleOnlineSocket.getReceiveStream().readLine();
                             System.out.println(replyMsg);
                             String[] allReplyMsg = replyMsg.split("___");
                             if(allReplyMsg[0].equals("true"))
@@ -195,10 +190,51 @@ public class SignupController implements Initializable {
 
                         } catch (IOException ex) {
                         }
-                    }
+                        finally {
+                                thread.stop();
+                        }
                 }
+            });
 
-            }).start();
+            thread.start();
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    while (true) {
+//                        String replyMsg;
+//                        try {
+//                            replyMsg = dis.readLine();
+//                            System.out.println(replyMsg);
+//                            String[] allReplyMsg = replyMsg.split("___");
+//                            if(allReplyMsg[0].equals("true"))
+//                            {
+//                                Platform.runLater(() -> {
+//                                    onSignUpPageSignInButton();
+//                                });
+//                            }
+//                            else
+//                            {
+//                                if(allReplyMsg[1].equals("name"))
+//                                {
+//                                    Platform.runLater(() -> {
+//                                        errorUsername.setText("Name "+allReplyMsg[2]);
+//                                    });
+//                                }
+//                                else if(allReplyMsg[1].equals("email"))
+//                                {
+//                                    Platform.runLater(() -> {
+//                                        errorEmail.setText("Email "+allReplyMsg[2]);
+//                                    });
+//                                }
+//                            }
+//
+//                        } catch (IOException ex) {
+//                        }
+//                    }
+//                }
+//
+//            }).start();
+//
         }
     }
 
