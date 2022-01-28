@@ -12,7 +12,9 @@ public class SocketServer {
 
     public SocketServer() {
         try {
-            serverSocket = new ServerSocket(5070);
+            serverSocket = new ServerSocket(5200);
+            System.out.println("Connected to serverSocket");
+
             App.setServerSocket(serverSocket);
             App.setDB();
             
@@ -26,7 +28,7 @@ public class SocketServer {
 //            s.close();
 //            serverSocket.close();
         } catch (Exception e) {
-            System.out.println("error from server " + e);
+            System.out.println("error from serverSocket: " + e);
         }
     }
 

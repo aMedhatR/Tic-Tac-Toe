@@ -138,14 +138,17 @@ public class SignupController implements Initializable {
         boolean checkValid = checkValidConfirmPassword && checkValidEmail && checkValidName && checkValidPassword;
 
         if (checkValid) {
+
+            //////////////////////////////////////////////////////////////////////////////////////
             Socket mySocket;
             DataInputStream dis;
             PrintStream ps;
 
-            mySocket = new Socket("127.0.0.1", 5070);
+            mySocket = new Socket("127.0.0.1", 5200);
             dis = new DataInputStream(mySocket.getInputStream());
             ps = new PrintStream(mySocket.getOutputStream());
-            System.out.println("client");
+            //////////////////////////////////////////////////////////////////////////////////////
+            
             ps.println("signUp___"+userNameTxt+"___"+emailTxt+"___"+passwordTxt);
 
             new Thread(new Runnable() {
@@ -156,26 +159,35 @@ public class SignupController implements Initializable {
                         try {
                             replyMsg = dis.readLine();
                             System.out.println(replyMsg);
+                            String[] allReplyMsg = replyMsg.split("___");
+                            if(allReplyMsg[0].equals("true"))
+                            {
+                                Platform.runLater(() -> {
+                                    onSignUpPageSignInButton();
+                                });
+                            }
+                            else
+                            {
+                                if(allReplyMsg[1].equals("name"))
+                                {
+                                    Platform.runLater(() -> {
+                                        errorUsername.setText("Name "+allReplyMsg[2]);
+                                    });
+                                }
+                                else if(allReplyMsg[1].equals("email"))
+                                {
+                                    Platform.runLater(() -> {
+                                        errorEmail.setText("Email "+allReplyMsg[2]);
+                                    });
+                                }
+                            }
+
                         } catch (IOException ex) {
                         }
                     }
                 }
 
             }).start();
-
-
-            // if return true form server
-            // go to second stage
-            // stage = (Stage) SignUpScenePane.getScene().getWindow();
-            // FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlFiles/signup.fxml"));
-            // try {
-            // scene = new Scene(fxmlLoader.load());
-            // } catch (IOException e) {
-            // e.printStackTrace();
-            // }
-            // stage.setScene(scene);
-            //else
-            // show error from server
         }
     }
 

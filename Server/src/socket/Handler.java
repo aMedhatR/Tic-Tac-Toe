@@ -50,7 +50,8 @@ public class Handler extends Thread {
     {
         Player player = new Player(allMsg[1],allMsg[3],allMsg[2],10);
         try {
-            App.getDB().CreatePlayer(player);
+            String res = App.getDB().CreatePlayer(player);
+            ps.println(res);
         } catch (SQLException ex2) {
             Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex2);
         }
