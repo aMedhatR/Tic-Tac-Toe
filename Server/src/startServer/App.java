@@ -1,6 +1,8 @@
 package startServer;
 
 
+import player.PlayerHandler;
+
 import java.net.ServerSocket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +16,7 @@ public class App {
     {
         try {
             db = new DbHandler();
+      //      new PlayerHandler().CreateDBT();
         } catch (Exception ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }

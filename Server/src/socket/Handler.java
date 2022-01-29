@@ -62,7 +62,7 @@ public class Handler extends Thread {
     
     public void signUp(String[] allMsg)
     {
-        Player player = new Player(allMsg[1],allMsg[3],allMsg[2],10);
+        Player player = new Player(allMsg[1],allMsg[3],allMsg[2],0);
         try {
             String res = playerToDb.CreatePlayer(player);
             ps.println(res);

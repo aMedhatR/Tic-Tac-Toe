@@ -29,7 +29,7 @@ public class PlayerHandler {
             + " password varchar(15) NOT NULL,"
             + " email varchar(100) unique NOT NULL,"
             + " score integer,"
-            + " status boolean NOT NULL DEFAULT FALSE"
+            + " status boolean NOT NULL DEFAULT FALSE,"
             + " PRIMARY KEY (id)"
             + ")";
 
