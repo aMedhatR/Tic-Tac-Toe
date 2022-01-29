@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/ITI%20courses/JAVA/Project/Tic-Tac-Toe/TicTacToeServer/src/player/Player.java</file>
+            <file>file:/D:/ITI%20courses/JAVA/Project/Tic-Tac-Toe/TicTacToeServer/src/database/App.java</file>
+            <file>file:/D:/ITI%20courses/JAVA/Project/Tic-Tac-Toe/TicTacToeServer/src/database/DBConnection.java</file>
+            <file>file:/D:/ITI%20courses/JAVA/Project/Tic-Tac-Toe/TicTacToeServer/src/game/GameHandler.java</file>
+            <file>file:/D:/ITI%20courses/JAVA/Project/Tic-Tac-Toe/TicTacToeServer/src/player/PlayerHandler.java</file>
+            <file>file:/D:/ITI%20courses/JAVA/Project/Tic-Tac-Toe/TicTacToeServer/src/game/Game.java</file>
+            <file>file:/D:/ITI%20courses/JAVA/Project/Tic-Tac-Toe/TicTacToeServer/src/database/DbHandler.java</file>
+        </group>
     </open-files>
 </project-private>
