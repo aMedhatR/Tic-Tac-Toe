@@ -1,5 +1,6 @@
 package socket;
 
+import player.PlayerHandler;
 import startServer.App;
 
 import java.net.Socket;
@@ -10,6 +11,7 @@ public class SocketServer {
     ServerSocket serverSocket;
     Socket s;
 
+
     public SocketServer() {
         try {
             serverSocket = new ServerSocket(5200);
@@ -17,6 +19,8 @@ public class SocketServer {
 
             App.setServerSocket(serverSocket);
             App.setDB();
+
+
             
             while (true) {
                 Socket s = serverSocket.accept();

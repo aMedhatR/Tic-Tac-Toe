@@ -19,6 +19,8 @@ import java.util.logging.Logger;
 public class PlayerHandler {
 
     static DbHandler db = App.getDB();
+    Vector<Player> v = new Vector<Player>();
+    Player player;
 
     private static final String SQL_CREATE = "CREATE TABLE players"
             + "("
@@ -27,6 +29,7 @@ public class PlayerHandler {
             + " password varchar(15) NOT NULL,"
             + " email varchar(100) unique NOT NULL,"
             + " score integer,"
+            + " status boolean NOT NULL DEFAULT FALSE"
             + " PRIMARY KEY (id)"
             + ")";
 
@@ -73,23 +76,21 @@ public class PlayerHandler {
         }
     }
 
-
-
-
-
-
-    Vector<Player> v = new Vector<Player>();
-    Player player;
-
-    public Vector<Player> getPlayer(String name, String password) {
+    public String getPlayer(String name, String password) {
+        String res = "";
         try {
             PreparedStatement stmt = db.connection.prepareStatement("SELECT * FROM players WHERE name=? AND password=?");
             stmt.setString(1, name);
             stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();
-            rs.next();
-            if (rs.getString("name").equals(name) && rs.getString("password").equals(password)) {
+            //rs.next();
+            boolean isExist = rs.next();
 
+            if (isExist) {
+                 res = "true___"+rs.getString("name")+rs.getInt("score");
+                 //PreparedStatement stmtUpdate = db.connection.prepareStatement("UPDATE players WHERE name=? AND password=? set status=TRUE");
+
+                ////////////// update status
                 Player player = new Player(
                         rs.getString("name"),
                         rs.getString("password"),
@@ -97,14 +98,21 @@ public class PlayerHandler {
                         rs.getInt("score"));
                 v.add(player);
             }
+            else
+            {
+                // if user don't exist
+                res = "false___notExist";
+            }
         } catch (SQLException ex) {
+               res = "false___error";
 //            Logger.getLogger(PlayerModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("tictactoedb.PlayerM.getPlayer()");
-
-        return v;
+        finally {
+            return res;
+        }
 
     }
+
     private static Map<Integer, Player> players;
     public static ArrayList<Player> playerslist;
 
