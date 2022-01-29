@@ -33,6 +33,22 @@ public class PlayerHandler {
             + " PRIMARY KEY (id)"
             + ")";
 
+
+//    private static final String SQL_UPDATE_TABLE = "ALTER TABLE players ADD"
+//            + " status boolean NOT NULL DEFAULT FALSE";
+//
+//
+//    public void UPDATETablePlayers() throws SQLException {
+//        try {
+//            PreparedStatement statement = db.connection.prepareStatement(SQL_UPDATE_TABLE);
+//            statement.executeUpdate();
+//        } catch (SQLException e) {
+//            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
     public void CreateDBT() throws SQLException {
         try {
 //            connention.setAutoCommit(false);
@@ -88,8 +104,10 @@ public class PlayerHandler {
 
             if (isExist) {
                  res = "true___"+rs.getString("name")+rs.getInt("score");
-                 //PreparedStatement stmtUpdate = db.connection.prepareStatement("UPDATE players WHERE name=? AND password=? set status=TRUE");
-
+                 PreparedStatement stmtUpdate = db.connection.prepareStatement("UPDATE players set status=TRUE WHERE name=? ");
+                 stmtUpdate.setString(1, name);
+                 int updataNumber = stmtUpdate.executeUpdate();
+                System.out.println(updataNumber);
                 ////////////// update status
                 Player player = new Player(
                         rs.getString("name"),
@@ -105,6 +123,7 @@ public class PlayerHandler {
             }
         } catch (SQLException ex) {
                res = "false___error";
+               System.out.println(ex);
 //            Logger.getLogger(PlayerModel.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally {

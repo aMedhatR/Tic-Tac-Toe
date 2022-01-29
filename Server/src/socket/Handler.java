@@ -2,7 +2,6 @@ package socket;
 
 import player.Player;
 import player.PlayerHandler;
-import startServer.App;
 
 import java.io.DataInputStream;
 import java.io.IOException;

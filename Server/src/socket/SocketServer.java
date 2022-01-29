@@ -1,6 +1,5 @@
 package socket;
 
-import player.PlayerHandler;
 import startServer.App;
 
 import java.net.Socket;
