@@ -2,7 +2,6 @@ package socket;
 
 import player.Player;
 import player.PlayerHandler;
-import startServer.App;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -21,7 +20,6 @@ public class Handler extends Thread {
     PlayerHandler playerToDb = new PlayerHandler();
 
     static Vector<Handler> handleVector = new Vector<Handler>();
-
     public Handler(Socket s) {
         try {
             socketTo = s;
@@ -43,6 +41,8 @@ public class Handler extends Thread {
                     case "signUp":
                         signUp(allMsg);
                         break;
+                    case "signIn":
+                        signIn(allMsg);
                 }
             } catch (IOException ioEs) {
                 try {
@@ -69,6 +69,13 @@ public class Handler extends Thread {
         } catch (SQLException ex2) {
             Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex2);
         }
+    }
+
+    public  void signIn(String[] allMsg)
+    {
+            String res = playerToDb.getPlayer(allMsg[1],allMsg[2]);
+            System.out.println(res);
+           ps.println(res);
     }
     
 }

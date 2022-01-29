@@ -42,7 +42,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="welcomePageExitButton" layoutX="736.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#onWelcomeCloseButtonClick" prefHeight="25.0" prefWidth="36.0" styleClass="welcomePageCloseButtonClass" text="X">
+      <Button fx:id="welcomePageExitButton" layoutX="736.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#onWelcomeCloseButtonClick" prefHeight="25.0" prefWidth="36.0" styleClass="welcomePageCloseButtonClass" stylesheets="@../cssFiles/Styling.css" text="X">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>

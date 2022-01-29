@@ -45,7 +45,7 @@
     <connection id="74770213-7c98-42db-ba4b-750963693d86" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="74770213-7c98-42db-ba4b-750963693d86" dataset="public.players" active-filter-id="">
+    <filter-actions connection-id="74770213-7c98-42db-ba4b-750963693d86" dataset="public.players" active-filter-id="EMPTY_FILTER">
       <filter id="4bc95719-69d6-4a51-8b90-a68e8a289965" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND">
         <condition column="id" operator="=" value="" active="true" />
       </filter>
