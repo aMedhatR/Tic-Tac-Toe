@@ -1,9 +1,21 @@
 package controllers;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Separator;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -15,16 +27,110 @@ public class ClientPageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
     }
+    private String playerChosen="0";
+    @FXML
+    private VBox VboxScrollPaneLeaderBoard;
+    @FXML
+    private Label testcolorforanother;
     @FXML
     private AnchorPane ClientScenePane;
-
-
-    Stage stage;
-    Scene scene;
+    @FXML
+    private ScrollPane ScrollPaneLeaderBoard;
+    private boolean LeaderBoardChoiceFlag;
     @FXML
     protected void clientPageCloseButton() {
         CommonControllers.closeWindow(ClientScenePane);
+    }
+
+    public void addNewLeaderBoardElement (String Name ,String Score ,boolean Status)
+    {
+        Image onlineImage = new Image("/Images/online.png", 20, 20, false, false);
+        ImageView onlineIcon = new ImageView(onlineImage);
+        Image offlineImage = new Image("/Images/offline.png", 20, 20, false, false);
+        ImageView offlineIcon = new ImageView(offlineImage);
+        HBox hbox = new HBox();
+        Label NameLabel = new Label(Name);
+        NameLabel.setMinWidth(190);
+        NameLabel.setMinHeight(34);
+        NameLabel.setFont(Font.font(17));
+
+        Label ScoreLabel = new Label(Score);
+        ScoreLabel.setMinWidth(60);
+        ScoreLabel.setMinHeight(34);
+        ScoreLabel.setFont(Font.font(17));
+        ImageView StatusImage ;
+        if (Status)
+        {
+            StatusImage=onlineIcon;
+        }
+        else
+        {
+            StatusImage=offlineIcon;
+        }
+
+
+        hbox.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY,Insets.EMPTY)));
+        Separator FirstSep = new Separator(Orientation.VERTICAL);
+        Separator SecondSep = new Separator(Orientation.VERTICAL);
+        hbox.getChildren().add(NameLabel);
+        hbox.getChildren().add(FirstSep);
+        hbox.getChildren().add(ScoreLabel);
+        hbox.getChildren().add(SecondSep);
+        hbox.getChildren().add(StatusImage);
+
+        hbox.setCursor(Cursor.HAND);
+        if (Status) {
+            hbox.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    for (int i = 0; i < VboxScrollPaneLeaderBoard.getChildren().size(); i++) {
+                        if (i % 2 == 0) {
+                            ((HBox) VboxScrollPaneLeaderBoard.getChildren().get(i)).setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+                        }
+                    }
+                    hbox.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+                    System.out.println(((Label) hbox.getChildren().get(0)).getText());
+                    playerChosen = ((Label) hbox.getChildren().get(0)).getText();
+                    System.out.println("mouse click detected! " + mouseEvent.getSource());
+
+
+                }
+            });
+        }
+        VboxScrollPaneLeaderBoard.getChildren().add(hbox);
+        Separator separator = new Separator(Orientation.HORIZONTAL);
+        VboxScrollPaneLeaderBoard.getChildren().add(separator);
+
 
     }
 
+    @FXML
+    protected void btnOnlineGameClientPage()
+    {
+        checkForCheckedPlayers();
+    }
+    protected boolean checkForCheckedPlayers ()
+    {
+        if (playerChosen == "0")
+        {
+            System.out.println("no player has been chosen");
+            return false;
+        }
+        else
+        {
+            System.out.println("the chosen player is "+playerChosen);
+            return true;
+        }
+    }
+    @FXML
+    protected void testclick() {
+        addNewLeaderBoardElement("Abdo","100",true);
+
+
+    }
+    @FXML
+    protected void testbtn2()
+    {
+        addNewLeaderBoardElement("nora","100",false);
+    }
 }

@@ -16,9 +16,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ClientScenePane" onMouseClicked="#clientPageCloseButton" prefHeight="599.0" prefWidth="1097.0" style="-fx-background-color: #2d2a40;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ClientPageController">
+<AnchorPane fx:id="ClientScenePane" prefHeight="631.0" prefWidth="1097.0" style="-fx-background-color: #2d2a40;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ClientPageController">
    <children>
-      <AnchorPane layoutX="30.0" layoutY="79.0" prefHeight="495.0" prefWidth="380.0" styleClass="leaderBoard" stylesheets="@../cssFiles/Styling.css">
+      <AnchorPane layoutX="28.0" layoutY="105.0" prefHeight="495.0" prefWidth="380.0" styleClass="leaderBoard" stylesheets="@../cssFiles/Styling.css">
          <children>
             <Label layoutX="117.0" layoutY="14.0" text="Leader Board" textFill="WHITE">
                <font>
@@ -40,212 +40,9 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <ScrollPane hbarPolicy="NEVER" layoutX="24.0" layoutY="112.0" prefHeight="363.0" prefWidth="333.0" styleClass="scrollPane" stylesheets="@../cssFiles/Styling.css">
+            <ScrollPane fx:id="ScrollPaneLeaderBoard" hbarPolicy="NEVER" layoutX="24.0" layoutY="112.0" prefHeight="363.0" prefWidth="333.0" style="-fx-background: inherit; -fx-border-color: #21f9fb;" styleClass="scrollPane" stylesheets="@../cssFiles/Styling.css">
                <content>
-                  <VBox prefHeight="289.0" prefWidth="313.0" styleClass="LeaderScrollVBox" stylesheets="@../cssFiles/Styling.css">
-                     <children>
-                        <HBox prefHeight="40.0" prefWidth="340.0" style="-fx-background-color: black;" VBox.vgrow="ALWAYS">
-                           <children>
-                              <Label prefHeight="34.0" prefWidth="190.0" text="Abdelrahman Mostafa" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                              <Separator orientation="VERTICAL" prefHeight="200.0" />
-                              <Label prefHeight="34.0" prefWidth="60.0" text="100">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                              <Separator orientation="VERTICAL" prefHeight="200.0" />
-                              <Label alignment="TOP_LEFT" contentDisplay="RIGHT" prefHeight="34.0" prefWidth="63.0" style="-fx-text-fill: lawngreen;" text="online" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </HBox>
-                        <Separator prefHeight="0.0" prefWidth="200.0" />
-                        <HBox prefHeight="40.0" prefWidth="340.0" style="-fx-background-color: black;">
-                           <children>
-                              <Label prefHeight="34.0" prefWidth="190.0" text="Abdelrahman Mostafa" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                              <Separator orientation="VERTICAL" prefHeight="200.0" />
-                              <Label prefHeight="34.0" prefWidth="60.0" text="100">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                              <Separator orientation="VERTICAL" prefHeight="200.0" />
-                              <Label alignment="TOP_LEFT" contentDisplay="RIGHT" prefHeight="34.0" prefWidth="70.0" style="-fx-text-fill: lawngreen;" text="online" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </HBox>
-                        <Separator prefHeight="0.0" prefWidth="200.0" />
-                        <HBox prefHeight="40.0" prefWidth="340.0" style="-fx-background-color: black;">
-                           <children>
-                              <Label prefHeight="34.0" prefWidth="190.0" text="Abdelrahman Mostafa" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                              <Separator orientation="VERTICAL" prefHeight="200.0" />
-                              <Label prefHeight="34.0" prefWidth="60.0" text="100">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                              <Separator orientation="VERTICAL" prefHeight="200.0" />
-                              <Label alignment="TOP_LEFT" contentDisplay="RIGHT" prefHeight="34.0" prefWidth="70.0" style="-fx-text-fill: lawngreen;" text="online" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </HBox>
-                        <Separator prefHeight="0.0" prefWidth="200.0" />
-                        <HBox prefHeight="40.0" prefWidth="340.0" style="-fx-background-color: black;">
-                           <children>
-                              <Label prefHeight="34.0" prefWidth="190.0" text="Abdelrahman Mostafa" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                              <Separator orientation="VERTICAL" prefHeight="200.0" />
-                              <Label prefHeight="34.0" prefWidth="60.0" text="100">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                              <Separator orientation="VERTICAL" prefHeight="200.0" />
-                              <Label alignment="TOP_LEFT" contentDisplay="RIGHT" prefHeight="34.0" prefWidth="70.0" style="-fx-text-fill: lawngreen;" text="online" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </HBox>
-                        <Separator prefHeight="0.0" prefWidth="200.0" />
-                        <HBox prefHeight="40.0" prefWidth="340.0" style="-fx-background-color: black;">
-                           <children>
-                              <Label prefHeight="34.0" prefWidth="190.0" text="Abdelrahman Mostafa" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                              <Separator orientation="VERTICAL" prefHeight="200.0" />
-                              <Label prefHeight="34.0" prefWidth="60.0" text="100">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                              <Separator orientation="VERTICAL" prefHeight="200.0" />
-                              <Label alignment="TOP_LEFT" contentDisplay="RIGHT" prefHeight="34.0" prefWidth="70.0" style="-fx-text-fill: red;" text="offline" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </HBox>
-                        <Separator prefHeight="0.0" prefWidth="200.0" />
-                        <HBox prefHeight="40.0" prefWidth="340.0" style="-fx-background-color: black;">
-                           <children>
-                              <Label prefHeight="34.0" prefWidth="190.0" text="Abdelrahman Mostafa" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                              <Separator orientation="VERTICAL" prefHeight="200.0" />
-                              <Label prefHeight="34.0" prefWidth="60.0" text="100">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                              <Separator orientation="VERTICAL" prefHeight="200.0" />
-                              <Label alignment="TOP_LEFT" contentDisplay="RIGHT" prefHeight="34.0" prefWidth="70.0" style="-fx-text-fill: red;" text="offline" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </HBox>
-                        <Separator prefHeight="0.0" prefWidth="200.0" />
-                        <HBox prefHeight="40.0" prefWidth="340.0" style="-fx-background-color: black;">
-                           <children>
-                              <Label prefHeight="34.0" prefWidth="190.0" text="Abdelrahman Mostafa" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                              <Separator orientation="VERTICAL" prefHeight="200.0" />
-                              <Label prefHeight="34.0" prefWidth="60.0" text="100">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                              <Separator orientation="VERTICAL" prefHeight="200.0" />
-                              <Label alignment="TOP_LEFT" contentDisplay="RIGHT" prefHeight="34.0" prefWidth="70.0" style="-fx-text-fill: red;" text="offline" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </HBox>
-                        <Separator prefHeight="0.0" prefWidth="200.0" />
-                        <HBox prefHeight="40.0" prefWidth="340.0" style="-fx-background-color: black;">
-                           <children>
-                              <Label prefHeight="34.0" prefWidth="190.0" text="Abdelrahman Mostafa" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                              <Separator orientation="VERTICAL" prefHeight="200.0" />
-                              <Label prefHeight="34.0" prefWidth="60.0" text="100">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                              <Separator orientation="VERTICAL" prefHeight="200.0" />
-                              <Label alignment="TOP_LEFT" contentDisplay="RIGHT" prefHeight="34.0" prefWidth="70.0" style="-fx-text-fill: red;" text="offline" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </HBox>
-                        <Separator prefHeight="0.0" prefWidth="200.0" />
-                     </children>
-                  </VBox>
+                  <VBox fx:id="VboxScrollPaneLeaderBoard" prefHeight="289.0" prefWidth="313.0" styleClass="LeaderScrollVBox" stylesheets="@../cssFiles/Styling.css" />
                </content>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="8.0" top="10.0" />
@@ -253,7 +50,7 @@
             </ScrollPane>
          </children>
       </AnchorPane>
-      <Button fx:id="btnOnlineGame" layoutX="489.0" layoutY="139.0" mnemonicParsing="false" prefHeight="114.0" prefWidth="112.0" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">
+      <Button fx:id="btnOnlineGame" layoutX="489.0" layoutY="182.0" mnemonicParsing="false" onMouseClicked="#testclick" prefHeight="114.0" prefWidth="112.0" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -292,7 +89,7 @@
             </AnchorPane>
          </graphic>
       </Button>
-      <HBox layoutX="14.0" layoutY="14.0" prefHeight="46.0" prefWidth="471.0" style="-fx-background-color: transparenet;" styleClass="leaderBoard" stylesheets="@../cssFiles/Styling.css">
+      <HBox layoutX="14.0" layoutY="26.0" prefHeight="46.0" prefWidth="471.0" style="-fx-background-color: transparenet; -fx-border-color: #21f9fb;" styleClass="leaderBoard" stylesheets="@../cssFiles/Styling.css">
          <children>
             <ImageView fitHeight="41.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -301,7 +98,7 @@
             </ImageView>
             <HBox prefHeight="33.0" prefWidth="377.0">
                <children>
-                  <Label prefHeight="39.0" prefWidth="333.0" style="-fx-text-fill: #21f9fb;" text="Abdelrahman Mostafa" textAlignment="CENTER" textFill="#e8e4e4">
+                  <Label fx:id="testcolorforanother" prefHeight="39.0" prefWidth="333.0" style="-fx-text-fill: #21f9fb;" text="Abdelrahman Mostafa" textAlignment="CENTER" textFill="#e8e4e4">
                      <font>
                         <Font size="27.0" />
                      </font>
@@ -322,26 +119,26 @@
             <Insets bottom="3.0" left="20.0" top="3.0" />
          </padding>
       </HBox>
-      <ImageView fitHeight="41.0" fitWidth="226.0" layoutX="434.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="41.0" fitWidth="226.0" layoutX="435.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/OXmEJcAD.gif" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="677.0" layoutY="79.0" prefHeight="495.0" prefWidth="380.0" styleClass="leaderBoard" stylesheets="@../cssFiles/Styling.css">
+      <AnchorPane layoutX="677.0" layoutY="105.0" prefHeight="495.0" prefWidth="380.0" style="-fx-background-color: #363350; -fx-border-color: #21f9fb;" styleClass="leaderBoard" stylesheets="@../cssFiles/Styling.css">
          <children>
             <Label layoutX="138.0" layoutY="14.0" text="Chat App" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <ScrollPane hbarPolicy="NEVER" layoutX="24.0" layoutY="112.0" prefHeight="363.0" prefWidth="333.0" styleClass="scrollPane" stylesheets="@../cssFiles/Styling.css">
+            <ScrollPane hbarPolicy="NEVER" layoutX="24.0" layoutY="112.0" prefHeight="363.0" prefWidth="333.0" style="-fx-background: inherit; -fx-border-color: #21f9fb;" styleClass="scrollPane" stylesheets="@../cssFiles/Styling.css">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="8.0" top="10.0" />
                </padding>
             </ScrollPane>
          </children>
       </AnchorPane>
-      <Button fx:id="btnOnlineGame1" layoutX="489.0" layoutY="271.0" mnemonicParsing="false" prefHeight="114.0" prefWidth="112.0" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">
+      <Button fx:id="btnOnlineGame1" layoutX="489.0" layoutY="322.0" mnemonicParsing="false" onMouseClicked="#testbtn2" prefHeight="114.0" prefWidth="112.0" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -380,7 +177,7 @@
             </AnchorPane>
          </graphic>
       </Button>
-      <Button fx:id="btnOnlineGame2" layoutX="492.0" layoutY="409.0" mnemonicParsing="false" prefHeight="114.0" prefWidth="112.0" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">
+      <Button fx:id="btnOnlineGame2" layoutX="492.0" layoutY="460.0" mnemonicParsing="false" onMouseClicked="#btnOnlineGameClientPage" prefHeight="114.0" prefWidth="112.0" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
