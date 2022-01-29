@@ -1,16 +1,30 @@
 package controllers;
 
-import javafx.application.Application;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class ClientPageController extends Application {
+import java.net.URL;
+import java.util.ResourceBundle;
 
-//    public static void main(String[] args) {
-//        launch(args);
-//    }
+public class ClientPageController implements Initializable {
 
     @Override
-    public void start(Stage primaryStage) {
+    public void initialize(URL location, ResourceBundle resources) {
 
     }
+    @FXML
+    private AnchorPane ClientScenePane;
+
+
+    Stage stage;
+    Scene scene;
+    @FXML
+    protected void clientPageCloseButton() {
+        CommonControllers.closeWindow(ClientScenePane);
+
+    }
+
 }
