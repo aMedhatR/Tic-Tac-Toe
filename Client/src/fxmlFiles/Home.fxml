@@ -48,6 +48,9 @@
                </children>
             </AnchorPane>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="welcomePageExitButton" layoutX="730.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#onWelcomeCloseButtonClick" prefHeight="25.0" prefWidth="36.0" styleClass="welcomePageCloseButtonClass" stylesheets="@../cssFiles/Styling.css" text="X">
          <cursor>
@@ -89,6 +92,9 @@
                </children>
             </AnchorPane>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="btnTwoPlayer" layoutX="302.0" layoutY="150.0" mnemonicParsing="false" prefHeight="190.0" prefWidth="168.0" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">
          <graphic>
@@ -125,6 +131,9 @@
                </children>
             </AnchorPane>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Label fx:id="txtAlert" alignment="CENTER" layoutX="24.0" layoutY="340.0" prefHeight="21.0" prefWidth="347.0" textFill="#d30606" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="-30.0" layoutY="-20.0" pickOnBounds="true" preserveRatio="true" rotate="50.0">

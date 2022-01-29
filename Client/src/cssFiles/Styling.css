@@ -48,3 +48,24 @@
 {
     -fx-background-color: #242424;
 }
+.leaderBoard
+{
+    -fx-background-color: #363350;
+    -fx-border-radius: 25px;
+    -fx-border-width: 2px;
+    -fx-border-color: #21f9fb;
+
+}
+.scrollPane
+{
+    -fx-background: inherit; 
+    /* -fx-background: #4856cf; */
+    -fx-border-radius: 25px;
+    -fx-border-width: 2px;
+    -fx-border-color: #21f9fb;
+}
+.LeaderScrollVBox
+{
+    -fx-background: transparent; 
+  
+}
