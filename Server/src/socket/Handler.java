@@ -1,6 +1,7 @@
 package socket;
 
-import handlePlayerDB.Player;
+import player.Player;
+import player.PlayerHandler;
 import startServer.App;
 
 import java.io.DataInputStream;
@@ -17,6 +18,7 @@ public class Handler extends Thread {
     DataInputStream dis;
     PrintStream ps;
     Socket socketTo;
+    PlayerHandler playerToDb = new PlayerHandler();
 
     static Vector<Handler> handleVector = new Vector<Handler>();
 
@@ -62,7 +64,7 @@ public class Handler extends Thread {
     {
         Player player = new Player(allMsg[1],allMsg[3],allMsg[2],10);
         try {
-            String res = App.getDB().CreatePlayer(player);
+            String res = playerToDb.CreatePlayer(player);
             ps.println(res);
         } catch (SQLException ex2) {
             Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex2);

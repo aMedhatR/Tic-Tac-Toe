@@ -1,20 +1,19 @@
 package startServer;
 
-import handlePlayerDB.PlayerDAO;
+
 import java.net.ServerSocket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import socket.SocketServer;
 
 public class App {
 
-    private static PlayerDAO db;
+    private static DbHandler db;
     private static ServerSocket serverSocket;
 
     public static void setDB()
     {
         try {
-            db = new PlayerDAO();
+            db = new DbHandler();
         } catch (Exception ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -25,7 +24,7 @@ public class App {
         serverSocket = serverSocket1;
     }
 
-    public static PlayerDAO getDB()
+    public static DbHandler getDB()
     {
         return db;
     }

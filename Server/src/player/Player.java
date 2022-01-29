@@ -1,4 +1,4 @@
-package handlePlayerDB;
+package player;
 
 public class Player {
 
@@ -8,12 +8,34 @@ public class Player {
     private String email;
     private int score;
 
+    //used in retrive in signin
+    public Player(String name, String password, String email) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+//        this.score = score;
+    }
+
     public Player(String name, String password, String email, int score) {
         this.name = name;
         this.password = password;
         this.email = email;
         this.score = score;
     }
+
+
+    //used to retrive data from db to leaderboard
+    public Player(int id, String name, String email, int score) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.score = score;
+    }
+
+    Player() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 
     public int getId() {
         return id;
