@@ -59,7 +59,7 @@ public class Controller implements Initializable {
     private int player2;
     private int playerTurn = 1;
     private int gameOver = 0;
-    private boolean checker = false;
+    private boolean checker = true;
 
     ArrayList<Button> buttons;
 
@@ -83,7 +83,7 @@ public class Controller implements Initializable {
     public void resetButton(Button button){
         button.setDisable(false);
         button.setText("");
-        playerTurn = 1;
+        checker = true;
         gameOver = 0;
     }
 
@@ -98,34 +98,26 @@ public class Controller implements Initializable {
 
 
     public void setPlayerSymbol(Button button){
-        if(playerTurn == 1){
+        if(checker) {
             button.setText("X");
-            playerTurn = 0;
-        }
-        else if(playerTurn == 0)
-        {
-            public void computerTurn() {
-            button.setOnAction(new EventHandler<ActionEvent>() {
 
+            button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    checker = true;
-                    while (checker) {
+                    for (int i = 0; i < 9; i++) {
                         int randomNum = ThreadLocalRandom.current().nextInt(0, 9);  //0 to 9
-                        System.out.println("For loop");
+                        System.out.println("if statement");
                         //String element = buttons.get(randomNum).getText();
                         computerTurn = buttons.get(randomNum);
                         if (computerTurn.getText() == "") {
                             computerTurn.setText("0");
                             computerTurn.setDisable(true);
                             playerTurn = 1;
-                            checker = false;
-
+                            System.out.println("for loop");
+                            checkIfGameIsOver();
                             break;
                         } else if (computerTurn.getText() == "0" || computerTurn.getText() == "X") {
-                            // break;
-                            System.out.println("else if");
-                            checker = false;
+                            System.out.println(computerTurn.getText());
                         }
                     }
 
@@ -133,7 +125,7 @@ public class Controller implements Initializable {
             });
         }
         }
-    }
+
 
     public void checkIfGameIsOver(){
         if(gameOver == 0) {
@@ -153,7 +145,7 @@ public class Controller implements Initializable {
                 //X winner
                 if (line.equals("XXX")) {
                     winnerText.setText("X won!");
-                    playerTurn = 3;
+                    checker = false;
                     player1++;
                     label1.setText(Integer.toString(player1));
                     gameOver++;
@@ -162,7 +154,7 @@ public class Controller implements Initializable {
                 //O winner
                 else if (line.equals("OOO")) {
                     winnerText.setText("O won!");
-                    playerTurn = 3;
+                    checker = false;
                     player2++;
                     label2.setText(Integer.toString(player2));
                     gameOver++;
