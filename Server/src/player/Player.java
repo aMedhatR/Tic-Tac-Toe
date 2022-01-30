@@ -7,6 +7,7 @@ public class Player {
     private String password;
     private String email;
     private int score;
+    private boolean status ;
 
     //used in retrive in signin
     public Player(String name, String password, String email) {
@@ -23,6 +24,12 @@ public class Player {
         this.score = score;
     }
 
+    public Player(int id, String name, int score, boolean status) {
+        this.id = id;
+        this.name = name;
+        this.score = score;
+        this.status = status;
+    }
 
     //used to retrive data from db to leaderboard
     public Player(int id, String name, String email, int score) {

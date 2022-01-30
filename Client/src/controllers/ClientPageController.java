@@ -1,12 +1,12 @@
 package controllers;
 
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.Cursor;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
@@ -16,18 +16,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
+import mainPk.HandleOnlineSocket;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ClientPageController implements Initializable {
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
-    private String playerChosen="0";
+    Thread thread;
+    private String playerChosen = "0";
     @FXML
     private VBox VboxScrollPaneLeaderBoard;
     @FXML
@@ -37,13 +34,48 @@ public class ClientPageController implements Initializable {
     @FXML
     private ScrollPane ScrollPaneLeaderBoard;
     private boolean LeaderBoardChoiceFlag;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        HandleOnlineSocket.getSendStream().println("leaderBoard___");
+
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String replyMsg;
+                try {
+
+                    boolean Flag = true;
+                    while (Flag)
+                    {
+                        replyMsg = HandleOnlineSocket.getReceiveStream().readLine();
+                        System.out.println(replyMsg);
+                        System.out.println("client while loop recieved");
+                        String[] allReplyMsg = replyMsg.split("___");
+                        Flag=Boolean.parseBoolean(allReplyMsg[0]);
+                        System.out.println("client while loop out Flag :" +Flag);
+                        Platform.runLater(()->{
+                        addNewLeaderBoardElement(allReplyMsg[2],allReplyMsg[3],Boolean.parseBoolean(allReplyMsg[4]));
+                        });
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println(e);
+                } finally {
+                    thread.stop();
+                }
+            }
+        });
+        thread.start();
+    }
+
     @FXML
     protected void clientPageCloseButton() {
         CommonControllers.closeWindow(ClientScenePane);
     }
 
-    public void addNewLeaderBoardElement (String Name ,String Score ,boolean Status)
-    {
+    public void addNewLeaderBoardElement(String Name, String Score, boolean Status) {
+
         Image onlineImage = new Image("/Images/online.png", 20, 20, false, false);
         ImageView onlineIcon = new ImageView(onlineImage);
         Image offlineImage = new Image("/Images/offline.png", 20, 20, false, false);
@@ -58,18 +90,15 @@ public class ClientPageController implements Initializable {
         ScoreLabel.setMinWidth(60);
         ScoreLabel.setMinHeight(34);
         ScoreLabel.setFont(Font.font(17));
-        ImageView StatusImage ;
-        if (Status)
-        {
-            StatusImage=onlineIcon;
-        }
-        else
-        {
-            StatusImage=offlineIcon;
+        ImageView StatusImage;
+        if (Status) {
+            StatusImage = onlineIcon;
+        } else {
+            StatusImage = offlineIcon;
         }
 
 
-        hbox.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY,Insets.EMPTY)));
+        hbox.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
         Separator FirstSep = new Separator(Orientation.VERTICAL);
         Separator SecondSep = new Separator(Orientation.VERTICAL);
         hbox.getChildren().add(NameLabel);
@@ -105,32 +134,29 @@ public class ClientPageController implements Initializable {
     }
 
     @FXML
-    protected void btnOnlineGameClientPage()
-    {
+    protected void btnOnlineGameClientPage() {
         checkForCheckedPlayers();
     }
-    protected boolean checkForCheckedPlayers ()
-    {
-        if (playerChosen == "0")
-        {
+
+    protected boolean checkForCheckedPlayers() {
+        if (playerChosen == "0") {
             System.out.println("no player has been chosen");
             return false;
-        }
-        else
-        {
-            System.out.println("the chosen player is "+playerChosen);
+        } else {
+            System.out.println("the chosen player is " + playerChosen);
             return true;
         }
     }
+
     @FXML
     protected void testclick() {
-        addNewLeaderBoardElement("Abdo","100",true);
+        addNewLeaderBoardElement("Abdo", "100", true);
 
 
     }
+
     @FXML
-    protected void testbtn2()
-    {
-        addNewLeaderBoardElement("nora","100",false);
+    protected void testbtn2() {
+        addNewLeaderBoardElement("nora", "100", false);
     }
 }
