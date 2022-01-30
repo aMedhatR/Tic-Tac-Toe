@@ -145,7 +145,7 @@ public class PlayerHandler {
             boolean isExist = rs.next();
 
             if (isExist) {
-                res = "true___" + rs.getString("name") + rs.getInt("score");
+                res = "true___" +rs.getInt("id")+"___"+ rs.getString("name")+"___"+ rs.getInt("score");
                 PreparedStatement stmtUpdate = db.connection.prepareStatement("UPDATE players set status=TRUE WHERE name=? ");
                 stmtUpdate.setString(1, name);
                 int updataNumber = stmtUpdate.executeUpdate();
@@ -170,6 +170,15 @@ public class PlayerHandler {
         }
 
     }
+    public void changeStatus(int id)  {
+        try {
+            PreparedStatement stmtUpdate = db.connection.prepareStatement("UPDATE players set status=FALSE WHERE id=?");
+            stmtUpdate.setInt(1, id);
+            int updataNumber = stmtUpdate.executeUpdate();
+        }catch (SQLException e) {
+        }
 
+        System.out.println("the player with"+ id +"is now offline");
+    }
 
 }

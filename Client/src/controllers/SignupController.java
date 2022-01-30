@@ -247,7 +247,7 @@ public class SignupController implements Initializable {
 
     @FXML
     protected void onWelcomeCloseButtonClick() {
-        CommonControllers.closeWindow(SignUpScenePane);
+        CommonControllers.closeWindow(SignUpScenePane,false);
     }
 
 

@@ -26,7 +26,7 @@ public class WelcomePageControl {
     Scene scene;
     @FXML
     protected void onWelcomeCloseButtonClick() {
-        CommonControllers.closeWindow(WelcomeScenePane);
+        CommonControllers.closeWindow(WelcomeScenePane,false);
 
     }
 

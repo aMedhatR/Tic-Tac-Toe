@@ -23,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import person.Person;
 
 /**
  *
@@ -32,7 +33,7 @@ public class signInController implements Initializable {
     Stage stage;
     Scene scene;
     Thread thread;
-
+    Person person;
     @FXML
     private Label errorUsername;
     @FXML
@@ -107,7 +108,16 @@ public class signInController implements Initializable {
                         String[] allReplyMsg = replyMsg.split("___");
                         if(allReplyMsg[0].equals("true"))
                         {
+                            try {
+                                person.setId(Integer.parseInt(allReplyMsg[1]));
+                                person.setName(allReplyMsg[2]);
+                                person.setScore(Integer.parseInt(allReplyMsg[3]));
+                            }catch(Exception e)
+                            {
+                                System.out.println(e);
+                            }
                             Platform.runLater(() -> {
+
                                 goToClientPage();
                             });
                         }
@@ -204,6 +214,6 @@ public class signInController implements Initializable {
     }
     @FXML
     protected void onWelcomeCloseButtonClick() {
-        CommonControllers.closeWindow(SignInPaneScene);
+        CommonControllers.closeWindow(SignInPaneScene,false);
     }
 }

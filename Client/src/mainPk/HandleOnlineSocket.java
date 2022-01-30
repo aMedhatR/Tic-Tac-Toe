@@ -9,7 +9,7 @@ import java.net.Socket;
 
 public class HandleOnlineSocket {
 
-    private  Socket mySocket;
+    private static Socket mySocket;
     private static DataInputStream dis;
     private static PrintStream ps;
 
@@ -32,5 +32,9 @@ public class HandleOnlineSocket {
     public static PrintStream getSendStream()
     {
         return ps;
+    }
+
+    public static Socket getMySocket() {
+        return mySocket;
     }
 }

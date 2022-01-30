@@ -8,13 +8,18 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import mainPk.HandleOnlineSocket;
+import person.Person;
 
+import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.net.Socket;
 
 public class CommonControllers {
     Stage stage;
 
-    public static void closeWindow(AnchorPane pane) {
+    public static void closeWindow(AnchorPane pane ,boolean After) {
         Stage stage;
         Alert WelcomeExitAlert= new Alert(Alert.AlertType.CONFIRMATION);
         WelcomeExitAlert.setTitle("Exit");
@@ -23,10 +28,17 @@ public class CommonControllers {
         if (WelcomeExitAlert.showAndWait().get()== ButtonType.OK) {
             stage = (Stage) pane.getScene().getWindow();
             System.out.println("you logout");
+            if (After) {
+                try {
+                    CommonControllers.signOut();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
             stage.close();
         }
     }
-    public static void closeWindow(BorderPane pane) {
+    public static void closeWindow(BorderPane pane ,boolean After) {
         Stage stage;
         Alert WelcomeExitAlert= new Alert(Alert.AlertType.CONFIRMATION);
         WelcomeExitAlert.setTitle("Exit");
@@ -35,6 +47,14 @@ public class CommonControllers {
         if (WelcomeExitAlert.showAndWait().get()== ButtonType.OK) {
             stage = (Stage) pane.getScene().getWindow();
             System.out.println("you logout");
+            if (After) {
+                try {
+                    CommonControllers.signOut();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
             stage.close();
         }
     }
@@ -63,5 +83,12 @@ public class CommonControllers {
             e.printStackTrace();
         }
 
+    }
+    public static void signOut () throws IOException {
+        HandleOnlineSocket.getSendStream().println("Logout___"+Person.getId());
+
+        HandleOnlineSocket.getReceiveStream().close();
+        HandleOnlineSocket.getSendStream().close();
+        HandleOnlineSocket.getMySocket().close();
     }
 }

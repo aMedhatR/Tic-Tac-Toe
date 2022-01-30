@@ -9,6 +9,7 @@ import java.io.PrintStream;
 import java.net.Socket;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,9 +17,11 @@ import java.util.logging.Logger;
 public class Handler extends Thread {
 
     static Vector<Handler> handleVector = new Vector<Handler>();
+    static HashMap<Integer, Handler> handleVectorWithID = new HashMap<Integer, Handler>();
     DataInputStream dis;
     PrintStream ps;
     Socket socketTo;
+
     PlayerHandler playerToDb = new PlayerHandler();
 
     public Handler(Socket s) {
@@ -46,7 +49,10 @@ public class Handler extends Thread {
                         signIn(allMsg);
                         break;
                     case "leaderBoard":
-                        leaderBoard();
+                        leaderBoard(this);
+                        break;
+                    case "Logout":
+                        logOut(allMsg[1]);
                         break;
 
                 }
@@ -78,11 +84,29 @@ public class Handler extends Thread {
 
     public void signIn(String[] allMsg) {
         String res = playerToDb.getPlayer(allMsg[1], allMsg[2]);
+        String[] resArr = res.split("___");
+        if(Boolean.valueOf(resArr[0]))
+        {
+            handleVectorWithID.put(Integer.valueOf(resArr[1]),this);
+            RefreshLeaderBoard();
+        }
+
         System.out.println(res);
         ps.println(res);
     }
+    public void logOut(String logoutId)  {
+        playerToDb.changeStatus(Integer.parseInt(logoutId));
+        handleVectorWithID.remove(logoutId);
+        RefreshLeaderBoard();
+    }
+    public void RefreshLeaderBoard()
+    {
+        for (Handler i : handleVectorWithID.values()) {
+            leaderBoard(i);
+        }
 
-    public void leaderBoard() {
+    }
+    public void leaderBoard(Handler handler) {
         String res = "";
         ResultSet leaderBoardArrL;
         leaderBoardArrL = PlayerHandler.getPlayers();
@@ -92,17 +116,22 @@ public class Handler extends Thread {
         try {
 
 boolean isleaderboard=leaderBoardArrL.next();
-            while (isleaderboard) {////true___1___abdo___100___true
+            if (!isleaderboard){handler.ps.println("false");}
+            else {
+                while (isleaderboard) {////true___1___abdo___100___true
 
-                res = "true" + "___" + leaderBoardArrL.getInt("id") + "___" + leaderBoardArrL.getString("name") +
-                        "___" + leaderBoardArrL.getInt("score") + "___" + leaderBoardArrL.getBoolean("status");
-                ps.println(res);
-                System.out.println("the leader board flag is :" +isleaderboard);
-                System.out.println(res);
-                isleaderboard=leaderBoardArrL.next();
+                    res = "___" + leaderBoardArrL.getInt("id") + "___" + leaderBoardArrL.getString("name") +
+                            "___" + leaderBoardArrL.getInt("score") + "___" + leaderBoardArrL.getBoolean("status");
+                    isleaderboard = leaderBoardArrL.next();
+                    res = Boolean.toString(isleaderboard) + res;
+                    handler.ps.println(res);
+                    System.out.println("the leader board flag is :" + isleaderboard);
+                    System.out.println(res);
+
+                }
             }
-            System.out.println("after server looop response :"+res);
-            ps.println("false___");
+ //         System.out.println("after server loop response :"+res);
+ //           ps.println("false___");
 
         } catch (SQLException a) {
 

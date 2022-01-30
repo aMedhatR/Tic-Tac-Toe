@@ -53,6 +53,6 @@ public class HomeController implements Initializable {
     }
     @FXML
     protected void onWelcomeCloseButtonClick() {
-        CommonControllers.closeWindow(HomePagepaneScene);
+        CommonControllers.closeWindow(HomePagepaneScene,false);
     }
 }
