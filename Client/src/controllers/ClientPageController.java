@@ -56,33 +56,37 @@ public class ClientPageController implements Initializable {
             @Override
             public void run() {
                 String replyMsg;
-
-                try {
-
-                    boolean Flag = true;
-
-                    while (Flag)
+                while (true)
                     {
-                        replyMsg = HandleOnlineSocket.getReceiveStream().readLine();
-                        System.out.println(replyMsg);
-                        System.out.println("client while loop recieved");
-                        if (replyMsg.equals("false")){break;}
-                        String[] allReplyMsg = replyMsg.split("___");
-                        Flag=Boolean.parseBoolean(allReplyMsg[0]);
-                        System.out.println("client while loop out Flag :" +Flag);
+                        try {
 
-                        Platform.runLater(()->{
-                                addNewLeaderBoardElement(allReplyMsg[2], allReplyMsg[3], Boolean.parseBoolean(allReplyMsg[4]));
-                                NameIdMap.put(allReplyMsg[2], Integer.parseInt(allReplyMsg[1]));
-                            });
+                            boolean Flag = true;
+                            VboxScrollPaneLeaderBoard.getChildren().clear();
+
+                            while (Flag) {
+                                replyMsg = HandleOnlineSocket.getReceiveStream().readLine();
+                                System.out.println(replyMsg);
+                                System.out.println("client while loop recieved");
+                                if (replyMsg.equals("false")) {
+                                    break;
+                                }
+                                String[] allReplyMsg = replyMsg.split("___");
+                                Flag = Boolean.parseBoolean(allReplyMsg[0]);
+                                System.out.println("client while loop out Flag :" + Flag);
+
+                                Platform.runLater(() -> {
+                                    addNewLeaderBoardElement(allReplyMsg[2], allReplyMsg[3], Boolean.parseBoolean(allReplyMsg[4]));
+                                    NameIdMap.put(allReplyMsg[2], Integer.parseInt(allReplyMsg[1]));
+                                });
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            System.out.println(e);
+                        } finally {
+                            // thread.stop();
+                        }
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    System.out.println(e);
-                } finally {
-                   // thread.stop();
-                }}
-
+                }
         });
         thread.start();
     }

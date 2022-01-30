@@ -85,26 +85,30 @@ public class Handler extends Thread {
     public void signIn(String[] allMsg) {
         String res = playerToDb.getPlayer(allMsg[1], allMsg[2]);
         String[] resArr = res.split("___");
+
         if(Boolean.valueOf(resArr[0]))
         {
-            handleVectorWithID.put(Integer.valueOf(resArr[1]),this);
-            RefreshLeaderBoard();
+            int id = Integer.valueOf(resArr[1]);
+            handleVectorWithID.put(id,this);
+            RefreshLeaderBoard(id);
         }
 
-        System.out.println(res);
+        //System.out.println(res);
         ps.println(res);
     }
     public void logOut(String logoutId)  {
         playerToDb.changeStatus(Integer.parseInt(logoutId));
         handleVectorWithID.remove(logoutId);
-        RefreshLeaderBoard();
+        RefreshLeaderBoard(Integer.parseInt(logoutId));
     }
-    public void RefreshLeaderBoard()
+    public void RefreshLeaderBoard(int exceptId)
     {
-        for (Handler i : handleVectorWithID.values()) {
-            leaderBoard(i);
-        }
 
+        // Print keys and values
+        for (int i : handleVectorWithID.keySet()) {
+            if(exceptId != i)
+                leaderBoard(handleVectorWithID.get(i));
+        }
     }
     public void leaderBoard(Handler handler) {
         String res = "";
@@ -125,8 +129,8 @@ boolean isleaderboard=leaderBoardArrL.next();
                     isleaderboard = leaderBoardArrL.next();
                     res = Boolean.toString(isleaderboard) + res;
                     handler.ps.println(res);
-                    System.out.println("the leader board flag is :" + isleaderboard);
-                    System.out.println(res);
+                    //System.out.println("the leader board flag is :" + isleaderboard);
+                   // System.out.println(res);
 
                 }
             }
