@@ -33,7 +33,7 @@ public class signInController implements Initializable {
     Stage stage;
     Scene scene;
     Thread thread;
-    Person person;
+
     @FXML
     private Label errorUsername;
     @FXML
@@ -109,9 +109,9 @@ public class signInController implements Initializable {
                         if(allReplyMsg[0].equals("true"))
                         {
                             try {
-                                person.setId(Integer.parseInt(allReplyMsg[1]));
-                                person.setName(allReplyMsg[2]);
-                                person.setScore(Integer.parseInt(allReplyMsg[3]));
+                                Person.setId(Integer.parseInt(allReplyMsg[1]));
+                                Person.setName(allReplyMsg[2]);
+                                Person.setScore(Integer.parseInt(allReplyMsg[3]));
                             }catch(Exception e)
                             {
                                 System.out.println(e);

@@ -102,7 +102,9 @@ public class Handler extends Thread {
     public void RefreshLeaderBoard()
     {
         for (Handler i : handleVectorWithID.values()) {
-            leaderBoard(i);
+            System.out.println("Sending update");
+            i.ps.println("update");
+
         }
 
     }
