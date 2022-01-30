@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="342.0" prefWidth="621.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.xo.Controller">
+    <children>
+        <Text fx:id="winnerText" fill="#c12222" layoutX="179.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tic-Tac-Toe" textAlignment="CENTER" wrappingWidth="237.9443359375">
+            <font>
+                <Font name="Comic Sans MS" size="32.0" />
+            </font>
+        </Text>
+      <GridPane hgap="5.0" layoutX="20.0" layoutY="98.0" prefHeight="205.0" prefWidth="318.0" vgap="5.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button fx:id="button8" mnemonicParsing="false" prefHeight="82.0" prefWidth="115.0" text=" " GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="28.0" />
+               </font></Button>
+            <Button fx:id="button2" mnemonicParsing="false" prefHeight="86.0" prefWidth="126.0" text=" " GridPane.columnIndex="1">
+               <font>
+                  <Font size="28.0" />
+               </font></Button>
+            <Button fx:id="button3" mnemonicParsing="false" prefHeight="81.0" prefWidth="123.0" text=" " GridPane.columnIndex="2">
+               <font>
+                  <Font size="28.0" />
+               </font></Button>
+            <Button fx:id="button7" mnemonicParsing="false" prefHeight="86.0" prefWidth="120.0" text=" " GridPane.rowIndex="2">
+               <font>
+                  <Font size="28.0" />
+               </font></Button>
+            <Button fx:id="button6" mnemonicParsing="false" prefHeight="88.0" prefWidth="114.0" text=" " GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <font>
+                  <Font size="28.0" />
+               </font></Button>
+            <Button fx:id="button5" mnemonicParsing="false" prefHeight="94.0" prefWidth="122.0" text=" " GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font size="28.0" />
+               </font></Button>
+            <Button fx:id="button4" mnemonicParsing="false" prefHeight="82.0" prefWidth="114.0" text=" " GridPane.rowIndex="1">
+               <font>
+                  <Font size="28.0" />
+               </font></Button>
+            <Button fx:id="button9" mnemonicParsing="false" prefHeight="99.0" prefWidth="114.0" text=" " GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <font>
+                  <Font size="28.0" />
+               </font></Button>
+            <Button fx:id="button1" mnemonicParsing="false" prefHeight="86.0" prefWidth="114.0" text=" ">
+               <font>
+                  <Font size="28.0" />
+               </font></Button>
+         </children>
+      </GridPane>
+      <AnchorPane layoutX="346.0" layoutY="86.0" prefHeight="222.0" prefWidth="254.0">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" text="Player:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="52.0" text="Computer:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="label1" layoutX="104.0" layoutY="14.0" prefHeight="26.0" prefWidth="134.0" style="-fx-background-color: skyblue;">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="label2" layoutX="102.0" layoutY="51.0" prefHeight="26.0" prefWidth="133.0" style="-fx-background-color: skyblue;">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <VBox layoutX="17.0" layoutY="114.0" prefHeight="106.0" prefWidth="223.0">
+               <children>
+                  <HBox prefHeight="36.0" prefWidth="223.0">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="64.0" style="-fx-background-color: yellow; -fx-text-fill: Black; -fx-font-weight: bold; -fx-font-size: 14; -fx-cursor: hand;" text="Pause">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="83.0" style="-fx-background-color: green; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14; -fx-cursor: hand;" text="Resume" />
+                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: red; -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-cursor: hand;" text="Exit">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <Button mnemonicParsing="false" onAction="#restartGame" prefHeight="26.0" prefWidth="223.0" style="-fx-font-size: 14; -fx-font-weight: bold; -fx-cursor: hand;" text="New Game">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+    </children>
+</AnchorPane>
