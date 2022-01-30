@@ -55,6 +55,7 @@ public class ClientPageController implements Initializable {
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
+<<<<<<< HEAD
                 AddDataToLeaderBoard();
 
                 }
@@ -121,6 +122,42 @@ public class ClientPageController implements Initializable {
             thread.stop();
         }
 
+=======
+                String replyMsg;
+                while (true)
+                    {
+                        try {
+
+                            boolean Flag = true;
+                            VboxScrollPaneLeaderBoard.getChildren().clear();
+
+                            while (Flag) {
+                                replyMsg = HandleOnlineSocket.getReceiveStream().readLine();
+                                System.out.println(replyMsg);
+                                System.out.println("client while loop recieved");
+                                if (replyMsg.equals("false")) {
+                                    break;
+                                }
+                                String[] allReplyMsg = replyMsg.split("___");
+                                Flag = Boolean.parseBoolean(allReplyMsg[0]);
+                                System.out.println("client while loop out Flag :" + Flag);
+
+                                Platform.runLater(() -> {
+                                    addNewLeaderBoardElement(allReplyMsg[2], allReplyMsg[3], Boolean.parseBoolean(allReplyMsg[4]));
+                                    NameIdMap.put(allReplyMsg[2], Integer.parseInt(allReplyMsg[1]));
+                                });
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            System.out.println(e);
+                        } finally {
+                            // thread.stop();
+                        }
+                    }
+                }
+        });
+        thread.start();
+>>>>>>> 1797eeb191d1ccf503b1ff62bd8519bdc25df542
     }
 
     @FXML

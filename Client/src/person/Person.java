@@ -6,8 +6,6 @@ public class Person {
     private static int Score ;
     private static boolean Status;
 
-
-
     public static void setId(int id) {
         Id = id;
     }
