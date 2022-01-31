@@ -21,6 +21,7 @@ public class Handler extends Thread {
     DataInputStream dis;
     PrintStream ps;
     Socket socketTo;
+    private int id;
 
     PlayerHandler playerToDb = new PlayerHandler();
 
@@ -57,15 +58,15 @@ public class Handler extends Thread {
 
                 }
             } catch (IOException ioEs) {
+                System.out.println(" : " + ioEs);
                 try {
-                    dis.close();
                     socketTo.close();
+                    dis.close();
                     ps.close();
-                    break;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                System.out.println(" : " + ioEs);
+
             }
 
         }
@@ -88,9 +89,12 @@ public class Handler extends Thread {
 
         if(Boolean.valueOf(resArr[0]))
         {
-            int id = Integer.valueOf(resArr[1]);
-            handleVectorWithID.put(id,this);
-            RefreshLeaderBoard(id);
+
+            int refreshId = Integer.valueOf(resArr[1]);
+            this.id=refreshId;
+            handleVectorWithID.put(refreshId,this);
+            RefreshLeaderBoard(refreshId);
+
         }
 
         //System.out.println(res);
@@ -103,14 +107,6 @@ public class Handler extends Thread {
     }
     public void RefreshLeaderBoard(int exceptId)
     {
-<<<<<<< HEAD
-        for (Handler i : handleVectorWithID.values()) {
-            System.out.println("Sending update");
-            i.ps.println("update");
-
-        }
-=======
->>>>>>> 1797eeb191d1ccf503b1ff62bd8519bdc25df542
 
         // Print keys and values
         for (int i : handleVectorWithID.keySet()) {
@@ -127,19 +123,26 @@ public class Handler extends Thread {
 //        }
         try {
 
-boolean isleaderboard=leaderBoardArrL.next();
+            boolean isleaderboard=leaderBoardArrL.next();
             if (!isleaderboard){handler.ps.println("false");}
             else {
                 while (isleaderboard) {////true___1___abdo___100___true
-
-                    res = "___" + leaderBoardArrL.getInt("id") + "___" + leaderBoardArrL.getString("name") +
-                            "___" + leaderBoardArrL.getInt("score") + "___" + leaderBoardArrL.getBoolean("status");
-                    isleaderboard = leaderBoardArrL.next();
-                    res = Boolean.toString(isleaderboard) + res;
-                    handler.ps.println(res);
-                    //System.out.println("the leader board flag is :" + isleaderboard);
-                   // System.out.println(res);
-
+                    if ( handler.id != leaderBoardArrL.getInt("id") ) {
+                        res = "___" + leaderBoardArrL.getInt("id") + "___" + leaderBoardArrL.getString("name") +
+                                "___" + leaderBoardArrL.getInt("score") + "___" + leaderBoardArrL.getBoolean("status");
+                        isleaderboard = leaderBoardArrL.next();
+                        res = Boolean.toString(isleaderboard) + res;
+                        handler.ps.println(res);
+                        //System.out.println("the leader board flag is :" + isleaderboard);
+                        // System.out.println(res);
+                    }
+                    else {
+                        isleaderboard = leaderBoardArrL.next();
+                        if (!isleaderboard) {
+                            res = Boolean.toString(isleaderboard);
+                            handler.ps.println(res);
+                        }
+                    }
                 }
             }
  //         System.out.println("after server loop response :"+res);

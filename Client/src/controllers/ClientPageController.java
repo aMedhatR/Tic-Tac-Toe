@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class ClientPageController implements Initializable {
-    Thread thread;
+   public static Thread thread;
 
     private String playerChosen = "0";
     @FXML
@@ -43,10 +43,11 @@ public class ClientPageController implements Initializable {
     private Label CurrentPlayerNameLabel;
     @FXML
     private Label CurrentPlayerScoreLabel;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         HandleOnlineSocket.getSendStream().println("leaderBoard___");
-        Platform.runLater(()->{
+        Platform.runLater(() -> {
             CurrentPlayerNameLabel.setText(Person.getName());
             CurrentPlayerScoreLabel.setText(String.valueOf(Person.getScore()));
         });
@@ -55,115 +56,55 @@ public class ClientPageController implements Initializable {
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
-<<<<<<< HEAD
-                AddDataToLeaderBoard();
-
-                }
-
-        });thread.start();
-       new Thread( new Runnable() {
-            @Override
-            public void run() {
-                String Update;
-            while(true)
-            {
-                try {
-                    Update = HandleOnlineSocket.getReceiveStream().readLine();
-
-                    if (Update == "update") {
-                        System.out.println("the condition of updting is true");
-                        UpdateLeaderboard();
-
-                    }
-                }catch (IOException e)
-                {
-                    System.out.println("let's test it "+e);
-                }
-            }
-
-            }
-       });
-
-    }
-
-    public void UpdateLeaderboard()
-    {
-        VboxScrollPaneLeaderBoard.getChildren().clear();
-        HandleOnlineSocket.getSendStream().println("leaderBoard___");
-
-        AddDataToLeaderBoard();
-
-    }
-    public void AddDataToLeaderBoard()
-    {
-        try {
-            String replyMsg;
-            boolean Flag = true;
-            while (Flag)
-            {
-                replyMsg = HandleOnlineSocket.getReceiveStream().readLine();
-                System.out.println(replyMsg);
-                System.out.println("client while loop recieved");
-                if (replyMsg.equals("false")){break;}
-                String[] allReplyMsg = replyMsg.split("___");
-                Flag=Boolean.parseBoolean(allReplyMsg[0]);
-                System.out.println("client while loop out Flag :" +Flag);
-                if (Flag) {
-                    Platform.runLater(() -> {
-                        addNewLeaderBoardElement(allReplyMsg[2], allReplyMsg[3], Boolean.parseBoolean(allReplyMsg[4]));
-                        NameIdMap.put(allReplyMsg[2], Integer.parseInt(allReplyMsg[1]));
-                    });
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println(e);
-        } finally {
-            thread.stop();
-        }
-
-=======
                 String replyMsg;
-                while (true)
-                    {
-                        try {
+                while (true) {
+                    try {
 
-                            boolean Flag = true;
-                            VboxScrollPaneLeaderBoard.getChildren().clear();
+                        boolean Flag = true;
+                        boolean UpdateFlag = true;
 
-                            while (Flag) {
-                                replyMsg = HandleOnlineSocket.getReceiveStream().readLine();
-                                System.out.println(replyMsg);
-                                System.out.println("client while loop recieved");
-                                if (replyMsg.equals("false")) {
-                                    break;
+                        while (Flag) {
+                            replyMsg = HandleOnlineSocket.getReceiveStream().readLine();
+                            System.out.println("second loop after reply message");
+                                if (UpdateFlag){
+                                    System.out.println("second loop after update flag");
+                                    Platform.runLater(() -> {
+                                    VboxScrollPaneLeaderBoard.getChildren().clear();
+
+                                    });
+                                    UpdateFlag = false;
                                 }
-                                String[] allReplyMsg = replyMsg.split("___");
-                                Flag = Boolean.parseBoolean(allReplyMsg[0]);
-                                System.out.println("client while loop out Flag :" + Flag);
 
-                                Platform.runLater(() -> {
-                                    addNewLeaderBoardElement(allReplyMsg[2], allReplyMsg[3], Boolean.parseBoolean(allReplyMsg[4]));
-                                    NameIdMap.put(allReplyMsg[2], Integer.parseInt(allReplyMsg[1]));
-                                });
+                            System.out.println(replyMsg);
+                            System.out.println("client while loop recieved");
+                            if (replyMsg.equals("false")) {
+                                break;
                             }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            System.out.println(e);
-                        } finally {
-                            // thread.stop();
+                            String[] allReplyMsg = replyMsg.split("___");
+                            Flag = Boolean.parseBoolean(allReplyMsg[0]);
+                            System.out.println("client while loop out Flag :" + Flag);
+
+                            Platform.runLater(() -> {
+                                addNewLeaderBoardElement(allReplyMsg[2], allReplyMsg[3], Boolean.parseBoolean(allReplyMsg[4]));
+                                NameIdMap.put(allReplyMsg[2], Integer.parseInt(allReplyMsg[1]));
+                            });
                         }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        System.out.println(e);
+                    } finally {
+                        // thread.stop();
                     }
                 }
+            }
         });
         thread.start();
->>>>>>> 1797eeb191d1ccf503b1ff62bd8519bdc25df542
     }
 
     @FXML
     protected void clientPageCloseButton() {
 
-        CommonControllers.closeWindow(ClientScenePane,true);
+        CommonControllers.closeWindow(ClientScenePane, true);
 
     }
 
@@ -213,7 +154,7 @@ public class ClientPageController implements Initializable {
                     hbox.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
                     System.out.println(((Label) hbox.getChildren().get(0)).getText());
                     playerChosen = ((Label) hbox.getChildren().get(0)).getText();
-                    UpdateSelectedPlayerId(playerChosen,NameIdMap);
+                    UpdateSelectedPlayerId(playerChosen, NameIdMap);
                     System.out.println("mouse click detected! " + mouseEvent.getSource());
 
 
@@ -241,14 +182,15 @@ public class ClientPageController implements Initializable {
             return true;
         }
     }
-    protected void UpdateSelectedPlayerId(String Name ,HashMap<String, Integer> map)
-    {
+
+    protected void UpdateSelectedPlayerId(String Name, HashMap<String, Integer> map) {
         if (map.containsKey(Name)) {
             // Mapping
-            SelectedId = (Integer) map.get(Name);
+            SelectedId = map.get(Name);
         }
-        System.out.println("the Player is :"+Name+ "And his id is : "+SelectedId);
+        System.out.println("the Player is :" + Name + "And his id is : " + SelectedId);
     }
+
     @FXML
     protected void testclick() {
         addNewLeaderBoardElement("Abdo", "100", true);
@@ -258,6 +200,6 @@ public class ClientPageController implements Initializable {
 
     @FXML
     protected void testbtn2() {
-        VboxScrollPaneLeaderBoard.getChildren().clear();
+        addNewLeaderBoardElement("nora", "100", false);
     }
 }

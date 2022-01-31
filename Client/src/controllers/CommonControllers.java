@@ -86,9 +86,10 @@ public class CommonControllers {
     }
     public static void signOut () throws IOException {
         HandleOnlineSocket.getSendStream().println("Logout___"+Person.getId());
-
+        ClientPageController.thread.stop();
         HandleOnlineSocket.getReceiveStream().close();
         HandleOnlineSocket.getSendStream().close();
         HandleOnlineSocket.getMySocket().close();
+
     }
 }
