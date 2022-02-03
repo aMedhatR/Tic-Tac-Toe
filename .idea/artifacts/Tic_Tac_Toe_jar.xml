@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Tic-Tac-Toe:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Tic_Tac_Toe_jar</output-path>
+    <root id="archive" name="Tic-Tac-Toe.jar">
+      <element id="module-output" name="Server" />
+      <element id="module-output" name="Client" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/postgresql-42.3.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

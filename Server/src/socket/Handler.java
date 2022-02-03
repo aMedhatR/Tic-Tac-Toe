@@ -55,6 +55,12 @@ public class Handler extends Thread {
                     case "Logout":
                         logOut(allMsg[1]);
                         break;
+                    case "InvitaionTo":
+                        sendinvetationTo(allMsg[1],allMsg[2],allMsg[3]);
+                        break;
+                    case "InvitaionResponse":
+                        sendResponseTo(allMsg[1],allMsg[2],allMsg[3]);
+                        break;
 
                 }
             } catch (IOException ioEs) {
@@ -149,11 +155,20 @@ public class Handler extends Thread {
  //           ps.println("false___");
 
         } catch (SQLException a) {
-
         }
-
-
         //System.out.println(res);
-
+    }
+    public void sendinvetationTo(String sID,String senderName,String RID)
+    {
+        int Id = Integer.parseInt(sID);
+       Handler reciverHandler= handleVectorWithID.get(Id);
+        reciverHandler.ps.println("InvetationFrom___"+senderName+"___"+RID);
+    }
+    public void sendResponseTo(String sId,String Name,String resp)
+    {
+        int Id = Integer.parseInt(sId);
+        Handler reciverHandler= handleVectorWithID.get(Id);
+        System.out.println("responseto invetation");
+        reciverHandler.ps.println("ResponsetoInvetation___"+resp+"___"+Name);
     }
 }
