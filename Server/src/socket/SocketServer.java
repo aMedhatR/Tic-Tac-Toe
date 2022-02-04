@@ -13,7 +13,7 @@ public class SocketServer {
 
     public SocketServer() {
         try {
-            serverSocket = new ServerSocket(5200);
+            serverSocket = new ServerSocket(5100);
             System.out.println("Connected to serverSocket");
 
             App.setServerSocket(serverSocket);

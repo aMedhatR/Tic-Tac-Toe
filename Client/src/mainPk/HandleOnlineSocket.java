@@ -16,7 +16,7 @@ public class HandleOnlineSocket {
     public HandleOnlineSocket()
     {
         try {
-            mySocket = new Socket("127.0.0.1", 5200);
+            mySocket = new Socket("127.0.0.1", 5100);
           //  mySocket = new Socket("154.183.156.139", 8080);
 
             dis = new DataInputStream(mySocket.getInputStream());

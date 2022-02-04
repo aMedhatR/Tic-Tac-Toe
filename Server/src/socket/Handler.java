@@ -66,9 +66,10 @@ public class Handler extends Thread {
             } catch (IOException ioEs) {
                 System.out.println(" : " + ioEs);
                 try {
-                    socketTo.close();
                     dis.close();
                     ps.close();
+                    socketTo.close();
+                    stop();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -158,6 +159,7 @@ public class Handler extends Thread {
         }
         //System.out.println(res);
     }
+
     public void sendinvetationTo(String sID,String senderName,String RID)
     {
         int Id = Integer.parseInt(sID);
