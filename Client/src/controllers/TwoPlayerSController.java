@@ -20,6 +20,8 @@ public class TwoPlayerSController implements Initializable {
     Button[] d = new Button[9];
     //ArrayList<Button> buttons;
     @FXML
+    private AnchorPane OnlineGameAnchorPane;
+    @FXML
     private Button button1;
     @FXML
     private Button button2;
@@ -44,9 +46,6 @@ public class TwoPlayerSController implements Initializable {
 
     @FXML
     private Label turnWho;
-
-    @FXML
-    private AnchorPane OnlineGameAnchorPane;
 
     @FXML
     private Label label2;
@@ -89,15 +88,16 @@ public class TwoPlayerSController implements Initializable {
             public void run() {
                 HandleOnlineSocket.getSendStream().println("startGame");
                 while (true) {
-
                     try {
                         System.out.println("---------------------"+"repeat");
                         replyMsg = HandleOnlineSocket.getReceiveStream().readLine();
                         String[] allReplyMsg = replyMsg.split("___");
                         System.out.println("message from server: "+ replyMsg);
                         switch (allReplyMsg[0]) {
+
                             case "tartSet":
                                 playerTurn = Integer.parseInt(allReplyMsg[2]);
+
                                 shapePlayer = allReplyMsg[3];
                                 break;
                             case "playerTurn":
@@ -243,7 +243,6 @@ public class TwoPlayerSController implements Initializable {
             }
         }
     }
-
 
     @FXML
     public void OnlineGameCloseButton()
