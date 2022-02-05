@@ -24,7 +24,7 @@ public class Handler extends Thread {
     Socket socketTo;
     PlayerHandler playerToDb = new PlayerHandler();
     private int id;
-    private Thread thread;
+    private HandleSession handleSession;
 
     public Handler(Socket s) {
         try {
@@ -42,6 +42,7 @@ public class Handler extends Thread {
         while (true) {
             try {
                 String msg = dis.readLine();
+                System.out.println("message from client" + msg);
                 String[] allMsg = msg.split("___");
                 switch (allMsg[0]) {
                     case "signUp":
@@ -63,13 +64,21 @@ public class Handler extends Thread {
                         sendResponseTo(allMsg[1], allMsg[2], allMsg[3]);
                         break;
 
-                    case "start":
+                    case "openWindowGame":
                         openWindowGame();
                         break;
 
-                    case "StopGameThread":
-                        StopGameThread();
+                    case "updateGame":
+                        updateGame();
                         break;
+
+                    case "startGame":
+                        startGame();
+                        break;
+
+//                    case "StopGameThread":
+//                        StopGameThread();
+//                        break;
 
                 }
             } catch (IOException ioEs) {
@@ -171,27 +180,38 @@ public class Handler extends Thread {
         //System.out.println(res);
     }
 
+    public void startGame() {
+        if (handleSession.playerId1 == id) {
+            ps.println("startSet___playerTurn___1");
+            ps.println("playerTurn___1");
+        } else {
+            ps.println("startSet___playerTurn___2");
+            ps.println("playerTurn___1");
+        }
+    }
+
+
+    public void updateGame() {
+
+    }
+
     public void sendinvetationTo(String sID, String senderName, String RID) {
-        int Id = Integer.parseInt(sID);
+        Integer Id = Integer.parseInt(sID);
         Handler reciverHandler = handleVectorWithID.get(Id);
         reciverHandler.ps.println("InvetationFrom___" + senderName + "___" + RID);
     }
 
     public void sendResponseTo(String sId, String Name, String resp) {
-        int Id = Integer.parseInt(sId);
-        Handler reciverHandler = handleVectorWithID.get(Id);
-        System.out.println("responseto invetation");
-        reciverHandler.ps.println("ResponsetoInvetation___" + resp + "___" + Name);
-        System.out.println("2: " + reciverHandler.playerName);
-        System.out.println("1: " + playerName);
+        Integer Id = Integer.parseInt(sId);
+        Handler reciverHandler2 = handleVectorWithID.get(Id);
+        reciverHandler2.ps.println("ResponsetoInvetation___" + resp + "___" + Name);
 
         // yes,no
         if (resp.equals("yes")) {
             // player 1 => reciverHandler
             // player 2 =>  this
-            thread = new Thread(new HandleSession(reciverHandler.socketTo, this.socketTo));
-            thread.start();
-            reciverHandler.thread = thread;
+            handleSession = new HandleSession(id, Id);
+            reciverHandler2.handleSession = handleSession;
         }
     }
 
@@ -199,7 +219,8 @@ public class Handler extends Thread {
 
     }
 
-    public void StopGameThread() {
-        thread.stop();
-    }
+    //public void StopGameThread()
+//    {
+//        thread.stop();
+//    }
 }

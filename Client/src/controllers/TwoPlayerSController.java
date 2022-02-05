@@ -80,20 +80,18 @@ Thread thread;
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                HandleOnlineSocket.getSendStream().println("start");
+                HandleOnlineSocket.getSendStream().println("startGame");
                 while (true) {
                     try {
-                        System.out.println("---------------------"+"try");
-
+                        System.out.println("---------------------"+"repeat");
                         replyMsg = HandleOnlineSocket.getReceiveStream().readLine();
                         String[] allReplyMsg = replyMsg.split("___");
-                        System.out.println("---------------------"+allReplyMsg[0]);
-
+                        System.out.println("message from server: "+ replyMsg);
                         switch (allReplyMsg[0]) {
-                            case "startSet":
-                                System.out.println(allReplyMsg[0]);
-                                playerTurn = Integer.parseInt(allReplyMsg[1]);
-                                HandleOnlineSocket.getSendStream().println("ok");
+
+                            case "tartSet":
+                                playerTurn = Integer.parseInt(allReplyMsg[2]);
+
                                 break;
                             case "playerTurn":
                                 whoPlayerTurn = Integer.parseInt(allReplyMsg[1]);
