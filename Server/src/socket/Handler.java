@@ -22,6 +22,8 @@ public class Handler extends Thread {
     PrintStream ps;
     Socket socketTo;
     private int id;
+    public String playerName;
+    private Thread thread;
 
     PlayerHandler playerToDb = new PlayerHandler();
 
@@ -62,6 +64,14 @@ public class Handler extends Thread {
                         sendResponseTo(allMsg[1],allMsg[2],allMsg[3]);
                         break;
 
+                    case"openWindowGame":
+                        openWindowGame();
+                        break;
+
+                    case "StopGameThread":
+                        StopGameThread();
+                        break;
+
                 }
             } catch (IOException ioEs) {
                 System.out.println(" : " + ioEs);
@@ -99,6 +109,7 @@ public class Handler extends Thread {
 
             int refreshId = Integer.valueOf(resArr[1]);
             this.id=refreshId;
+            this.playerName = resArr[2];
             handleVectorWithID.put(refreshId,this);
             RefreshLeaderBoard(refreshId);
 
@@ -112,6 +123,7 @@ public class Handler extends Thread {
         handleVectorWithID.remove(logoutId);
         RefreshLeaderBoard(Integer.parseInt(logoutId));
     }
+
     public void RefreshLeaderBoard(int exceptId)
     {
 
@@ -172,5 +184,28 @@ public class Handler extends Thread {
         Handler reciverHandler= handleVectorWithID.get(Id);
         System.out.println("responseto invetation");
         reciverHandler.ps.println("ResponsetoInvetation___"+resp+"___"+Name);
+        // yes,no
+        if(resp.equals("yes"))
+        {
+            // player 1 => reciverHandler
+            // player 2 =>  this
+            reciverHandler.ps.println("startSet___playerTurn___1");
+            ps.println("startSet___playerTurn___2");
+           thread =  new Thread(new HandleSession(reciverHandler,this));
+            thread.start();
+            reciverHandler.thread = thread;
+
+
+        }
+    }
+
+    public void openWindowGame()
+    {
+
+    }
+
+    public void StopGameThread()
+    {
+        thread.stop();
     }
 }

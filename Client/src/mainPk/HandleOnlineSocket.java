@@ -17,7 +17,7 @@ public class HandleOnlineSocket {
     {
         try {
             mySocket = new Socket("127.0.0.1", 5100);
-          //  mySocket = new Socket("154.183.156.139", 8080);
+            //mySocket = new Socket("197.53.101.24", 8080);
 
             dis = new DataInputStream(mySocket.getInputStream());
             ps = new PrintStream(mySocket.getOutputStream());

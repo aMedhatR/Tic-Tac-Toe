@@ -6,76 +6,139 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
+import mainPk.HandleOnlineSocket;
+import person.Person;
 
+import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class TwoPlayerSController implements Initializable {
 
+    Button[] d = new Button[9];
+    //ArrayList<Button> buttons;
     @FXML
     private Button button1;
-
     @FXML
     private Button button2;
-
     @FXML
     private Button button3;
-
     @FXML
     private Button button4;
-
     @FXML
     private Button button5;
-
     @FXML
     private Button button6;
-
     @FXML
     private Button button7;
-
     @FXML
     private Button button8;
-
     @FXML
     private Button button9;
-
     @FXML
     private Text winnerText;
-
     @FXML
     private Label label1;
-
     @FXML
-    private  Label label2;
-
-
+    private Label label2;
     private int player1;
     private int player2;
     private int playerTurn = 0;
+    private int whoPlayerTurn = 0;
     private int gameOver = 0;
-
-    ArrayList<Button> buttons;
-
+    private String replyMsg;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        buttons = new ArrayList<>(Arrays.asList(button1,button2,button3,button4,button5,button6,button7,button8,button9));
+        //buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
+        d[0] = button1;
+        d[1] = button2;
+        d[2] = button3;
+        d[3] = button4;
+        d[4] = button5;
+        d[5] = button6;
+        d[6] = button7;
+        d[7] = button8;
+        d[8] = button9;
 
-        buttons.forEach(button ->{
-            setupButton(button);
-            button.setFocusTraversable(false);
-        });
+
+//        buttons.forEach(button -> {
+//            setupButton(button);
+//            button.setFocusTraversable(false);
+//        });
+
+        for (Button btn : d) {
+            setupButton(btn);
+            btn.setFocusTraversable(false);
+        }
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                while (true) {
+
+                    try {
+                        System.out.println("---------------------"+"try");
+
+                        replyMsg = HandleOnlineSocket.getReceiveStream().readLine();
+                        String[] allReplyMsg = replyMsg.split("___");
+                        System.out.println("---------------------"+allReplyMsg[0]);
+
+                        switch (allReplyMsg[0]) {
+                            case "startSet":
+                                System.out.println(allReplyMsg[0]);
+
+                                playerTurn = Integer.parseInt(allReplyMsg[1]);
+
+                                break;
+                            case "playerTurn":
+                                whoPlayerTurn = Integer.parseInt(allReplyMsg[1]);
+                                break;
+                            case "move":
+                                //leaderBoard(this);
+                                break;
+                            case "won":
+                                //logOut(allMsg[1]);
+                                break;
+                            case "draw":
+                                //sendinvetationTo(allMsg[1],allMsg[2],allMsg[3]);
+                                break;
+                            case "loss":
+                                //sendResponseTo(allMsg[1],allMsg[2],allMsg[3]);
+                                break;
+                            case "reset":
+                                //StopGameThread();
+                                break;
+
+                            case "noReplayGame":
+                                //StopGameThread();
+                                break;
+                        }
+
+                    } catch (IOException e) {
+                        System.out.println("---------------------"+e);
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
     }
+
 
     @FXML
     public void restartGame(ActionEvent event) {
-        buttons.forEach(this::resetButton);
+        //buttons.forEach(this::resetButton);
+
+        for (Button btn : d) {
+            resetButton(btn);
+        }
+
         winnerText.setText("Tic-Tac-Toe");
+
     }
 
-    public void resetButton(Button button){
+    public void resetButton(Button button) {
         button.setDisable(false);
         button.setText("");
         playerTurn = 0;
@@ -85,37 +148,58 @@ public class TwoPlayerSController implements Initializable {
     private void setupButton(Button button) {
         button.setOnMouseClicked(mouseEvent -> {
             setPlayerSymbol(button);
-            button.setDisable(true);
-            checkIfGameIsOver();
         });
     }
 
-    public void setPlayerSymbol(Button button){
-        if(playerTurn == 1){
-            button.setText("X");
-            playerTurn = 0;
-        } else if(playerTurn == 0){
-            button.setText("O");
-            playerTurn = 1;
+    public void setPlayerSymbol(Button button) {
+
+        if (playerTurn == whoPlayerTurn) {
+            int index = Integer.parseInt(String.valueOf(button.getId().charAt(6)))-1;
+            System.out.println(index);
+            HandleOnlineSocket.getSendStream().println(index);
+            button.setDisable(true);
+            checkIfGameIsOver();
+        } else if (playerTurn != whoPlayerTurn) {
+
         }
+
+
     }
 
-    public void checkIfGameIsOver(){
-        if(gameOver == 0) {
+    public void checkIfGameIsOver() {
+        if (gameOver == 0) {
             for (int a = 0; a < 8; a++) {
 
-                     String line ;
-                    switch (a) {
-                        case 0 : line=button1.getText() + button2.getText() + button3.getText();break;
-                        case 1 : line= button4.getText() + button5.getText() + button6.getText();break;
-                        case 2 : line=button7.getText() + button8.getText() + button9.getText();break;
-                        case 3 : line=button1.getText() + button5.getText() + button9.getText();break;
-                        case 4 : line=button3.getText() + button5.getText() + button7.getText();break;
-                        case 5 : line=button1.getText() + button4.getText() + button7.getText();break;
-                        case 6 : line=button2.getText() + button5.getText() + button8.getText();break;
-                        case 7 : line=button3.getText() + button6.getText() + button9.getText();break;
-                        default : line=null;break;
-                };
+                String line;
+                switch (a) {
+                    case 0:
+                        line = button1.getText() + button2.getText() + button3.getText();
+                        break;
+                    case 1:
+                        line = button4.getText() + button5.getText() + button6.getText();
+                        break;
+                    case 2:
+                        line = button7.getText() + button8.getText() + button9.getText();
+                        break;
+                    case 3:
+                        line = button1.getText() + button5.getText() + button9.getText();
+                        break;
+                    case 4:
+                        line = button3.getText() + button5.getText() + button7.getText();
+                        break;
+                    case 5:
+                        line = button1.getText() + button4.getText() + button7.getText();
+                        break;
+                    case 6:
+                        line = button2.getText() + button5.getText() + button8.getText();
+                        break;
+                    case 7:
+                        line = button3.getText() + button6.getText() + button9.getText();
+                        break;
+                    default:
+                        line = null;
+                        break;
+                }
 
                 //X winner
                 if (line.equals("XXX")) {

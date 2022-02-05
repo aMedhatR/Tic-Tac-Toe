@@ -92,4 +92,19 @@ public class CommonControllers {
         HandleOnlineSocket.getMySocket().close();
 
     }
+
+    public static void gotoStage (String path,AnchorPane pane)
+    {
+        Stage stage;
+        Scene scene;
+        stage = (Stage) pane.getScene().getWindow();
+
+        FXMLLoader fxmlGameLoader = new FXMLLoader(mainPk.MainApp.class.getResource("/fxmlFiles/"+path));
+        try {
+            scene = new Scene(fxmlGameLoader.load());
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
