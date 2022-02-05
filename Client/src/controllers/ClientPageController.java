@@ -1,5 +1,6 @@
 package controllers;
 
+import dialoguesAndControllers.WinLoseDrawDialogController;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -25,6 +26,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+
 
 public class ClientPageController implements Initializable {
     public static Thread thread;
@@ -188,10 +190,9 @@ public class ClientPageController implements Initializable {
 
     @FXML
     protected void testclick() {
-        addNewLeaderBoardElement("Abdo", "100", true);
+      //  addNewLeaderBoardElement("Abdo", "100", true);
 
-
-    }
+           }
 
     @FXML
     protected void testbtn2() {
@@ -362,4 +363,5 @@ public class ClientPageController implements Initializable {
             NameIdMap.put(allReplyMsg[2], Integer.parseInt(allReplyMsg[1]));
         });
     }
+
 }
