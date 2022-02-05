@@ -21,11 +21,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<<<<<<< HEAD
+
 <AnchorPane fx:id="OnlineGameAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="631.0" prefWidth="1097.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TwoPlayerSController">
-=======
-<AnchorPane fx:id="OnlineGameAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="631.0" prefWidth="1097.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TwoPlayerSController">
->>>>>>> 03d2714f5bd156f8d8ce265c8e8eb8de6d433927
+
     <children>
         <Text fx:id="winnerText" fill="#c12222" layoutX="430.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tic-Tac-Toe" textAlignment="CENTER" wrappingWidth="237.9443359375">
             <font>
@@ -141,13 +139,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-<<<<<<< HEAD
+
       <Label fx:id="turnWho" layoutX="54.0" layoutY="37.0" text="Label" textFill="#450be4">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-=======
->>>>>>> 03d2714f5bd156f8d8ce265c8e8eb8de6d433927
+
     </children>
 </AnchorPane>
