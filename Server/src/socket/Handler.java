@@ -69,7 +69,7 @@ public class Handler extends Thread {
                         break;
 
                     case "updateGame":
-                        updateGame();
+                        updateGame(allMsg[1],allMsg[2]);
                         break;
 
                     case "startGame":
@@ -182,17 +182,19 @@ public class Handler extends Thread {
 
     public void startGame() {
         if (handleSession.playerId1 == id) {
-            ps.println("startSet___playerTurn___1");
+
+            ps.println("startSet___playerTurn___1___X");
             ps.println("playerTurn___1");
         } else {
-            ps.println("startSet___playerTurn___2");
+            ps.println("startSet___playerTurn___2___O");
+
             ps.println("playerTurn___1");
         }
     }
 
 
-    public void updateGame() {
-
+    public void updateGame(String shape, String index) {
+        handleSession.insertMove(Integer.parseInt(index),shape);
     }
 
     public void sendinvetationTo(String sID, String senderName, String RID) {
@@ -210,7 +212,7 @@ public class Handler extends Thread {
         if (resp.equals("yes")) {
             // player 1 => reciverHandler
             // player 2 =>  this
-            handleSession = new HandleSession(id, Id);
+            handleSession = new HandleSession(id,this ,Id,reciverHandler2 );
             reciverHandler2.handleSession = handleSession;
         }
     }
