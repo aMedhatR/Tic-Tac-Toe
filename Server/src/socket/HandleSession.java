@@ -19,8 +19,6 @@ public class HandleSession implements Runnable {
         this.handlerPlayer2 = handlerPlayer2;
         // Initialize cells
 
-        System.out.println("three");
-
         for (int i = 0; i < 9; i++)
             cell[i] = " ";
     }
@@ -28,8 +26,14 @@ public class HandleSession implements Runnable {
     public void run() {
         try {
 
+            String msg2Tostart = handlerPlayer2.dis.readLine();
+            handlerPlayer2.ps.println("startSet___playerTurn___2");
+            
+            String msg1Tostart = handlerPlayer1.dis.readLine();
+            handlerPlayer1.ps.println("startSet___playerTurn___1");
+            
+
             while (true) {
-                System.out.println("one");
                 sentMessageToPlayers("playerTurn___1","playerTurn___1");
 
                 String msg1 = handlerPlayer1.dis.readLine();
@@ -37,7 +41,7 @@ public class HandleSession implements Runnable {
                 index = Integer.parseInt(allMsg1[0]);
                 cell[index] = "X";
 
-System.out.println("xxx");
+                System.out.println("xxx");
                 ///// function to send to player1 and player2
                 sentMessageToPlayers("move___X___"+index,"move___X___"+index);
 

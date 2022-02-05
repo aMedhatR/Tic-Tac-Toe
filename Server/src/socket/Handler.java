@@ -189,8 +189,8 @@ public class Handler extends Thread {
         {
             // player 1 => reciverHandler
             // player 2 =>  this
-            reciverHandler.ps.println("startSet___playerTurn___1");
-            ps.println("startSet___playerTurn___2");
+
+
            thread =  new Thread(new HandleSession(reciverHandler,this));
             thread.start();
             reciverHandler.thread = thread;

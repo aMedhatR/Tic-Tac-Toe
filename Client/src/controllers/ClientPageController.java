@@ -79,7 +79,7 @@ public class ClientPageController implements Initializable {
                            // //System.out.println("second loop after reply message");
 
 
-                            ////System.out.println(replyMsg);
+                            System.out.println(replyMsg);
                            // //System.out.println("client while loop recieved");
                             if (replyMsg.equals("false")) {
                                 break;

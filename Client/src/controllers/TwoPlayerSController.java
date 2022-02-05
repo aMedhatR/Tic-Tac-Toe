@@ -47,7 +47,7 @@ public class TwoPlayerSController implements Initializable {
     private int whoPlayerTurn = 0;
     private int gameOver = 0;
     private String replyMsg;
-
+Thread thread;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
@@ -72,10 +72,10 @@ public class TwoPlayerSController implements Initializable {
             btn.setFocusTraversable(false);
         }
 
-        new Thread(new Runnable() {
+        thread = new Thread(new Runnable() {
             @Override
             public void run() {
-
+                HandleOnlineSocket.getSendStream().println("start");
                 while (true) {
 
                     try {
@@ -122,7 +122,8 @@ public class TwoPlayerSController implements Initializable {
                     }
                 }
             }
-        }).start();
+        });
+        thread.start();
     }
 
 
