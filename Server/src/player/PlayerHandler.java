@@ -170,6 +170,7 @@ public class PlayerHandler {
         }
 
     }
+
     public void changeStatus(int id)  {
         try {
             PreparedStatement stmtUpdate = db.connection.prepareStatement("UPDATE players set status=FALSE WHERE id=?");
@@ -180,5 +181,21 @@ public class PlayerHandler {
 
         System.out.println("the player with"+ id +"is now offline");
     }
+
+    public void changeScore(int id,int increaseScoreBy)  {
+        try {
+            PreparedStatement stmtUpdate = db.connection.prepareStatement("UPDATE players set score=score+? WHERE id=?");
+            stmtUpdate.setInt(1, increaseScoreBy);
+            stmtUpdate.setInt(2, id);
+
+            int updataNumber = stmtUpdate.executeUpdate();
+        }catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        System.out.println("the player with"+ id +"is now offline");
+    }
+
+
 
 }

@@ -64,6 +64,15 @@ public class Handler extends Thread {
                         sendResponseTo(allMsg[1], allMsg[2], allMsg[3]);
                         break;
 
+
+                    case "requestNewGame":
+                        requestNewGameFrom(allMsg[1], Integer.parseInt(allMsg[2]));
+                        break;
+
+                    case "responseNewGame":
+                        responseNewGame(allMsg[1]);
+                        break;
+
                     case "openWindowGame":
                         openWindowGame();
                         break;
@@ -185,8 +194,10 @@ public class Handler extends Thread {
 
             ps.println("startSet___playerTurn___1___X");
             ps.println("playerTurn___1");
+            ps.println("informationAnotherPlayer___"+handleSession.playerId2+"___"+handleSession.playerName2);
         } else {
             ps.println("startSet___playerTurn___2___O");
+            ps.println("informationAnotherPlayer___"+handleSession.playerId1+"___"+handleSession.playerName1);
 
             ps.println("playerTurn___1");
         }
@@ -195,6 +206,26 @@ public class Handler extends Thread {
 
     public void updateGame(String shape, String index) {
         handleSession.insertMove(Integer.parseInt(index),shape);
+    }
+
+
+    public void requestNewGameFrom(String nameFrom, int idTo)
+    {
+        Handler reciverHandler = handleVectorWithID.get(idTo);
+        reciverHandler.ps.println("requestNewGameFrom___" + nameFrom + "___" + idTo);
+    }
+
+    public void responseNewGame(String response)
+    {
+        if(response.equals("yes"))
+        {
+            handleSession.sentMessageToPlayers("responseToNewGame___"+response,"responseToNewGame___"+response);
+            handleSession.resetGame();
+        }
+        else
+        {
+            handleSession.sentMessageToPlayers("responseToNewGame___"+response,"responseToNewGame___"+response);
+        }
     }
 
     public void sendinvetationTo(String sID, String senderName, String RID) {
@@ -212,7 +243,7 @@ public class Handler extends Thread {
         if (resp.equals("yes")) {
             // player 1 => reciverHandler
             // player 2 =>  this
-            handleSession = new HandleSession(id,this ,Id,reciverHandler2 );
+            handleSession = new HandleSession(id,playerName ,this ,Id, reciverHandler2.playerName ,reciverHandler2 );
             reciverHandler2.handleSession = handleSession;
         }
     }
