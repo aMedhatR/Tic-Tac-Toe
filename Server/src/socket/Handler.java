@@ -182,17 +182,12 @@ public class Handler extends Thread {
 
     public void startGame() {
         if (handleSession.playerId1 == id) {
-<<<<<<< HEAD
+
             ps.println("startSet___playerTurn___1___X");
             ps.println("playerTurn___1");
         } else {
             ps.println("startSet___playerTurn___2___O");
-=======
-            ps.println("startSet___playerTurn___1");
-            ps.println("playerTurn___1");
-        } else {
-            ps.println("startSet___playerTurn___2");
->>>>>>> 03d2714f5bd156f8d8ce265c8e8eb8de6d433927
+
             ps.println("playerTurn___1");
         }
     }
