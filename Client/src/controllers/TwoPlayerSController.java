@@ -1,10 +1,12 @@
 package controllers;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import mainPk.HandleOnlineSocket;
 import person.Person;
@@ -39,15 +41,23 @@ public class TwoPlayerSController implements Initializable {
     private Text winnerText;
     @FXML
     private Label label1;
+
+    @FXML
+    private Label turnWho;
+
+    @FXML
+    private AnchorPane OnlineGameAnchorPane;
+
     @FXML
     private Label label2;
     private int player1;
     private int player2;
     private int playerTurn = 0;
+    private String shapePlayer = "";
     private int whoPlayerTurn = 0;
     private int gameOver = 0;
     private String replyMsg;
-Thread thread;
+    Thread thread;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -88,12 +98,15 @@ Thread thread;
                         switch (allReplyMsg[0]) {
                             case "tartSet":
                                 playerTurn = Integer.parseInt(allReplyMsg[2]);
+                                shapePlayer = allReplyMsg[3];
                                 break;
                             case "playerTurn":
                                 whoPlayerTurn = Integer.parseInt(allReplyMsg[1]);
+                                if(whoPlayerTurn == playerTurn) Platform.runLater(()-> turnWho.setText("Your turn"));
+                                else Platform.runLater(()-> turnWho.setText(""));
                                 break;
                             case "move":
-                                //leaderBoard(this);
+                                handleMovement(allReplyMsg[1], Integer.parseInt(allReplyMsg[2]));
                                 break;
                             case "won":
                                 //logOut(allMsg[1]);
@@ -154,12 +167,23 @@ Thread thread;
         if (playerTurn == whoPlayerTurn) {
             int index = Integer.parseInt(String.valueOf(button.getId().charAt(6)))-1;
             System.out.println(index);
-            HandleOnlineSocket.getSendStream().println(index);
+            HandleOnlineSocket.getSendStream().println("updateGame___"+shapePlayer+"___"+index);
             button.setDisable(true);
             checkIfGameIsOver();
         } else if (playerTurn != whoPlayerTurn) {
 
         }
+
+
+    }
+
+
+    public void handleMovement(String shape,int index)
+    {
+        Platform.runLater(() -> {
+            d[index].setText(shape);
+            d[index].setDisable(true);
+        });
 
 
     }
@@ -219,4 +243,12 @@ Thread thread;
             }
         }
     }
+
+
+    @FXML
+    public void OnlineGameCloseButton()
+    {
+        CommonControllers.closeWindow(OnlineGameAnchorPane,true);
+    }
+
 }
