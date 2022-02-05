@@ -55,6 +55,7 @@ public class ClientPageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         HandleOnlineSocket.getSendStream().println("leaderBoard___");
         Platform.runLater(() -> {
             CurrentPlayerNameLabel.setText(Person.getName());
@@ -355,7 +356,10 @@ public class ClientPageController implements Initializable {
             });
             UpdateFlag = false;
         }
-        Flag = Boolean.parseBoolean(allReplyMsg[0]);
+        if(allReplyMsg[0].equals("rue"))
+            Flag=true;
+        else
+            Flag = Boolean.parseBoolean(allReplyMsg[0]);
         //System.out.println("client while loop out Flag :" + Flag);
 
         Platform.runLater(() -> {

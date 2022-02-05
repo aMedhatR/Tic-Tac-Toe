@@ -1,7 +1,9 @@
 package socket;
 
-public class HandleSession {
+import player.Player;
+import player.PlayerHandler;
 
+public class HandleSession {
 
     private final String[] cell = new String[9];
     private final boolean continueToPlay = true;
@@ -9,17 +11,30 @@ public class HandleSession {
     private final Handler handlerPlayer2;
     public int playerId1;
     public int playerId2;
+    public String playerName1;
+    public String playerName2;
+
+    public int scorePlayer1;
+    public int scorePlayer2;
+
     private int index;
     private String statusGame;
 
-    public HandleSession(int playerId1, Handler handlerPlayer1, int playerId2, Handler handlerPlayer2) {
+    public HandleSession(int playerId1,String playerName1 ,Handler handlerPlayer1, int playerId2,String playerName2, Handler handlerPlayer2) {
         this.playerId2 = playerId2;
         this.playerId1 = playerId1;
+
+        this.playerName1 = playerName1;
+        this.playerName2 = playerName2;
+
         this.handlerPlayer1 = handlerPlayer1;
         this.handlerPlayer2 = handlerPlayer2;
 
+        this.scorePlayer1 = 0;
+        this.scorePlayer2 = 0;
+
         for (int i = 0; i < 9; i++)
-            cell[i] = " ";
+            cell[i] = "";
     }
 
     public void insertMove(int index, String shape) {
@@ -32,23 +47,38 @@ public class HandleSession {
         if (shape.equals("X")) sentMessageToPlayers("playerTurn___2", "playerTurn___2");
         else sentMessageToPlayers("playerTurn___1", "playerTurn___1");
 
+        System.out.println("checkIfGameFinish :"+ checkIfGameFinish());
+
         statusGame = checkIfGameIsOver();
         if (statusGame.equals("xWon")) {
-            sentMessageToPlayers("won___x1___", "loss___o2___");
+            sentMessageToPlayers("status___win", "status___lose");
+
+            handlerPlayer1.playerToDb.changeScore(playerId1,10);
+            scorePlayer1 += 10;
+            sentMessageToPlayers("updateScore___"+scorePlayer1+"___"+scorePlayer2, "updateScore___"+scorePlayer2+"___"+scorePlayer1);
 
         } else if (statusGame.equals("oWon")) {
-            sentMessageToPlayers("won___o2___", "loss___x1___");
+            sentMessageToPlayers("status___lose", "status___win");
+            handlerPlayer1.playerToDb.changeScore(playerId2,10);
+            scorePlayer2 += 10;
+            sentMessageToPlayers("updateScore___"+scorePlayer1+"___"+scorePlayer2, "updateScore___"+scorePlayer2+"___"+scorePlayer1);
 
         } else if (checkIfGameFinish()) {
             ///// finish game
-            sentMessageToPlayers("draw", "draw");
+            sentMessageToPlayers("status___draw", "status___draw");
         }
 
 
     }
 
+    public void resetGame()
+    {
+        for (int i = 0; i < 9; i++)
+            cell[i] = "";
+        sentMessageToPlayers("playerTurn___1", "playerTurn___1");
+    }
 
-    private void sentMessageToPlayers(String msg1, String msg2) {
+    public void sentMessageToPlayers(String msg1, String msg2) {
         handlerPlayer1.ps.println(msg1);
         handlerPlayer2.ps.println(msg2);
     }
