@@ -21,8 +21,20 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<<<<<<< HEAD
 <AnchorPane fx:id="OnlineGameAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="631.0" prefWidth="1097.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TwoPlayerSController">
 
+=======
+<<<<<<< HEAD
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#OnlineGameCloseButton" prefHeight="631.0" prefWidth="1097.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TwoPlayerSController">
+=======
+<<<<<<< HEAD
+<AnchorPane fx:id="OnlineGameAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="631.0" prefWidth="1097.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TwoPlayerSController">
+=======
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#OnlineGameCloseButton" prefHeight="631.0" prefWidth="1097.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TwoPlayerSController">
+>>>>>>> 03d2714f5bd156f8d8ce265c8e8eb8de6d433927
+>>>>>>> 97b2610dffbee4803cc00a7f4db756bb7040e75f
+>>>>>>> ec04627e82bab9f9ec3b376756fa66ffd26cbd6f
     <children>
         <Text fx:id="winnerText" fill="#c12222" layoutX="430.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tic-Tac-Toe" textAlignment="CENTER" wrappingWidth="237.9443359375">
             <font>
@@ -133,17 +145,41 @@
             </ScrollPane>
          </children>
       </AnchorPane>
+<<<<<<< HEAD
       <Button fx:id="welcomePageExitButton" layoutX="1026.0" layoutY="25.0" mnemonicParsing="false" onMouseClicked="#OnlineGameCloseButton" prefHeight="25.0" prefWidth="36.0" styleClass="welcomePageCloseButtonClass" stylesheets="@../cssFiles/Styling.css" text="X">
+=======
+<<<<<<< HEAD
+      <Button fx:id="welcomePageExitButton" layoutX="1026.0" layoutY="25.0" mnemonicParsing="false" onMouseClicked="#clientPageCloseButton" prefHeight="25.0" prefWidth="36.0" styleClass="welcomePageCloseButtonClass" stylesheets="@../cssFiles/Styling.css" text="X">
+=======
+<<<<<<< HEAD
+      <Button fx:id="welcomePageExitButton" layoutX="1026.0" layoutY="25.0" mnemonicParsing="false" onMouseClicked="#OnlineGameCloseButton" prefHeight="25.0" prefWidth="36.0" styleClass="welcomePageCloseButtonClass" stylesheets="@../cssFiles/Styling.css" text="X">
+=======
+      <Button fx:id="welcomePageExitButton" layoutX="1026.0" layoutY="25.0" mnemonicParsing="false" onMouseClicked="#clientPageCloseButton" prefHeight="25.0" prefWidth="36.0" styleClass="welcomePageCloseButtonClass" stylesheets="@../cssFiles/Styling.css" text="X">
+>>>>>>> 03d2714f5bd156f8d8ce265c8e8eb8de6d433927
+>>>>>>> 97b2610dffbee4803cc00a7f4db756bb7040e75f
+>>>>>>> ec04627e82bab9f9ec3b376756fa66ffd26cbd6f
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> ec04627e82bab9f9ec3b376756fa66ffd26cbd6f
       <Label fx:id="turnWho" layoutX="54.0" layoutY="37.0" text="Label" textFill="#450be4">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
+<<<<<<< HEAD
 
+=======
+=======
+>>>>>>> 03d2714f5bd156f8d8ce265c8e8eb8de6d433927
+>>>>>>> 97b2610dffbee4803cc00a7f4db756bb7040e75f
+>>>>>>> ec04627e82bab9f9ec3b376756fa66ffd26cbd6f
     </children>
 </AnchorPane>
