@@ -26,14 +26,8 @@ public class HandleSession implements Runnable {
     public void run() {
         try {
 
-            String msg2Tostart = handlerPlayer2.dis.readLine();
-            handlerPlayer2.ps.println("startSet___playerTurn___2");
-            
-            String msg1Tostart = handlerPlayer1.dis.readLine();
-            handlerPlayer1.ps.println("startSet___playerTurn___1");
-            
-
             while (true) {
+
                 sentMessageToPlayers("playerTurn___1","playerTurn___1");
 
                 String msg1 = handlerPlayer1.dis.readLine();
