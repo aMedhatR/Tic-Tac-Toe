@@ -50,6 +50,8 @@ public class TwoPlayerSController implements Initializable {
 Thread thread;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        ClientPageController.thread.stop();
         //buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
         d[0] = button1;
         d[1] = button2;
@@ -75,22 +77,17 @@ Thread thread;
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                HandleOnlineSocket.getSendStream().println("start");
+                HandleOnlineSocket.getSendStream().println("startGame");
                 while (true) {
 
                     try {
-                        System.out.println("---------------------"+"try");
-
+                        System.out.println("---------------------"+"repeat");
                         replyMsg = HandleOnlineSocket.getReceiveStream().readLine();
                         String[] allReplyMsg = replyMsg.split("___");
-                        System.out.println("---------------------"+allReplyMsg[0]);
-
+                        System.out.println("message from server: "+ replyMsg);
                         switch (allReplyMsg[0]) {
-                            case "startSet":
-                                System.out.println(allReplyMsg[0]);
-
-                                playerTurn = Integer.parseInt(allReplyMsg[1]);
-
+                            case "tartSet":
+                                playerTurn = Integer.parseInt(allReplyMsg[2]);
                                 break;
                             case "playerTurn":
                                 whoPlayerTurn = Integer.parseInt(allReplyMsg[1]);
