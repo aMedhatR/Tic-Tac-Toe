@@ -52,7 +52,10 @@ public class ClientPageController implements Initializable {
     private Label CurrentPlayerScoreLabel;
     @FXML
     private AnchorPane chatAppToGame;
-
+    @FXML
+    private TextField txtfiled;
+    @FXML
+    private TextArea txtarea;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -69,6 +72,7 @@ public class ClientPageController implements Initializable {
                 String replyMsg;
                 while (true) {
                     try {
+
 
                         Flag = true;
                         UpdateFlag = true;
@@ -89,6 +93,11 @@ public class ClientPageController implements Initializable {
                                 case "ResponsetoInvetation":
                                     responseHandler(allReplyMsg);
                                     break;
+                                case "msg":
+                                    appendmsg(allReplyMsg[1]);
+
+                                    break;
+
                                 default:
                                     updateLeaderboardHandler(allReplyMsg);
                                     break;
@@ -367,5 +376,18 @@ public class ClientPageController implements Initializable {
             NameIdMap.put(allReplyMsg[2], Integer.parseInt(allReplyMsg[1]));
         });
     }
+@FXML
+protected void send(){
+    System.out.println("send action");
+    HandleOnlineSocket.getSendStream().println("chatall"+"___"+txtfiled.getText());
+    txtfiled.setText("");
+}
+protected  void appendmsg(String msg){
+    Platform.runLater(() -> {
+        txtarea.appendText("\n"+msg);
+
+    });
+}
+
 
 }

@@ -374,7 +374,6 @@ public class TwoPlayerSController implements Initializable {
 //            }
 //        }
 //    }
-
     @FXML
     public void OnlineGameCloseButton() {
         CommonControllers.closeWindow(OnlineGameAnchorPane, true);

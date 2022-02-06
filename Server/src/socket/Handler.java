@@ -84,7 +84,9 @@ public class Handler extends Thread {
                     case "startGame":
                         startGame();
                         break;
-
+                    case "chatall":
+                        sendtoallPlayer(allMsg[1]);
+                        break;
 //                    case "StopGameThread":
 //                        StopGameThread();
 //                        break;
@@ -256,4 +258,10 @@ public class Handler extends Thread {
 //    {
 //        thread.stop();
 //    }
+    public void sendtoallPlayer(String msg){
+        for (Handler i : handleVectorWithID.values()) {
+            i.ps.println("msg"+"___"+playerName+" : "+msg);
+        }
+
+    }
 }

@@ -9,10 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.ResourceBundle;
-import java.util.Vector;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class PlayerVsComputerControllerTry implements Initializable {
@@ -114,22 +111,25 @@ public class PlayerVsComputerControllerTry implements Initializable {
     public void setPlayerSymbol(Button button){
         int randomNum;
             button.setText("X");
-
+        button.setDisable(true);
         System.out.println(vector);
 
         System.out.println(button.getId().charAt(6));
         System.out.println(Integer.parseInt(String.valueOf(button.getId().charAt(6)))-1 );
-            vector.remove(String.valueOf(Integer.parseInt(String.valueOf(button.getId().charAt(6)))-1));
+
+       //     vector.remove(String.valueOf(Integer.parseInt(String.valueOf(button.getId().charAt(6)))-1));
             System.out.println(vector);
             if(vector.size() != 0) {
-                randomNum = ThreadLocalRandom.current().nextInt(0, vector.size());  //0 to 9
+             //   randomNum = ThreadLocalRandom.current().nextInt(0, vector.size());  //0 to 9
 
 
-                computerTurn = buttons.get(Integer.parseInt(vector.get(randomNum)));
+            //    computerTurn = buttons.get(Integer.parseInt(vector.get(randomNum)));
+                System.out.println(findBestMove());
+                computerTurn = buttons.get(findBestMove());
                 computerTurn.setText("0");
                 computerTurn.setDisable(true);
                  System.out.println(vector);
-                vector.remove(randomNum);
+               // vector.remove(randomNum);
                    System.out.println(vector);
                 System.out.println("For loop");
     }   //String element = buttons.get(randomNum).getText();
@@ -273,7 +273,7 @@ public class PlayerVsComputerControllerTry implements Initializable {
     int findBestMove()
     {
         int bestVal = -1000;
-        int bestMove=-1;
+        int bestMove= -1;
         boolean checkPlayerMove = false;
 
 
@@ -283,8 +283,11 @@ public class PlayerVsComputerControllerTry implements Initializable {
         for (int i = 0; i < 9; i++)
         {
             // Check if cell is empty
-            if (buttons.get(i).getText() == "")
+            System.out.println("buttons.get(i).getText() :"+buttons.get(i).getText());
+           if(Objects.equals(buttons.get(i).getText(), new String(""))) // --> true
+           // if (buttons.get(i).getText().equals(""))
             {
+                System.out.println("in best move if condition");
                 //before make any move just check if pla
                 // Make the move
                 buttons.get(i).setText("0");

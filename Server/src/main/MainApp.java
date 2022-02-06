@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 
 import java.sql.SQLException;
 import socket.SocketServer;
-import startServer.App;
 
 /**
  *
@@ -23,7 +22,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxmlFiles/sampleFxml.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxmlFiles/ServerPage.fxml"));
 
         Scene scene = new Scene(root);
 
