@@ -198,8 +198,7 @@ public class PlayerVsComputerControllerTry implements Initializable {
         return 0;
     }
 
-    int minimax(char board[][],
-                       int depth, Boolean isMax)
+    int minimax(int depth, Boolean isMax)
     {
         int score = evaluate();
 
@@ -234,8 +233,7 @@ public class PlayerVsComputerControllerTry implements Initializable {
 
                         // Call minimax recursively and choose
                         // the maximum value
-                        best = Math.max(best, minimax(board,
-                                depth + 1, !isMax));
+                        best = Math.max(best, minimax(depth + 1, !isMax));
 
                         // Undo the move
                         buttons.get(i).setText("");
@@ -262,8 +260,7 @@ public class PlayerVsComputerControllerTry implements Initializable {
 
                         // Call minimax recursively and choose
                         // the minimum value
-                        best = Math.min(best, minimax(board,
-                                depth + 1, !isMax));
+                        best = Math.min(best, minimax(depth + 1, !isMax));
 
                         // Undo the move
                         buttons.get(i).setText("");
@@ -273,26 +270,28 @@ public class PlayerVsComputerControllerTry implements Initializable {
         }
     }
 
-    int findBestMove(char board[][])
+    int findBestMove()
     {
         int bestVal = -1000;
         int bestMove=-1;
+        boolean checkPlayerMove = false;
 
 
         // Traverse all cells, evaluate minimax function
         // for all empty cells. And return the cell
         // with optimal value.
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 9; i++)
         {
             // Check if cell is empty
             if (buttons.get(i).getText() == "")
             {
+                //before make any move just check if pla
                 // Make the move
                 buttons.get(i).setText("0");
 
                 // compute evaluation function for this
                 // move.
-                int moveVal = minimax(board, 0, false);
+                int moveVal = minimax(0, false);
 
                 // Undo the move
                 buttons.get(i).setText("");
