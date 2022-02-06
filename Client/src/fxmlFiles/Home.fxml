@@ -13,7 +13,7 @@
 
 <AnchorPane fx:id="HomePagepaneScene" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="780.0" style="-fx-background-color: #ffffff;" styleClass="signInBack" stylesheets="@../cssFiles/Styling.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
    <children>
-      <Button fx:id="btnSinglePlayer" layoutX="70.0" layoutY="150.0" mnemonicParsing="false" prefHeight="190.0" prefWidth="168.0" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">
+      <Button fx:id="btnSinglePlayer" layoutX="70.0" layoutY="150.0" mnemonicParsing="false" onMouseClicked="#homepageSinglbtn" prefHeight="190.0" prefWidth="168.0" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">
          <graphic>
             <AnchorPane stylesheets="@../cssFiles/Styling.css">
                <children>

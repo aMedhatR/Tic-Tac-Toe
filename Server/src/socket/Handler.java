@@ -86,9 +86,18 @@ public class Handler extends Thread {
                         startGame();
                         break;
 
+                    case "chatall":
+                        sendtoallPlayer(allMsg[1]);
+                        break;
+//                    case "StopGameThread":
+//                        StopGameThread();
+//                        break;
+
+
                     case "quitFromGame":
                         handlePlayerWantToQuit();
                         break;
+
 
                 }
             } catch (IOException ioEs) {
@@ -289,6 +298,18 @@ public class Handler extends Thread {
     }
 
     public void openWindowGame() {
+
+    }
+
+
+    //public void StopGameThread()
+//    {
+//        thread.stop();
+//    }
+    public void sendtoallPlayer(String msg){
+        for (Handler i : handleVectorWithID.values()) {
+            i.ps.println("msg"+"___"+playerName+" : "+msg);
+        }
 
     }
 

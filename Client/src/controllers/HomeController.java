@@ -55,4 +55,8 @@ public class HomeController implements Initializable {
     protected void onWelcomeCloseButtonClick() {
         CommonControllers.closeWindow(HomePagepaneScene,false);
     }
+    @FXML
+    protected void homepageSinglbtn(){
+        CommonControllers.gotoStage("PlayerVsComputer.fxml",HomePagepaneScene);
+    }
 }
