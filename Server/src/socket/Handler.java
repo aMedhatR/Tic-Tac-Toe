@@ -85,19 +85,19 @@ public class Handler extends Thread {
                     case "startGame":
                         startGame();
                         break;
-<<<<<<< HEAD
+
                     case "chatall":
                         sendtoallPlayer(allMsg[1]);
                         break;
 //                    case "StopGameThread":
 //                        StopGameThread();
 //                        break;
-=======
+
 
                     case "quitFromGame":
                         handlePlayerWantToQuit();
                         break;
->>>>>>> 5e472cfd4f037596ba4c351e43c1dc412437d2d2
+
 
                 }
             } catch (IOException ioEs) {
@@ -301,7 +301,7 @@ public class Handler extends Thread {
 
     }
 
-<<<<<<< HEAD
+
     //public void StopGameThread()
 //    {
 //        thread.stop();
@@ -312,6 +312,5 @@ public class Handler extends Thread {
         }
 
     }
-=======
->>>>>>> 5e472cfd4f037596ba4c351e43c1dc412437d2d2
+
 }
