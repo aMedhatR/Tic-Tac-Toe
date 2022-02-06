@@ -3,3 +3,6 @@
 /Client/dist/
 .idea/workspace.xml
 /Client/build/
+/out
+/Client/out
+/Server/out
