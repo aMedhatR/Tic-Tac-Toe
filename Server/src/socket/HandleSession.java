@@ -7,8 +7,8 @@ public class HandleSession {
 
     private final String[] cell = new String[9];
     private final boolean continueToPlay = true;
-    private final Handler handlerPlayer1;
-    private final Handler handlerPlayer2;
+    private Handler handlerPlayer1;
+    private Handler handlerPlayer2;
     public int playerId1;
     public int playerId2;
     public String playerName1;
