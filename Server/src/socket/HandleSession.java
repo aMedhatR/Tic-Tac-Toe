@@ -134,6 +134,13 @@ public class HandleSession {
         return "continue";
     }
 
+    public Handler getHandlerPlayer1() {
+        return handlerPlayer1;
+    }
+
+    public Handler getHandlerPlayer2() {
+        return handlerPlayer2;
+    }
 
 //    private void replaygame() {
 //        string msgfrom1, msgfrom2;
