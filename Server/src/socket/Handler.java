@@ -24,7 +24,8 @@ public class Handler extends Thread {
     Socket socketTo;
     PlayerHandler playerToDb = new PlayerHandler();
     private int id;
-    private HandleSession handleSession;
+    private HandleSession handleSession = null;
+    boolean isPlaying = false;
 
     public Handler(Socket s) {
         try {
@@ -84,25 +85,24 @@ public class Handler extends Thread {
                     case "startGame":
                         startGame();
                         break;
+<<<<<<< HEAD
                     case "chatall":
                         sendtoallPlayer(allMsg[1]);
                         break;
 //                    case "StopGameThread":
 //                        StopGameThread();
 //                        break;
+=======
+
+                    case "quitFromGame":
+                        handlePlayerWantToQuit();
+                        break;
+>>>>>>> 5e472cfd4f037596ba4c351e43c1dc412437d2d2
 
                 }
             } catch (IOException ioEs) {
                 System.out.println(" : " + ioEs);
-                try {
-                    dis.close();
-                    ps.close();
-                    socketTo.close();
-                    stop();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+                    handleExitPlayer(id);
             }
 
         }
@@ -138,11 +138,44 @@ public class Handler extends Thread {
     }
 
     public void logOut(String logoutId) {
-        playerToDb.changeStatus(Integer.parseInt(logoutId));
-        handleVectorWithID.remove(logoutId);
-        RefreshLeaderBoard(Integer.parseInt(logoutId));
+        handleExitPlayer(Integer.parseInt(logoutId));
     }
 
+    public void handleExitPlayer(int logoutId)
+    {
+
+        if(isPlaying)
+        {
+            handlePlayerWantToQuit();
+        }
+
+        playerToDb.changeStatus(logoutId);
+        handleVectorWithID.remove(logoutId);
+        RefreshLeaderBoard(logoutId);
+        try {
+            dis.close();
+            ps.close();
+            socketTo.close();
+            stop();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handleQuitPlayer(Handler toPlayer,String quittingPlayer)
+    {
+        toPlayer.ps.println("quitPlayer___The player "+quittingPlayer+" has withdrawn, you have got 10 points");
+        toPlayer.playerToDb.changeScore(toPlayer.id,10);
+        removeSessionGameFromPlayers();
+    }
+
+    public void handlePlayerWantToQuit()
+    {
+        Handler toPlayer = handleSession.playerId1 == id ? handleSession.getHandlerPlayer2() : handleSession.getHandlerPlayer1();
+        handleQuitPlayer(toPlayer,playerName);
+    }
+
+    // leader board
     public void RefreshLeaderBoard(int exceptId) {
 
         // Print keys and values
@@ -191,26 +224,31 @@ public class Handler extends Thread {
         //System.out.println(res);
     }
 
+
+    // start game
     public void startGame() {
         if (handleSession.playerId1 == id) {
 
             ps.println("startSet___playerTurn___1___X");
             ps.println("playerTurn___1");
             ps.println("informationAnotherPlayer___"+handleSession.playerId2+"___"+handleSession.playerName2);
+            isPlaying = true;
         } else {
             ps.println("startSet___playerTurn___2___O");
             ps.println("informationAnotherPlayer___"+handleSession.playerId1+"___"+handleSession.playerName1);
 
             ps.println("playerTurn___1");
+            isPlaying = true;
+
         }
     }
-
 
     public void updateGame(String shape, String index) {
         handleSession.insertMove(Integer.parseInt(index),shape);
     }
 
 
+    // request for newGame
     public void requestNewGameFrom(String nameFrom, int idTo)
     {
         Handler reciverHandler = handleVectorWithID.get(idTo);
@@ -227,9 +265,18 @@ public class Handler extends Thread {
         else
         {
             handleSession.sentMessageToPlayers("responseToNewGame___"+response,"responseToNewGame___"+response);
+            removeSessionGameFromPlayers();
         }
     }
 
+
+    public void removeSessionGameFromPlayers()
+    {
+        handleSession.getHandlerPlayer1().isPlaying = false;
+        handleSession.getHandlerPlayer2().isPlaying = false;
+    }
+
+    // send invitation to play
     public void sendinvetationTo(String sID, String senderName, String RID) {
         Integer Id = Integer.parseInt(sID);
         Handler reciverHandler = handleVectorWithID.get(Id);
@@ -254,6 +301,7 @@ public class Handler extends Thread {
 
     }
 
+<<<<<<< HEAD
     //public void StopGameThread()
 //    {
 //        thread.stop();
@@ -264,4 +312,6 @@ public class Handler extends Thread {
         }
 
     }
+=======
+>>>>>>> 5e472cfd4f037596ba4c351e43c1dc412437d2d2
 }

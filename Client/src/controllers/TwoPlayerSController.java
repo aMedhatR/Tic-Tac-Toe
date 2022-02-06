@@ -73,10 +73,13 @@ public class TwoPlayerSController implements Initializable {
 
     private boolean stopPlayer = false;
 
+    private boolean stopThread = false;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         ClientPageController.thread.stop();
+        stopThread = false;
         //buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
         d[0] = button1;
         d[1] = button2;
@@ -103,7 +106,7 @@ public class TwoPlayerSController implements Initializable {
             @Override
             public void run() {
                 HandleOnlineSocket.getSendStream().println("startGame");
-                while (true) {
+                while (true && !stopThread) {
                     try {
                         System.out.println("---------------------" + "repeat");
                         replyMsg = HandleOnlineSocket.getReceiveStream().readLine();
@@ -147,14 +150,17 @@ public class TwoPlayerSController implements Initializable {
                                 requestNewGameFrom(allReplyMsg[1]);
                                 break;
 
-
                             case "responseToNewGame":
                                 responseToNewGame(allReplyMsg[1]);
                                 break;
+
                             case "updateScore":
                                 scorePlayer1 = Integer.parseInt(allReplyMsg[1]);
                                 scorePlayer2 = Integer.parseInt(allReplyMsg[2]);
                                 updateScore();
+                                break;
+                            case"quitPlayer":
+                                handlePlayerWasQuit(allReplyMsg[1]);
                                 break;
                         }
 
@@ -191,11 +197,7 @@ public class TwoPlayerSController implements Initializable {
             }
             stopPlayer = false;
         } else {
-            Platform.runLater(() -> {
-
-                thread.stop();
-                CommonControllers.gotoStage("ClientPage.fxml", OnlineGameAnchorPane);
-            });
+            backToClientPage();
         }
     }
 
@@ -253,6 +255,37 @@ public class TwoPlayerSController implements Initializable {
 
     public void requestNewGameFrom(String name) {
         handleDialog(name + " want to play new game again, Do you want to?");
+    }
+
+    public void handlePlayerWasQuit(String msg)
+    {
+        Platform.runLater(() -> {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dialoguesAndControllers/AcceptInvetation.fxml"));
+            DialogPane ConfirmDialogPane = null;
+            try {
+                ConfirmDialogPane = fxmlLoader.load();
+
+                ConfirmDialogPane.setContentText(msg);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setDialogPane(ConfirmDialogPane);
+            dialog.initStyle(StageStyle.UNDECORATED);
+            dialog.showAndWait().ifPresent(response -> {
+                int score = Person.getScore()+10;
+                if (response == ButtonType.OK) {
+
+                    Person.setScore(score);
+                    backToClientPage();
+                } else if (response == ButtonType.CANCEL) {
+                    /// back to home
+                    backToClientPage();
+                    Person.setScore(score);
+                }
+
+            });
+        });
     }
 
 
@@ -374,6 +407,48 @@ public class TwoPlayerSController implements Initializable {
 //            }
 //        }
 //    }
+
+
+
+    public void backToClientPage()
+    {
+        Platform.runLater(() -> {
+            thread.stop();
+            CommonControllers.gotoStage("ClientPage.fxml", OnlineGameAnchorPane);
+        });
+        stopThread = true;
+    }
+
+    @FXML
+    public void handleWithDraw()
+    {
+
+        Platform.runLater(() -> {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dialoguesAndControllers/AcceptInvetation.fxml"));
+            DialogPane ConfirmDialogPane = null;
+            try {
+                ConfirmDialogPane = fxmlLoader.load();
+
+                ConfirmDialogPane.setContentText("Are you sure about getting out? "+ nameAntherPlayer +"  will win");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setDialogPane(ConfirmDialogPane);
+            dialog.initStyle(StageStyle.UNDECORATED);
+            dialog.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    HandleOnlineSocket.getSendStream().println("quitFromGame");
+                    backToClientPage();
+                } else if (response == ButtonType.CANCEL) {
+                    /// back to home
+                }
+            });
+        });
+
+
+    }
+
     @FXML
     public void OnlineGameCloseButton() {
         CommonControllers.closeWindow(OnlineGameAnchorPane, true);
