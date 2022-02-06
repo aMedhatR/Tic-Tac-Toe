@@ -297,7 +297,7 @@ public class ClientPageController implements Initializable {
 
 
                         HandleOnlineSocket.getSendStream().println("InvitaionResponse___" + allReplyMsg[2] + "___" + Person.getName() + "___" + "yes");
-                        CommonControllers.gotoStage("TwoPlayersGame.fxml", ClientScenePane);
+                        CommonControllers. gotoStage("TwoPlayersGame.fxml", ClientScenePane);
 
                     });
 
