@@ -519,6 +519,13 @@ System.out.println(numberOfX+" : "+numberOfO);
         }
 
     }
+
+    public void handleChangeScore(int addScore)
+    {
+
+    }
+
+
     public void sendToAnotherPlayer(int playerid , String msg){
 
         Handler receiverHandler = handleVectorWithID.get(playerid);
