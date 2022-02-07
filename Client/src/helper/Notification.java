@@ -10,7 +10,8 @@ import org.controlsfx.control.Notifications;
 
 public class Notification {
 
-    private Image img=new Image("/Images/n3.png");
+    private Image img=new Image("/Images/n3.png",40, 40, false, false);
+
     private String notificationBody;
 
     public  Notification(String notificationBody){

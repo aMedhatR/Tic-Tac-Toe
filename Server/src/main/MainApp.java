@@ -8,6 +8,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
@@ -29,6 +30,7 @@ public class MainApp extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("The Fabulous Tic Tac Toe");
 //        Image icon =new Image("");
+        stage.getIcons().add(new Image(main.MainApp.class.getResourceAsStream("/images/servericon.png")));
 
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);

@@ -16,7 +16,9 @@ public class MainApp extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlFiles/WelcomePage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("The Fabulous Tic Tac Toe");
-//        Image icon =new Image("");
+        stage.getIcons().add(new Image(mainPk.MainApp.class.getResourceAsStream("/images/icon.png")));
+
+      //  Image icon =new Image("/Images/icon.png");
 
         stage.initStyle(StageStyle.UNDECORATED);
 
@@ -25,7 +27,6 @@ public class MainApp extends Application {
     }
 
    public static void main(String[] args) {
-
 
         launch();
     }
