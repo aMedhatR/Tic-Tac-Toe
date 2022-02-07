@@ -58,7 +58,7 @@
 }
 .scrollPane
 {
-    -fx-background: inherit; 
+    -fx-background: inherit;
     /* -fx-background: #4856cf; */
     -fx-border-radius: 25px;
     -fx-border-width: 2px;
@@ -66,26 +66,6 @@
 }
 .LeaderScrollVBox
 {
-    -fx-background: transparent; 
-  
-}
-.text-area {
- -fx-background-color: #363350;
-    text-area-background: #363350 ;
+    -fx-background: transparent;
 
-}
-
-.text-area .content {
-    -fx-background-color: text-area-background ;
-    -fx-border-color: #21f9fb;
-    -fx-border-radius :  30;
-}
-.gameButtonsStyling
-{
-    -fx-background-color: #363350;
-    -fx-background-radius :  20;
-    -fx-text-fill: #21f9fb;
-    -fx-font-size: 45px;
-    -fx-border-color: #21f9fb;
-     -fx-border-radius: 25px;
 }

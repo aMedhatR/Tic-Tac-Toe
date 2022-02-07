@@ -1,26 +1,21 @@
 package socket;
 
-import player.Player;
-import player.PlayerHandler;
-
 public class HandleSession {
 
     private String[] cell = new String[9];
     private final boolean continueToPlay = true;
-    private Handler handlerPlayer1;
-    private Handler handlerPlayer2;
     public int playerId1;
     public int playerId2;
     public String playerName1;
     public String playerName2;
-
     public int scorePlayer1;
     public int scorePlayer2;
-
+    private final Handler handlerPlayer1;
+    private final Handler handlerPlayer2;
     private int index;
     private String statusGame;
 
-    public HandleSession(int playerId1,String playerName1 ,Handler handlerPlayer1, int playerId2,String playerName2, Handler handlerPlayer2) {
+    public HandleSession(int playerId1, String playerName1, Handler handlerPlayer1, int playerId2, String playerName2, Handler handlerPlayer2) {
         this.playerId2 = playerId2;
         this.playerId1 = playerId1;
 
@@ -47,21 +42,21 @@ public class HandleSession {
         if (shape.equals("X")) sentMessageToPlayers("playerTurn___2", "playerTurn___2");
         else sentMessageToPlayers("playerTurn___1", "playerTurn___1");
 
-        System.out.println("checkIfGameFinish :"+ checkIfGameFinish());
+        System.out.println("checkIfGameFinish :" + checkIfGameFinish());
 
         statusGame = checkIfGameIsOver();
         if (statusGame.equals("xWon")) {
             sentMessageToPlayers("status___win", "status___lose");
 
-            handlerPlayer1.playerToDb.changeScore(playerId1,10);
+            handlerPlayer1.playerToDb.changeScore(playerId1, 10);
             scorePlayer1 += 10;
-            sentMessageToPlayers("updateScore___"+scorePlayer1+"___"+scorePlayer2, "updateScore___"+scorePlayer2+"___"+scorePlayer1);
+            sentMessageToPlayers("updateScore___" + scorePlayer1 + "___" + scorePlayer2, "updateScore___" + scorePlayer2 + "___" + scorePlayer1);
 
         } else if (statusGame.equals("oWon")) {
             sentMessageToPlayers("status___lose", "status___win");
-            handlerPlayer1.playerToDb.changeScore(playerId2,10);
+            handlerPlayer1.playerToDb.changeScore(playerId2, 10);
             scorePlayer2 += 10;
-            sentMessageToPlayers("updateScore___"+scorePlayer1+"___"+scorePlayer2, "updateScore___"+scorePlayer2+"___"+scorePlayer1);
+            sentMessageToPlayers("updateScore___" + scorePlayer1 + "___" + scorePlayer2, "updateScore___" + scorePlayer2 + "___" + scorePlayer1);
 
         } else if (checkIfGameFinish()) {
             ///// finish game
@@ -71,8 +66,7 @@ public class HandleSession {
 
     }
 
-    public void resetGame()
-    {
+    public void resetGame() {
         for (int i = 0; i < 9; i++)
             cell[i] = "";
         sentMessageToPlayers("playerTurn___1", "playerTurn___1");
