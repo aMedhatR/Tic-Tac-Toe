@@ -84,4 +84,9 @@ public class HomeController implements Initializable {
 
     });
     }
+    @FXML
+    protected void homepageTwoPlayersbtn()
+    {
+        CommonControllers.gotoStage("TwoPlayersOffline.fxml",HomePagepaneScene);
+    }
 }
