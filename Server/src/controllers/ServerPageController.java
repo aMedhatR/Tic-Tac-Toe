@@ -159,7 +159,9 @@ public static void update ()
                // handler.ps.println("false");
                     while (isleaderboard) {
 
-                            addNewLeaderBoardElement(leaderBoardArrL.getString("name"), String.valueOf(leaderBoardArrL.getInt("score")),leaderBoardArrL.getBoolean("status"));
+                            addNewLeaderBoardElement(leaderBoardArrL.getString("name"),
+                                    String.valueOf(leaderBoardArrL.getInt("score")),leaderBoardArrL.getBoolean("status")
+                            );
 
               //          addNewLeaderBoardElement(leaderBoardArrL.getString("name"), String.valueOf(leaderBoardArrL.getInt("score")),leaderBoardArrL.getBoolean("status"));
                         isleaderboard = leaderBoardArrL.next();

@@ -233,7 +233,8 @@ public class Handler extends Thread {
                 while (isleaderboard) {////true___1___abdo___100___true
                     if (handler.id != leaderBoardArrL.getInt("id")) {
                         res = "___" + leaderBoardArrL.getInt("id") + "___" + leaderBoardArrL.getString("name") +
-                                "___" + leaderBoardArrL.getInt("score") + "___" + leaderBoardArrL.getBoolean("status");
+                                "___" + leaderBoardArrL.getInt("score") + "___" + leaderBoardArrL.getBoolean("status")
+                                +"___"+ leaderBoardArrL.getBoolean("IsPlaying");
                         isleaderboard = leaderBoardArrL.next();
                         res = isleaderboard + res;
                         handler.ps.println(res);
