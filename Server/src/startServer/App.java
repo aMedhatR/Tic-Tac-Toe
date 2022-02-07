@@ -19,6 +19,8 @@ public class App {
             db = new DbHandler();
       //      new PlayerHandler().CreateDBT();
        //     new GameHandler().CreateDBT();
+
+            new PlayerHandler().UPDATETablePlayers();
         } catch (Exception ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }

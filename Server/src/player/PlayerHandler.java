@@ -35,16 +35,21 @@ public class PlayerHandler {
 //            + " status boolean NOT NULL DEFAULT FALSE";
 //
 //
-//    public void UPDATETablePlayers() throws SQLException {
-//        try {
-//            PreparedStatement statement = db.connection.prepareStatement(SQL_UPDATE_TABLE);
-//            statement.executeUpdate();
-//        } catch (SQLException e) {
-//            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+
+        private static final String SQL_UPDATE_TABLE = "ALTER TABLE players ADD"
+            + " IsPlaying boolean NOT NULL DEFAULT FALSE";
+
+
+    public void UPDATETablePlayers() throws SQLException {
+        try {
+            PreparedStatement statement = db.connection.prepareStatement(SQL_UPDATE_TABLE);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     Vector<Player> v = new Vector<Player>();
     Player player;
 
@@ -189,6 +194,7 @@ public class PlayerHandler {
 
 //        System.out.println("the player with" + id + "is now offline");
     }
+    
 
     public void changeScore(int id, int increaseScoreBy) {
         try {

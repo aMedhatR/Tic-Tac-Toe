@@ -161,6 +161,7 @@ public static void update ()
                     while (isleaderboard) {
 
                             addNewLeaderBoardElement(leaderBoardArrL.getString("name"),
+
                                     String.valueOf(leaderBoardArrL.getInt("score")),
                                     leaderBoardArrL.getBoolean("status"),  leaderBoardArrL.getBoolean("IsPlaying"));
 
