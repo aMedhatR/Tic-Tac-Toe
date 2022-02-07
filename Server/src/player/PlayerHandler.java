@@ -31,7 +31,7 @@ public class PlayerHandler {
     private static Map<Integer, Player> players;
 
 
-//    private static final String SQL_UPDATE_TABLE = "ALTER TABLE players ADD"
+    //    private static final String SQL_UPDATE_TABLE = "ALTER TABLE players ADD"
 //            + " status boolean NOT NULL DEFAULT FALSE";
 //
 //
@@ -51,7 +51,7 @@ public class PlayerHandler {
     public static ResultSet getPlayers() {
         players = new LinkedHashMap<>();
         playerslist = new ArrayList<Player>();
-        ResultSet resultSet ;
+        ResultSet resultSet;
         try {
             Statement stmt = db.connection.createStatement();
             resultSet = stmt.executeQuery("SELECT * FROM players ORDER BY status DESC, score DESC ");
@@ -65,7 +65,7 @@ public class PlayerHandler {
             Logger.getLogger(DbHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-       // return playerslist;
+        // return playerslist;
     }
 
     private static Player playerObiect(ResultSet resultSet) {
@@ -145,18 +145,22 @@ public class PlayerHandler {
             boolean isExist = rs.next();
 
             if (isExist) {
-                res = "true___" +rs.getInt("id")+"___"+ rs.getString("name")+"___"+ rs.getInt("score");
-                PreparedStatement stmtUpdate = db.connection.prepareStatement("UPDATE players set status=TRUE WHERE name=? ");
-                stmtUpdate.setString(1, name);
-                int updataNumber = stmtUpdate.executeUpdate();
-                System.out.println(updataNumber);
-                ////////////// update status
-                Player player = new Player(
-                        rs.getString("name"),
-                        rs.getString("password"),
-                        rs.getString("email"),
-                        rs.getInt("score"));
-                v.add(player);
+                if (rs.getBoolean("status")) {
+                    res = "false___isOnlineInOtherPlace";
+                } else {
+                    res = "true___" + rs.getInt("id") + "___" + rs.getString("name") + "___" + rs.getInt("score");
+                    PreparedStatement stmtUpdate = db.connection.prepareStatement("UPDATE players set status=TRUE WHERE name=? ");
+                    stmtUpdate.setString(1, name);
+                    int updataNumber = stmtUpdate.executeUpdate();
+                    System.out.println(updataNumber);
+                    ////////////// update status
+                    Player player = new Player(
+                            rs.getString("name"),
+                            rs.getString("password"),
+                            rs.getString("email"),
+                            rs.getInt("score"));
+                    v.add(player);
+                }
             } else {
                 // if user don't exist
                 res = "false___notExist";
@@ -171,31 +175,30 @@ public class PlayerHandler {
 
     }
 
-    public void changeStatus(int id)  {
+    public void changeStatus(int id) {
         try {
             PreparedStatement stmtUpdate = db.connection.prepareStatement("UPDATE players set status=FALSE WHERE id=?");
             stmtUpdate.setInt(1, id);
             int updataNumber = stmtUpdate.executeUpdate();
-        }catch (SQLException e) {
+        } catch (SQLException e) {
         }
 
-        System.out.println("the player with"+ id +"is now offline");
+        System.out.println("the player with" + id + "is now offline");
     }
 
-    public void changeScore(int id,int increaseScoreBy)  {
+    public void changeScore(int id, int increaseScoreBy) {
         try {
             PreparedStatement stmtUpdate = db.connection.prepareStatement("UPDATE players set score=score+? WHERE id=?");
             stmtUpdate.setInt(1, increaseScoreBy);
             stmtUpdate.setInt(2, id);
 
             int updataNumber = stmtUpdate.executeUpdate();
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
 
-        System.out.println("the player with"+ id +"is now offline");
+        System.out.println("the player with" + id + "is now offline");
     }
-
 
 
 }

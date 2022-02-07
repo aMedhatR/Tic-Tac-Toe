@@ -67,6 +67,7 @@
                </font></Button>
          </children>
       </GridPane>
+  
       <AnchorPane fx:id="chatAppToGame" layoutX="619.0" layoutY="99.0" prefHeight="495.0" prefWidth="380.0" style="-fx-background-color: #363350; -fx-border-color: #21f9fb;" styleClass="leaderBoard" stylesheets="@../cssFiles/Styling.css">
          <children>
             <Label layoutX="138.0" layoutY="14.0" text="Chat App" textFill="WHITE">
