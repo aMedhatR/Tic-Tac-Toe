@@ -517,7 +517,7 @@ public class ClientPageController implements Initializable {
                 dialog.showAndWait().ifPresent(response -> {
                     if (response == ButtonType.OK) {
 
-                        CommonControllers.gotoStage("TwoPlayersOnline.fxml", ClientScenePane);
+
 
                         isSavedGame = false;
                         CommonControllers.gotoStage("TwoPlayersOnline.fxml", ClientScenePane);
