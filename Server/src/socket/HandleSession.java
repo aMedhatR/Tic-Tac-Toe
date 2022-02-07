@@ -5,7 +5,7 @@ import player.PlayerHandler;
 
 public class HandleSession {
 
-    private final String[] cell = new String[9];
+    private String[] cell = new String[9];
     private final boolean continueToPlay = true;
     private Handler handlerPlayer1;
     private Handler handlerPlayer2;
@@ -140,6 +140,14 @@ public class HandleSession {
 
     public Handler getHandlerPlayer2() {
         return handlerPlayer2;
+    }
+
+    public String[] getCell() {
+        return cell;
+    }
+
+    public void setCell(String[] cell) {
+        this.cell = cell;
     }
 
 //    private void replaygame() {

@@ -26,24 +26,26 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="3670cd1b-d560-4b22-8b00-12953f599331">
+        <schema name="pg_catalog" object-types="table, view, function" />
         <schema name="public" object-types="table, view, sequence, function, constraint, index, column, dataset trigger" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="3670cd1b-d560-4b22-8b00-12953f599331">
-      <console name="Connection" type="STANDARD" schema="information_schema" session="Main" />
+      <console name="Connection" type="STANDARD" schema="public" session="Main"><![CDATA[select * from restorg]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files>
-      <object connection-id="3670cd1b-d560-4b22-8b00-12953f599331" object-ref="schemas/public/tables/players" />
+      <object connection-id="3670cd1b-d560-4b22-8b00-12953f599331" object-ref="consoles/Connection" />
     </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="3670cd1b-d560-4b22-8b00-12953f599331" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="3670cd1b-d560-4b22-8b00-12953f599331" dataset="public.restorg" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="3670cd1b-d560-4b22-8b00-12953f599331" dataset="public.players" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
