@@ -454,6 +454,7 @@ public class TwoPlayersOnlineController implements Initializable {
     }
 
 
+
     public void backToClientPage()
     {
         Platform.runLater(() -> {
