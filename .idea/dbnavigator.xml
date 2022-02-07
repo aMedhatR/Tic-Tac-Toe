@@ -24,7 +24,12 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="3670cd1b-d560-4b22-8b00-12953f599331">
+        <schema name="pg_catalog" object-types="table, view, function" />
+        <schema name="public" object-types="table, view, sequence, function, constraint, index, column, dataset trigger" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="3670cd1b-d560-4b22-8b00-12953f599331">
@@ -32,7 +37,10 @@
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="3670cd1b-d560-4b22-8b00-12953f599331" object-ref="schemas/public/tables/players" />
+      <object connection-id="3670cd1b-d560-4b22-8b00-12953f599331" object-ref="consoles/Connection" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="3670cd1b-d560-4b22-8b00-12953f599331" />
@@ -76,7 +84,7 @@
           <description value="" />
           <database-type value="POSTGRES" />
           <config-type value="BASIC" />
-          <database-version value="14.0" />
+          <database-version value="14.1" />
           <driver-source value="BUILTIN" />
           <driver-library value="" />
           <driver value="" />

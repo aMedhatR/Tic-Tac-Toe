@@ -504,6 +504,9 @@ System.out.println(numberOfX+" : "+numberOfO);
                             +"___"+isThereGame.getPosition1()+"___"+isThereGame.getPosition2()
 
                     );
+
+                gameToDb.DeleteGame(idInvitationFrom, id);
+
             } else if (res.equals("no")) {
                 Handler receiverHandler = handleVectorWithID.get(idInvitationFrom);
                 receiverHandler.ps.println("responseHandlerToSavedGame___" + "no___" + playerName);
