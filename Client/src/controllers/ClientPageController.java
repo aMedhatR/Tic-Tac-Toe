@@ -60,10 +60,12 @@ public class ClientPageController implements Initializable {
     private TextArea txtarea;
     boolean StopThread = false;
     public static boolean isSavedGame = false;
+    private double xOffset = 0;
+    private double yOffset = 0;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        StopThread=false;
+        StopThread = false;
         HandleOnlineSocket.getSendStream().println("leaderBoard___");
         Platform.runLater(() -> {
             CurrentPlayerNameLabel.setText(Person.getName());
@@ -141,7 +143,7 @@ public class ClientPageController implements Initializable {
 
     }
 
-    public void addNewLeaderBoardElement(String Name, String Score, boolean Status ,boolean isPlaying) {
+    public void addNewLeaderBoardElement(String Name, String Score, boolean Status, boolean isPlaying) {
 
         Image onlineImage = new Image("/Images/online.png", 20, 20, false, false);
         ImageView onlineIcon = new ImageView(onlineImage);
@@ -160,16 +162,13 @@ public class ClientPageController implements Initializable {
         ScoreLabel.setMinHeight(34);
         ScoreLabel.setFont(Font.font(17));
         ImageView StatusImage;
-        if (Status&&isPlaying) {
-            StatusImage=busyIcon;
+        if (Status && isPlaying) {
+            StatusImage = busyIcon;
 
-        }
-        else if (Status&&!isPlaying) {
+        } else if (Status && !isPlaying) {
             StatusImage = onlineIcon;
 
-        }
-        else
-        {
+        } else {
             StatusImage = offlineIcon;
         }
 
@@ -184,7 +183,7 @@ public class ClientPageController implements Initializable {
         hbox.getChildren().add(StatusImage);
 
         hbox.setCursor(Cursor.HAND);
-        if (Status &&!isPlaying) {
+        if (Status && !isPlaying) {
             hbox.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
@@ -245,14 +244,14 @@ public class ClientPageController implements Initializable {
 
                 HandleOnlineSocket.getSendStream().println("ChangeIsPlaying___true");
                 StopThread();
-                CommonControllers.gotoStage("PlayerBotHard.fxml",ClientScenePane);
+                CommonControllers.gotoStage("PlayerBotHard.fxml", ClientScenePane);
 
             } else if (response == ButtonType.CANCEL) {
                 /// back to home
 
                 HandleOnlineSocket.getSendStream().println("ChangeIsPlaying___true");
                 StopThread();
-                CommonControllers.gotoStage("PlayerBotEasy.fxml",ClientScenePane);
+                CommonControllers.gotoStage("PlayerBotEasy.fxml", ClientScenePane);
             }
 
         });
@@ -265,7 +264,7 @@ public class ClientPageController implements Initializable {
 
         HandleOnlineSocket.getSendStream().println("ChangeIsPlaying___true");
         StopThread();
-        CommonControllers.gotoStage("TwoPlayersOffline.fxml",ClientScenePane);
+        CommonControllers.gotoStage("TwoPlayersOffline.fxml", ClientScenePane);
     }
 
     @FXML
@@ -312,7 +311,7 @@ public class ClientPageController implements Initializable {
             dialog.initStyle(StageStyle.UNDECORATED);
             dialog.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.OK) {
-                    HandleOnlineSocket.getSendStream().println("InvitationToSavedGame___" + SelectedId );
+                    HandleOnlineSocket.getSendStream().println("InvitationToSavedGame___" + SelectedId);
                 } else if (response == ButtonType.CANCEL) {
                     /// back to home
                     newGame();
@@ -342,12 +341,12 @@ public class ClientPageController implements Initializable {
                 if (response == ButtonType.OK) {
                     //System.out.println("trying to send response");
                     Platform.runLater(() -> {
-                        HandleOnlineSocket.getSendStream().println("InvitaionResponseToSavedGame___"+ "yes"+"___"+allReplyMsg[2]);
+                        HandleOnlineSocket.getSendStream().println("InvitaionResponseToSavedGame___" + "yes" + "___" + allReplyMsg[2]);
                     });
                     // CommonControllers.gotoStage("TwoPlayersGame.fxml",ClientScenePane);
                 } else if (response == ButtonType.CANCEL) {
                     //System.out.println("trying to send response");
-                    HandleOnlineSocket.getSendStream().println("InvitaionResponseToSavedGame___" +"no"+"___"+allReplyMsg[2]);
+                    HandleOnlineSocket.getSendStream().println("InvitaionResponseToSavedGame___" + "no" + "___" + allReplyMsg[2]);
                 }
             });
         });
@@ -379,7 +378,7 @@ public class ClientPageController implements Initializable {
 
             Platform.runLater(() -> {
 
-                System.out.println(allReplyMsg[4]+" : "+allReplyMsg[5]);
+                System.out.println(allReplyMsg[4] + " : " + allReplyMsg[5]);
                 Game.setIdAnotherPlayer(Integer.parseInt(allReplyMsg[2]));
                 Game.setNameAnotherPlayer(allReplyMsg[3]);
                 Game.setScoreAnotherPlayer(Integer.parseInt(allReplyMsg[4]));
@@ -394,45 +393,44 @@ public class ClientPageController implements Initializable {
     }
 
 
-
     public void newGame() {
         Platform.runLater(() -> {
-        if (checkForCheckedPlayers()) {
+            if (checkForCheckedPlayers()) {
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dialoguesAndControllers/SendInvetation.fxml"));
-            DialogPane ConfirmDialogPane = null;
-            try {
-                ConfirmDialogPane = fxmlLoader.load();
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dialoguesAndControllers/SendInvetation.fxml"));
+                DialogPane ConfirmDialogPane = null;
+                try {
+                    ConfirmDialogPane = fxmlLoader.load();
 
-                ConfirmDialogPane.setContentText("Are You Sure To Send The Invetation to " + playerChosen + " ?");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Dialog<ButtonType> dialog = new Dialog<>();
-
-            dialog.setDialogPane(ConfirmDialogPane);
-            dialog.initStyle(StageStyle.UNDECORATED);
-            dialog.showAndWait().ifPresent(response -> {
-                if (response == ButtonType.YES) {
-                    HandleOnlineSocket.getSendStream().println("InvitaionTo___" + SelectedId + "___" + CurrentPlayerNameLabel.getText() + "___" + Person.getId());
+                    ConfirmDialogPane.setContentText("Are You Sure To Send The Invetation to " + playerChosen + " ?");
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                if (response == ButtonType.CANCEL) {
-                    //do NOTHING
-                }
-            });
-        } else {
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dialoguesAndControllers/PleaseChoosePlayer.fxml"));
-                DialogPane failDialogPane = fxmlLoader.load();
                 Dialog<ButtonType> dialog = new Dialog<>();
-                dialog.setDialogPane(failDialogPane);
+
+                dialog.setDialogPane(ConfirmDialogPane);
                 dialog.initStyle(StageStyle.UNDECORATED);
                 dialog.showAndWait().ifPresent(response -> {
-                    if (response == ButtonType.OK) {
-                        //do something
+                    if (response == ButtonType.YES) {
+                        HandleOnlineSocket.getSendStream().println("InvitaionTo___" + SelectedId + "___" + CurrentPlayerNameLabel.getText() + "___" + Person.getId());
                     }
-
+                    if (response == ButtonType.CANCEL) {
+                        //do NOTHING
+                    }
                 });
+            } else {
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dialoguesAndControllers/PleaseChoosePlayer.fxml"));
+                    DialogPane failDialogPane = fxmlLoader.load();
+                    Dialog<ButtonType> dialog = new Dialog<>();
+                    dialog.setDialogPane(failDialogPane);
+                    dialog.initStyle(StageStyle.UNDECORATED);
+                    dialog.showAndWait().ifPresent(response -> {
+                        if (response == ButtonType.OK) {
+                            //do something
+                        }
+
+                    });
 //               Scene scene = new Scene(parent);
 //               Stage stage = new Stage();
 //               stage.initModality(Modality.APPLICATION_MODAL);
@@ -443,10 +441,10 @@ public class ClientPageController implements Initializable {
 //                       formatSystem();
 //                   }
 //               });
-            } catch (IOException e) {
-                e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-        }
 
         });
     }
@@ -474,7 +472,7 @@ public class ClientPageController implements Initializable {
                         isSavedGame = false;
                         HandleOnlineSocket.getSendStream().println("InvitaionResponse___" + allReplyMsg[2] + "___" + Person.getName() + "___" + "yes");
 
-                        CommonControllers. gotoStage("TwoPlayersOnline.fxml", ClientScenePane);
+                        CommonControllers.gotoStage("TwoPlayersOnline.fxml", ClientScenePane);
 
 
                     });
@@ -529,7 +527,6 @@ public class ClientPageController implements Initializable {
                     if (response == ButtonType.OK) {
 
 
-
                         isSavedGame = false;
                         CommonControllers.gotoStage("TwoPlayersOnline.fxml", ClientScenePane);
 
@@ -555,7 +552,7 @@ public class ClientPageController implements Initializable {
         //System.out.println("client while loop out Flag :" + Flag);
 
         Platform.runLater(() -> {
-            addNewLeaderBoardElement(allReplyMsg[2], allReplyMsg[3], Boolean.parseBoolean(allReplyMsg[4]),Boolean.parseBoolean(allReplyMsg[5]));
+            addNewLeaderBoardElement(allReplyMsg[2], allReplyMsg[3], Boolean.parseBoolean(allReplyMsg[4]), Boolean.parseBoolean(allReplyMsg[5]));
             NameIdMap.put(allReplyMsg[2], Integer.parseInt(allReplyMsg[1]));
         });
     }
@@ -566,40 +563,41 @@ public class ClientPageController implements Initializable {
         HandleOnlineSocket.getSendStream().println("chatall" + "___" + txtfiled.getText());
         txtfiled.setText("");
     }
-@FXML
-public void LogoutPlayerName()
-{
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dialoguesAndControllers/AcceptInvetation.fxml"));
-    DialogPane ConfirmDialogPane = null;
-    try {
-        ConfirmDialogPane = fxmlLoader.load();
 
-        ConfirmDialogPane.setContentText("Do you want to log out?");
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-    Dialog<ButtonType> dialog = new Dialog<>();
-    dialog.setDialogPane(ConfirmDialogPane);
-    dialog.initStyle(StageStyle.UNDECORATED);
-    dialog.showAndWait().ifPresent(response -> {
-        if (response == ButtonType.OK) {
+    @FXML
+    public void LogoutPlayerName() {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dialoguesAndControllers/AcceptInvetation.fxml"));
+        DialogPane ConfirmDialogPane = null;
+        try {
+            ConfirmDialogPane = fxmlLoader.load();
 
-            HandleOnlineSocket.getSendStream().println("ChangeIsPlaying___false");
-            try {
-                CommonControllers.signOut();
-            } catch (IOException e) {
-                e.printStackTrace();
+            ConfirmDialogPane.setContentText("Do you want to log out?");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setDialogPane(ConfirmDialogPane);
+        dialog.initStyle(StageStyle.UNDECORATED);
+        dialog.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+
+                HandleOnlineSocket.getSendStream().println("ChangeIsPlaying___false");
+                try {
+                    CommonControllers.signOut();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                CommonControllers.goToHome(ClientScenePane);
+
+            } else if (response == ButtonType.CANCEL) {
+
+
             }
 
-            CommonControllers.goToHome(ClientScenePane);
+        });
+    }
 
-        } else if (response == ButtonType.CANCEL) {
-
-
-              }
-
-    });
-}
     protected void appendmsg(String msg) {
         Platform.runLater(() -> {
             txtarea.appendText("\n" + msg);
@@ -607,15 +605,29 @@ public void LogoutPlayerName()
 
         });
     }
-    protected void notification(String notificationBody){
+
+    protected void notification(String notificationBody) {
         Platform.runLater(() -> {
             new Notification(notificationBody);
         });
     }
 
- public void StopThread()
- {
-     StopThread =true;
-     thread.stop();
- }
+    public void StopThread() {
+        StopThread = true;
+        thread.stop();
+    }
+
+    @FXML
+    protected void handlePressedAction(MouseEvent event) {
+        xOffset = event.getSceneX();
+        yOffset = event.getSceneY();
+    }
+
+    @FXML
+    protected void handleMovementAction(MouseEvent event) {
+        Stage stage = (Stage) ClientScenePane.getScene().getWindow();
+        stage.setX(event.getScreenX() - xOffset);
+        stage.setY(event.getScreenY() - yOffset);
+
+    }
 }

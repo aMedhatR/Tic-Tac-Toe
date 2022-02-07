@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ClientScenePane" prefHeight="631.0" prefWidth="1097.0" style="-fx-background-color: #2d2a40;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ClientPageController">
+<AnchorPane fx:id="ClientScenePane" onMouseDragged="#handleMovementAction" onMousePressed="#handlePressedAction" prefHeight="631.0" prefWidth="1097.0" style="-fx-background-color: #2d2a40;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ClientPageController">
    <children>
       <AnchorPane layoutX="28.0" layoutY="105.0" prefHeight="495.0" prefWidth="380.0" styleClass="leaderBoard" stylesheets="@../cssFiles/Styling.css">
          <children>

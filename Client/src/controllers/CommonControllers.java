@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -19,13 +20,13 @@ import java.net.Socket;
 public class CommonControllers {
     Stage stage;
 
-    public static void closeWindow(AnchorPane pane ,boolean After) {
+    public static void closeWindow(AnchorPane pane, boolean After) {
         Stage stage;
-        Alert WelcomeExitAlert= new Alert(Alert.AlertType.CONFIRMATION);
+        Alert WelcomeExitAlert = new Alert(Alert.AlertType.CONFIRMATION);
         WelcomeExitAlert.setTitle("Exit");
         WelcomeExitAlert.setHeaderText("you're about to logout!");
         WelcomeExitAlert.setContentText("Are You Sure you want to Exit ?");
-        if (WelcomeExitAlert.showAndWait().get()== ButtonType.OK) {
+        if (WelcomeExitAlert.showAndWait().get() == ButtonType.OK) {
             stage = (Stage) pane.getScene().getWindow();
             System.out.println("you logout");
             if (After) {
@@ -38,13 +39,14 @@ public class CommonControllers {
             stage.close();
         }
     }
-    public static void closeWindow(BorderPane pane ,boolean After) {
+
+    public static void closeWindow(BorderPane pane, boolean After) {
         Stage stage;
-        Alert WelcomeExitAlert= new Alert(Alert.AlertType.CONFIRMATION);
+        Alert WelcomeExitAlert = new Alert(Alert.AlertType.CONFIRMATION);
         WelcomeExitAlert.setTitle("Exit");
         WelcomeExitAlert.setHeaderText("you're about to logout!");
         WelcomeExitAlert.setContentText("Are You Sure you want to Exit ?");
-        if (WelcomeExitAlert.showAndWait().get()== ButtonType.OK) {
+        if (WelcomeExitAlert.showAndWait().get() == ButtonType.OK) {
             stage = (Stage) pane.getScene().getWindow();
             System.out.println("you logout");
             if (After) {
@@ -58,18 +60,20 @@ public class CommonControllers {
             stage.close();
         }
     }
+
     public static void goToHome(AnchorPane pane) {
         try {
             HandleOnlineSocket.getReceiveStream().close();
 
-        HandleOnlineSocket.getSendStream().close();
-        HandleOnlineSocket.getMySocket().close();
+            HandleOnlineSocket.getSendStream().close();
+            HandleOnlineSocket.getMySocket().close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        gotoStage("WelcomePage.fxml",pane);
+        gotoStage("WelcomePage.fxml", pane);
 
     }
+
     public static void goToHome(BorderPane pane) {
         try {
             HandleOnlineSocket.getReceiveStream().close();
@@ -79,11 +83,12 @@ public class CommonControllers {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        gotoStage("WelcomePage.fxml",pane);
+        gotoStage("WelcomePage.fxml", pane);
 
     }
-    public static void signOut () throws IOException {
-        HandleOnlineSocket.getSendStream().println("Logout___"+Person.getId());
+
+    public static void signOut() throws IOException {
+        HandleOnlineSocket.getSendStream().println("Logout___" + Person.getId());
         ClientPageController.thread.stop();
         HandleOnlineSocket.getReceiveStream().close();
         HandleOnlineSocket.getSendStream().close();
@@ -91,13 +96,12 @@ public class CommonControllers {
 
     }
 
-    public static void gotoStage (String path,AnchorPane pane)
-    {
+    public static void gotoStage(String path, AnchorPane pane) {
         Stage stage;
         Scene scene;
         stage = (Stage) pane.getScene().getWindow();
 
-        FXMLLoader fxmlGameLoader = new FXMLLoader(mainPk.MainApp.class.getResource("/fxmlFiles/"+path));
+        FXMLLoader fxmlGameLoader = new FXMLLoader(mainPk.MainApp.class.getResource("/fxmlFiles/" + path));
         try {
             scene = new Scene(fxmlGameLoader.load());
             stage.setScene(scene);
@@ -105,13 +109,13 @@ public class CommonControllers {
             e.printStackTrace();
         }
     }
-    public static void gotoStage (String path,BorderPane pane)
-    {
+
+    public static void gotoStage(String path, BorderPane pane) {
         Stage stage;
         Scene scene;
         stage = (Stage) pane.getScene().getWindow();
 
-        FXMLLoader fxmlGameLoader = new FXMLLoader(mainPk.MainApp.class.getResource("/fxmlFiles/"+path));
+        FXMLLoader fxmlGameLoader = new FXMLLoader(mainPk.MainApp.class.getResource("/fxmlFiles/" + path));
         try {
             scene = new Scene(fxmlGameLoader.load());
             stage.setScene(scene);

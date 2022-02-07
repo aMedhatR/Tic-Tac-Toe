@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.StageStyle;
 import mainPk.HandleOnlineSocket;
 import mainPk.MainApp;
@@ -32,6 +33,8 @@ public class HomeController implements Initializable {
     private AnchorPane HomePagepaneScene;
     Stage stage;
     Scene scene;
+    private double xOffset = 0;
+    private double yOffset = 0;
     /**
      * Initializes the controller class.
      */
@@ -89,4 +92,19 @@ public class HomeController implements Initializable {
     {
         CommonControllers.gotoStage("TwoPlayersOffline.fxml",HomePagepaneScene);
     }
+
+    @FXML
+    protected void handlePressedAction(MouseEvent event) {
+        xOffset = event.getSceneX();
+        yOffset = event.getSceneY();
+    }
+
+    @FXML
+    protected void handleMovementAction(MouseEvent event) {
+        Stage stage = (Stage) HomePagepaneScene.getScene().getWindow();
+        stage.setX(event.getScreenX() - xOffset);
+        stage.setY(event.getScreenY() - yOffset);
+
+    } 
+
 }
