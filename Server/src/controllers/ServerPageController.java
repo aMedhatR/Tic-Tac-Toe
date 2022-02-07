@@ -229,7 +229,6 @@ public static void update ()
     {
         xOffset = event.getSceneX();
         yOffset = event.getSceneY();
-
     }
     @FXML
     protected void handleMovementAction(MouseEvent event)
@@ -237,7 +236,6 @@ public static void update ()
         Stage stage =(Stage)ServerScenePane.getScene().getWindow();
         stage.setX(event.getScreenX() - xOffset);
         stage.setY(event.getScreenY() - yOffset);
-
     }
     @FXML
     protected void clientPageCloseButton()

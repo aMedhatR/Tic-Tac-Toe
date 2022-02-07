@@ -59,8 +59,10 @@ public class TwoPlayersOnlineController implements Initializable {
     private TextField txtfiled;
     @FXML
     private  TextArea  txtarea;
-
-
+@FXML
+private Button SaveGameForLater;
+@FXML
+private Button withdrawButton;
 
 
     private String replyMsg;
@@ -199,6 +201,8 @@ public class TwoPlayersOnlineController implements Initializable {
 
     public void responseToNewGame(String res) {
         if (res.equals("yes")) {
+            SaveGameForLater.setDisable(false);
+            withdrawButton.setDisable(false);
             for (Button btn : d) {
                 resetButton(btn);
             }
@@ -277,7 +281,7 @@ public class TwoPlayersOnlineController implements Initializable {
             dialog.initStyle(StageStyle.UNDECORATED);
 
             dialog.showAndWait().ifPresent(response -> {
-                int score = Person.getScore()+10;
+               int score = Person.getScore()+10;
                 if (response == ButtonType.OK) {
 
                     Person.setScore(score);
@@ -338,12 +342,18 @@ public class TwoPlayersOnlineController implements Initializable {
             case "win":
                 StatusImage = winview;
                 increaseScore();
+                SaveGameForLater.setDisable(true);
+                withdrawButton.setDisable(true);
                 break;
             case "lose":
                 StatusImage = loseview;
+                SaveGameForLater.setDisable(true);
+                withdrawButton.setDisable(true);
                 break;
             case "draw":
                 StatusImage = drawview;
+                SaveGameForLater.setDisable(true);
+                withdrawButton.setDisable(true);
                 break;
 
         }
