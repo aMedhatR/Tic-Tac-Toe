@@ -67,16 +67,16 @@
                </font></Button>
          </children>
       </GridPane>
-      <AnchorPane fx:id="chatAppToGame" layoutX="619.0" layoutY="99.0" prefHeight="495.0" prefWidth="380.0" style="-fx-background-color: #363350; -fx-border-color: #21f9fb;" styleClass="leaderBoard" stylesheets="@../cssFiles/Styling.css">
+      <AnchorPane fx:id="chatAppToGame" layoutX="619.0" layoutY="99.0" prefHeight="495.0" prefWidth="380.0" style="-fx-background-color: #363350; -fx-border-color: #21f9fb; -fx-background-radius: 27;" styleClass="leaderBoard" stylesheets="@../cssFiles/Styling.css">
          <children>
             <Label layoutX="138.0" layoutY="25.0" text="Chat App" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <TextArea fx:id="txtarea" layoutX="35.0" layoutY="74.0" prefHeight="354.0" prefWidth="310.0" style="-fx-text-fill: #21f9fb;" stylesheets="@../cssFiles/Styling.css" />
-            <TextField fx:id="txtfiled" layoutX="42.0" layoutY="440.0" prefHeight="25.0" prefWidth="249.0" promptText="write your message .." style="-fx-text-fill: #21f9fb; -fx-background-color: #2d2a40;" styleClass="leaderBoard" stylesheets="@../cssFiles/Styling.css" />
-            <Button fx:id="send" layoutX="302.0" layoutY="440.0" mnemonicParsing="false" onMouseClicked="#send" style="-fx-background-color: #21f9fb;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css" text="Send" />
+            <TextArea fx:id="txtarea" editable="false" layoutX="44.0" layoutY="74.0" prefHeight="354.0" prefWidth="301.0" style="-fx-text-fill: #21f9fb; -fx-background-radius: 27;" stylesheets="@../cssFiles/Styling.css" />
+            <TextField fx:id="txtfiled" layoutX="42.0" layoutY="440.0" prefHeight="25.0" prefWidth="249.0" promptText="write your message .." style="-fx-text-fill: #21f9fb; -fx-background-color: #2d2a40; -fx-background-radius: 25;" styleClass="leaderBoard" stylesheets="@../cssFiles/Styling.css" />
+            <Button fx:id="send" defaultButton="true" layoutX="302.0" layoutY="440.0" mnemonicParsing="false" onAction="#send" onMouseClicked="#send" style="-fx-background-color: #21f9fb; -fx-cursor: hand;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css" text="Send" />
          </children>
       </AnchorPane>
       <Button fx:id="welcomePageExitButton" layoutX="1026.0" layoutY="25.0" mnemonicParsing="false" onMouseClicked="#OnlineGameCloseButton" prefHeight="25.0" prefWidth="36.0" styleClass="welcomePageCloseButtonClass" stylesheets="@../cssFiles/Styling.css" text="X">
@@ -100,12 +100,12 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="yourName" layoutX="181.0" layoutY="152.0" maxWidth="150.0" minWidth="111.0" prefHeight="47.0" style="-fx-font-size: 30;" styleClass="gameButtonsStyling" stylesheets="@../cssFiles/Styling.css" text="Player1:">
+      <Label fx:id="yourName" layoutX="181.0" layoutY="152.0" maxWidth="150.0" minWidth="111.0" prefHeight="47.0" prefWidth="119.0" style="-fx-font-size: 30;" styleClass="gameButtonsStyling" stylesheets="@../cssFiles/Styling.css" text="Player1:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="playerName" layoutX="349.0" layoutY="152.0" maxWidth="150.0" minWidth="111.0" prefHeight="47.0" style="-fx-font-size: 30;" styleClass="gameButtonsStyling" stylesheets="@../cssFiles/Styling.css" text="Player2:">
+      <Label fx:id="playerName" layoutX="349.0" layoutY="152.0" maxWidth="150.0" minWidth="111.0" prefHeight="47.0" prefWidth="119.0" style="-fx-font-size: 30;" styleClass="gameButtonsStyling" stylesheets="@../cssFiles/Styling.css" text="Player2:">
          <font>
             <Font size="16.0" />
          </font>

@@ -60,6 +60,9 @@ public class TwoPlayersOnlineController implements Initializable {
     @FXML
     private  TextArea  txtarea;
 
+
+
+
     private String replyMsg;
     // information players
     private int playerTurn = 0;
@@ -512,6 +515,7 @@ public class TwoPlayersOnlineController implements Initializable {
         HandleOnlineSocket.getSendStream().println("twochat" + "___" + idAntherPlayer+"___"+ txtfiled.getText());
         txtfiled.setText("");
     }
+
     protected void appendmsg(String msg) {
         Platform.runLater(() -> {
             txtarea.appendText("\n" + msg);

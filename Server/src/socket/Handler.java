@@ -513,6 +513,9 @@ System.out.println(numberOfX+" : "+numberOfO);
                             +"___"+isThereGame.getPosition1()+"___"+isThereGame.getPosition2()
 
                     );
+
+                gameToDb.DeleteGame(idInvitationFrom, id);
+
             } else if (res.equals("no")) {
                 Handler receiverHandler = handleVectorWithID.get(idInvitationFrom);
                 receiverHandler.ps.println("responseHandlerToSavedGame___" + "no___" + playerName);
@@ -529,7 +532,7 @@ System.out.println(numberOfX+" : "+numberOfO);
 
         Handler receiverHandler = handleVectorWithID.get(playerid);
         receiverHandler.ps.println("twochatmsg"+"___"+playerName+" : "+msg);
-        ps.println("msg"+"___"+"You"+" : "+msg);
+        ps.println("twochatmsg"+"___"+"You"+" : "+msg);
 
     }
 

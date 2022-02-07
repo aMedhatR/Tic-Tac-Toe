@@ -61,7 +61,6 @@ public class GameHandler {
                          res.getInt("playerOneScore"),
                          res.getInt("playerTwoScore")
                 );
-        DeleteGame(PlayerOneId, PlayerTwoId);
             } else {
                 game = null;
             }
