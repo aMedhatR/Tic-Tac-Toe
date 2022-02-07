@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class TwoPlayerSController implements Initializable {
+public class TwoPlayersOnlineController implements Initializable {
 
     Button[] d = new Button[9];
     static Thread thread;

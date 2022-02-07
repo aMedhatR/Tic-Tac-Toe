@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class PlayerVsComputerController implements Initializable {
+public class PlayerBotEasyController implements Initializable {
 
     @FXML
     private Button button1;
@@ -166,5 +166,9 @@ public class PlayerVsComputerController implements Initializable {
         }
     }
 
+@FXML
+    protected void OnlineGameCloseButton()
+{
 
+}
 }

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
-public class TwoPlayerSController2 implements Initializable {
+public class TwoPlayersOfflineController implements Initializable {
 
     @FXML
     private Button button1;
@@ -144,5 +144,15 @@ public class TwoPlayerSController2 implements Initializable {
                 }
             }
         }
+    }
+    @FXML
+    protected void handleWithDraw()
+    {
+
+    }
+    @FXML
+    protected void OnlineGameCloseButton()
+    {
+
     }
 }

@@ -57,6 +57,6 @@ public class HomeController implements Initializable {
     }
     @FXML
     protected void homepageSinglbtn(){
-        CommonControllers.gotoStage("PlayerVsComputer.fxml",HomePagepaneScene);
+        CommonControllers.gotoStage("PlayerBotHard.fxml",HomePagepaneScene);
     }
 }

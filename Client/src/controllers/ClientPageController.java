@@ -30,6 +30,7 @@ import java.util.ResourceBundle;
 
 public class ClientPageController implements Initializable {
     public static Thread thread;
+    private String SingleEasyHard = "";
     Stage stage;
     Scene scene;
     boolean Flag;
@@ -199,8 +200,40 @@ public class ClientPageController implements Initializable {
     }
 
     @FXML
-    protected void testclick() {
-      //  addNewLeaderBoardElement("Abdo", "100", true);
+    protected void ClientPageSingleGame() {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dialoguesAndControllers/SendInvetation.fxml"));
+        DialogPane ConfirmDialogPane = null;
+        try {
+            ConfirmDialogPane = fxmlLoader.load();
+
+            ConfirmDialogPane.setContentText("Are You Sure To Send The Invetation to " + playerChosen + " ?");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Dialog<ButtonType> dialog = new Dialog<>();
+
+        dialog.setDialogPane(ConfirmDialogPane);
+        dialog.initStyle(StageStyle.UNDECORATED);
+        dialog.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.YES) {
+                //send invitaation to trhe speccified mail
+
+//                    Thread invitaionThread;
+//                    invitaionThread = new Thread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            String replyMsg;
+                HandleOnlineSocket.getSendStream().println("InvitaionTo___" + SelectedId + "___" + CurrentPlayerNameLabel.getText() + "___" + Person.getId());
+//                        }
+//                    });
+//                    invitaionThread.start();
+            }
+            if (response == ButtonType.CANCEL) {
+                //do NOTHING
+            }
+
+
+        });
 
            }
 
@@ -223,6 +256,7 @@ public class ClientPageController implements Initializable {
                 e.printStackTrace();
             }
             Dialog<ButtonType> dialog = new Dialog<>();
+
             dialog.setDialogPane(ConfirmDialogPane);
             dialog.initStyle(StageStyle.UNDECORATED);
             dialog.showAndWait().ifPresent(response -> {
@@ -297,12 +331,12 @@ public class ClientPageController implements Initializable {
 
 
                         HandleOnlineSocket.getSendStream().println("InvitaionResponse___" + allReplyMsg[2] + "___" + Person.getName() + "___" + "yes");
-                        CommonControllers. gotoStage("TwoPlayersGame.fxml", ClientScenePane);
+                        CommonControllers. gotoStage("TwoPlayersOnline.fxml", ClientScenePane);
 
                     });
 
 
-                    // CommonControllers.gotoStage("TwoPlayersGame.fxml",ClientScenePane);
+                    // CommonControllers.gotoStage("TwoPlayersOnline.fxml",ClientScenePane);
                 } else if (response == ButtonType.CANCEL) {
                     //System.out.println("trying to send response");
                     HandleOnlineSocket.getSendStream().println("InvitaionResponse___" + allReplyMsg[2] + "___" + Person.getName() + "___" + "no");
@@ -349,7 +383,7 @@ public class ClientPageController implements Initializable {
                 dialog.initStyle(StageStyle.UNDECORATED);
                 dialog.showAndWait().ifPresent(response -> {
                     if (response == ButtonType.OK) {
-                        CommonControllers.gotoStage("TwoPlayersGame.fxml", ClientScenePane);
+                        CommonControllers.gotoStage("TwoPlayersOnline.fxml", ClientScenePane);
                     }
                 });
             });

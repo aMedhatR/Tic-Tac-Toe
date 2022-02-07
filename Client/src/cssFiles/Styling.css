@@ -71,7 +71,7 @@
 }
 .text-area {
  -fx-background-color: #363350;
-    text-area-background: #363350 ;
+    text-area-background:  #2d2a40 ;
 
 }
 
@@ -79,6 +79,7 @@
     -fx-background-color: text-area-background ;
     -fx-border-color: #21f9fb;
     -fx-border-radius :  30;
+     -fx-font-size: 20px;
 }
 .gameButtonsStyling
 {

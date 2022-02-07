@@ -10,9 +10,8 @@ import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
 
-public class PlayerVsComputerControllerTry implements Initializable {
+public class PlayerBotHardController implements Initializable {
 
     @FXML
     private Button button1;
@@ -315,6 +314,10 @@ public class PlayerVsComputerControllerTry implements Initializable {
 
         return bestMove;
     }
+@FXML
+    protected void OnlineGameCloseButton()
+{
 
+}
 
 }
