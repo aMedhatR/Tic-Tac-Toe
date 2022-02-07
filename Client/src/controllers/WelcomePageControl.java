@@ -1,5 +1,7 @@
 package controllers;
 
+import javafx.fxml.Initializable;
+import mainPk.HandleOnlineSocket;
 import mainPk.MainApp;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,8 +14,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class WelcomePageControl {
+public class WelcomePageControl  implements Initializable {
     @FXML
     private Label welcomeText;
     @FXML
@@ -32,40 +36,27 @@ public class WelcomePageControl {
 
     @FXML
     protected void onWelcomeSignInButtonClick() {
-
-        stage = (Stage) WelcomeScenePane.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlFiles/signIn.fxml"));
-        try {
-           scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        stage.setScene(scene);
+        CommonControllers.gotoStage("signIn.fxml",WelcomeScenePane);
     }
 
     @FXML
     protected void onWelcomeSignUpButtonClick() {
+        CommonControllers.gotoStage("signup.fxml",WelcomeScenePane);
 
-        stage = (Stage) WelcomeScenePane.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlFiles/signup.fxml"));
-        try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        stage.setScene(scene);
     }
 
     @FXML
-    protected void onWelcomeGuestButtonClick() {
+    protected void onWelcomeGuestButtonClick() throws IOException {
+        HandleOnlineSocket.getReceiveStream().close();
+        HandleOnlineSocket.getSendStream().close();
+        HandleOnlineSocket.getMySocket().close();
+         CommonControllers.gotoStage("Home.fxml",WelcomeScenePane);
 
-        stage = (Stage) WelcomeScenePane.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlFiles/Home.fxml"));
-        try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        stage.setScene(scene);
+
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        new HandleOnlineSocket();
     }
 }

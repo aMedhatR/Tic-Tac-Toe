@@ -78,6 +78,9 @@ public class CommonControllers {
         FXMLLoader fxmlLoader = new FXMLLoader(mainPk.MainApp.class.getResource("/fxmlFiles/WelcomePage.fxml"));
         try {
             scene = new Scene(fxmlLoader.load());
+            HandleOnlineSocket.getReceiveStream().close();
+            HandleOnlineSocket.getSendStream().close();
+            HandleOnlineSocket.getMySocket().close();
             stage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();
@@ -94,6 +97,20 @@ public class CommonControllers {
     }
 
     public static void gotoStage (String path,AnchorPane pane)
+    {
+        Stage stage;
+        Scene scene;
+        stage = (Stage) pane.getScene().getWindow();
+
+        FXMLLoader fxmlGameLoader = new FXMLLoader(mainPk.MainApp.class.getResource("/fxmlFiles/"+path));
+        try {
+            scene = new Scene(fxmlGameLoader.load());
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void gotoStage (String path,BorderPane pane)
     {
         Stage stage;
         Scene scene;

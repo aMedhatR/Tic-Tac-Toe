@@ -182,34 +182,21 @@ public class signInController implements Initializable {
 
     @FXML
     protected void onSignInSignUpButton() {
+CommonControllers.gotoStage("signup.fxml",SignInPaneScene);
 
-        stage = (Stage) SignInPaneScene.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlFiles/signup.fxml"));
-        try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        stage.setScene(scene);
     }
 
 
     @FXML
     protected void goToClientPage()
     {
-        stage = (Stage) SignInPaneScene.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlFiles/ClientPage.fxml"));
-        try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        stage.setScene(scene);
+        CommonControllers.gotoStage("ClientPage.fxml",SignInPaneScene);
+
     }
 
 
     @FXML
-    protected void goToHome() {
+    protected void goToHome() throws IOException {
         CommonControllers.goToHome(SignInPaneScene);
     }
     @FXML
