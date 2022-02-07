@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -23,6 +24,8 @@ import java.util.ResourceBundle;
 public class TwoPlayersOnlineController implements Initializable {
 
     Button[] d = new Button[9];
+    private double xOffset = 0;
+    private double yOffset = 0;
     static Thread thread;
     @FXML
     private AnchorPane OnlineGameAnchorPane;
@@ -59,8 +62,10 @@ public class TwoPlayersOnlineController implements Initializable {
     private TextField txtfiled;
     @FXML
     private  TextArea  txtarea;
-
-
+@FXML
+private Button SaveGameForLater;
+@FXML
+private Button withdrawButton;
 
 
     private String replyMsg;
@@ -199,6 +204,8 @@ public class TwoPlayersOnlineController implements Initializable {
 
     public void responseToNewGame(String res) {
         if (res.equals("yes")) {
+            SaveGameForLater.setDisable(false);
+            withdrawButton.setDisable(false);
             for (Button btn : d) {
                 resetButton(btn);
             }
@@ -277,7 +284,7 @@ public class TwoPlayersOnlineController implements Initializable {
             dialog.initStyle(StageStyle.UNDECORATED);
 
             dialog.showAndWait().ifPresent(response -> {
-                int score = Person.getScore()+10;
+               int score = Person.getScore()+10;
                 if (response == ButtonType.OK) {
 
                     Person.setScore(score);
@@ -338,12 +345,18 @@ public class TwoPlayersOnlineController implements Initializable {
             case "win":
                 StatusImage = winview;
                 increaseScore();
+                SaveGameForLater.setDisable(true);
+                withdrawButton.setDisable(true);
                 break;
             case "lose":
                 StatusImage = loseview;
+                SaveGameForLater.setDisable(true);
+                withdrawButton.setDisable(true);
                 break;
             case "draw":
                 StatusImage = drawview;
+                SaveGameForLater.setDisable(true);
+                withdrawButton.setDisable(true);
                 break;
 
         }
@@ -522,4 +535,19 @@ public class TwoPlayersOnlineController implements Initializable {
 
         });
     }
+    @FXML
+    protected void handlePressedAction(MouseEvent event)
+    {
+        xOffset = event.getSceneX();
+        yOffset = event.getSceneY();
+    }
+
+    @FXML
+    protected void handleMovementAction(MouseEvent event)
+    {
+        Stage stage =(Stage)OnlineGameAnchorPane.getScene().getWindow();
+        stage.setX(event.getScreenX() - xOffset);
+        stage.setY(event.getScreenY() - yOffset);
+    }
+
 }

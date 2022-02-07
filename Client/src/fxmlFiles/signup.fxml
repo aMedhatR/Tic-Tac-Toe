@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -22,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="SignUpScenePane" prefHeight="450.0" prefWidth="780.0" style="-fx-background-color: #1c2e4a;" styleClass="signInBack" stylesheets="@../cssFiles/Styling.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignupController">
+<BorderPane fx:id="SignUpScenePane" onMouseDragged="#handleMovementAction" onMousePressed="#handlePressedAction" prefHeight="450.0" prefWidth="780.0" style="-fx-background-color: #1c2e4a;" styleClass="signInBack" stylesheets="@../cssFiles/Styling.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignupController">
    <top>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="700.0" BorderPane.alignment="CENTER">
          <children>

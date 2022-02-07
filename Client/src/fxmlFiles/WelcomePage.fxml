@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="WelcomeScenePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="780.0" style="-fx-background-color: black;" styleClass="WelcomePagePaneclass" stylesheets="@../cssFiles/Styling.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WelcomePageControl">
+<AnchorPane fx:id="WelcomeScenePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#handleMovementAction" onMousePressed="#handlePressedAction" prefHeight="450.0" prefWidth="780.0" style="-fx-background-color: black;" styleClass="WelcomePagePaneclass" stylesheets="@../cssFiles/Styling.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WelcomePageControl">
    <children>
       <Text layoutX="65.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Fabulous">
          <font>

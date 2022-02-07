@@ -18,7 +18,7 @@ public class MainApp extends Application {
         stage.setTitle("The Fabulous Tic Tac Toe");
 //        Image icon =new Image("");
 
-//        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initStyle(StageStyle.UNDECORATED);
 
         stage.setScene(scene);
         stage.show();

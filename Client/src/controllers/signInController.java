@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 
 import javafx.application.Platform;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import mainPk.HandleOnlineSocket;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,7 +29,8 @@ public class signInController implements Initializable {
     Stage stage;
     Scene scene;
     Thread thread;
-
+    private double xOffset = 0;
+    private double yOffset = 0;
     @FXML
     private Label errorUsername;
     @FXML
@@ -202,5 +204,19 @@ CommonControllers.gotoStage("signup.fxml",SignInPaneScene);
     @FXML
     protected void onWelcomeCloseButtonClick() {
         CommonControllers.closeWindow(SignInPaneScene,false);
+    }
+    @FXML
+    protected void handlePressedAction(MouseEvent event)
+    {
+        xOffset = event.getSceneX();
+        yOffset = event.getSceneY();
+    }
+
+    @FXML
+    protected void handleMovementAction(MouseEvent event)
+    {
+        Stage stage =(Stage)SignInPaneScene.getScene().getWindow();
+        stage.setX(event.getScreenX() - xOffset);
+        stage.setY(event.getScreenY() - yOffset);
     }
 }
