@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -17,7 +18,8 @@ public class TwoPlayersOfflineController implements Initializable {
 
     @FXML
     private Button button1;
-
+    @FXML
+    private AnchorPane OnlineGameAnchorPane;
     @FXML
     private Button button2;
 
@@ -52,8 +54,8 @@ public class TwoPlayersOfflineController implements Initializable {
     private  Label label2;
 
 
-    private int player1;
-    private int player2;
+    private int player1=0;
+    private int player2=0;
     private int playerTurn = 0;
     private int gameOver = 0;
 
@@ -136,7 +138,7 @@ public class TwoPlayersOfflineController implements Initializable {
 
                     winnerText.setText("X won!");
                     playerTurn = 3;
-                    player1++;
+                    player1+=10;
                     label1.setText(Integer.toString(player1));
                     gameOver++;
                     });
@@ -147,7 +149,7 @@ public class TwoPlayersOfflineController implements Initializable {
                     Platform.runLater(()->{
                     winnerText.setText("O won!");
                     playerTurn = 3;
-                    player2++;
+                    player2+=10;
                     label2.setText(Integer.toString(player2));
                     gameOver++;
                     });
@@ -163,6 +165,11 @@ public class TwoPlayersOfflineController implements Initializable {
     @FXML
     protected void OnlineGameCloseButton()
     {
-
+        CommonControllers.closeWindow(OnlineGameAnchorPane,false);
+    }
+    @FXML
+    protected void goToHome()
+    {
+        CommonControllers.goToHome(OnlineGameAnchorPane);
     }
 }
