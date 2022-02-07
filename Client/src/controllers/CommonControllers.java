@@ -59,32 +59,27 @@ public class CommonControllers {
         }
     }
     public static void goToHome(AnchorPane pane) {
-        Stage stage;
-        Scene scene;
-        stage = (Stage) pane.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(mainPk.MainApp.class.getResource("/fxmlFiles/WelcomePage.fxml"));
         try {
-            scene = new Scene(fxmlLoader.load());
-            stage.setScene(scene);
+            HandleOnlineSocket.getReceiveStream().close();
+
+        HandleOnlineSocket.getSendStream().close();
+        HandleOnlineSocket.getMySocket().close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        gotoStage("WelcomePage.fxml",pane);
 
     }
     public static void goToHome(BorderPane pane) {
-        Stage stage;
-        Scene scene;
-        stage = (Stage) pane.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(mainPk.MainApp.class.getResource("/fxmlFiles/WelcomePage.fxml"));
         try {
-            scene = new Scene(fxmlLoader.load());
             HandleOnlineSocket.getReceiveStream().close();
+
             HandleOnlineSocket.getSendStream().close();
             HandleOnlineSocket.getMySocket().close();
-            stage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        gotoStage("WelcomePage.fxml",pane);
 
     }
     public static void signOut () throws IOException {

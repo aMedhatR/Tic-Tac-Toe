@@ -47,9 +47,7 @@ public class WelcomePageControl  implements Initializable {
 
     @FXML
     protected void onWelcomeGuestButtonClick() throws IOException {
-        HandleOnlineSocket.getReceiveStream().close();
-        HandleOnlineSocket.getSendStream().close();
-        HandleOnlineSocket.getMySocket().close();
+
          CommonControllers.gotoStage("Home.fxml",WelcomeScenePane);
 
 

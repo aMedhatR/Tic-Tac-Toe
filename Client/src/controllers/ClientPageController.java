@@ -1,6 +1,7 @@
 package controllers;
 
 import game.Game;
+import helper.Notification;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -111,6 +112,9 @@ public class ClientPageController implements Initializable {
                                     break;
                                 case "responseHandlerToSavedGame":
                                     responseHandlerToSavedGame(allReplyMsg);
+                                    break;
+                                case "notification":
+                                    notification(allReplyMsg[1]);
                                     break;
                                 default:
                                     updateLeaderboardHandler(allReplyMsg);
@@ -600,7 +604,12 @@ public void LogoutPlayerName()
         Platform.runLater(() -> {
             txtarea.appendText("\n" + msg);
 
+
         });
+    }
+    protected void notification(String notificationBody){
+
+        new Notification(notificationBody);
     }
 
  public void StopThread()

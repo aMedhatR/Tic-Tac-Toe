@@ -182,7 +182,7 @@ public class PlayerHandler {
 
     public boolean changeStatus(int id) {
         try {
-            PreparedStatement stmtUpdate = db.connection.prepareStatement("UPDATE players set status=FALSE WHERE id=?");
+            PreparedStatement stmtUpdate = db.connection.prepareStatement("UPDATE players set status=FALSE, IsPlaying=FALSE WHERE id=?");
             stmtUpdate.setInt(1, id);
             int isupdated = stmtUpdate.executeUpdate();
             if (isupdated > 0) {
