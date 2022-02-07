@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -50,7 +51,8 @@ public class PlayerBotHardController implements Initializable {
     private  Label label2;
 
     private Button computerTurn;
-
+@FXML
+    private AnchorPane HardBotScenePane ;
     private Vector<String> vector= new Vector<String>(9);
 
     private int player1;
@@ -317,7 +319,7 @@ public class PlayerBotHardController implements Initializable {
 @FXML
     protected void OnlineGameCloseButton()
 {
-
+    CommonControllers.closeWindow(HardBotScenePane,false);
 }
 
 }

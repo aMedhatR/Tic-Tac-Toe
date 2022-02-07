@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -52,10 +53,13 @@ public class PlayerBotEasyController implements Initializable {
 
     private Button computerTurn;
 
+    @FXML
+    private AnchorPane EasyBotScenePane;
+
     private Vector<String> vector= new Vector<String>(9);
 
-    private int player1;
-    private int player2;
+    private int player1 =0;
+    private int player2 =0;
     private int playerTurn = 1;
     private int gameOver = 0;
 
@@ -148,7 +152,7 @@ public class PlayerBotEasyController implements Initializable {
                 if (line.equals("XXX")) {
                     winnerText.setText("X won!");
                     playerTurn = 3;
-                    player1++;
+                    player1+=10;
                     label1.setText(Integer.toString(player1));
                     gameOver++;
                 }
@@ -158,7 +162,7 @@ public class PlayerBotEasyController implements Initializable {
                     System.out.println("Hi Failuer");
                     winnerText.setText("O won!");
                     playerTurn = 3;
-                    player2++;
+                    player2+=10;
                     label2.setText(Integer.toString(player2));
                     gameOver++;
                 }
@@ -169,6 +173,6 @@ public class PlayerBotEasyController implements Initializable {
 @FXML
     protected void OnlineGameCloseButton()
 {
-
+ CommonControllers.closeWindow(EasyBotScenePane,false);
 }
 }
