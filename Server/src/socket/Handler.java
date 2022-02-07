@@ -520,7 +520,7 @@ System.out.println(numberOfX+" : "+numberOfO);
 
         Handler receiverHandler = handleVectorWithID.get(playerid);
         receiverHandler.ps.println("twochatmsg"+"___"+playerName+" : "+msg);
-        ps.println("msg"+"___"+"You"+" : "+msg);
+        ps.println("twochatmsg"+"___"+"You"+" : "+msg);
 
     }
 
