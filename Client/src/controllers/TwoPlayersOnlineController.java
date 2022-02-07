@@ -1,5 +1,6 @@
 package controllers;
 
+import game.Game;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +11,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import mainPk.HandleOnlineSocket;
@@ -24,7 +24,6 @@ public class TwoPlayersOnlineController implements Initializable {
 
     Button[] d = new Button[9];
     static Thread thread;
-    //ArrayList<Button> buttons;
     @FXML
     private AnchorPane OnlineGameAnchorPane;
     @FXML
@@ -45,8 +44,7 @@ public class TwoPlayersOnlineController implements Initializable {
     private Button button8;
     @FXML
     private Button button9;
-    @FXML
-    private Text winnerText;
+
     @FXML
     private Label label1;
     @FXML
@@ -57,8 +55,7 @@ public class TwoPlayersOnlineController implements Initializable {
     private Label playerName;
     @FXML
     private Label label2;
-    private int player1;
-    private int player2;
+
     private String replyMsg;
     // information players
     private int playerTurn = 0;
@@ -69,7 +66,6 @@ public class TwoPlayersOnlineController implements Initializable {
     // information  other players
     private String nameAntherPlayer = "";
     private int idAntherPlayer;
-    private final int gameOver = 0;
 
     private boolean stopPlayer = false;
 
@@ -80,7 +76,6 @@ public class TwoPlayersOnlineController implements Initializable {
 
         ClientPageController.thread.stop();
         stopThread = false;
-        //buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
         d[0] = button1;
         d[1] = button2;
         d[2] = button3;
@@ -92,15 +87,16 @@ public class TwoPlayersOnlineController implements Initializable {
         d[8] = button9;
 
 
-//        buttons.forEach(button -> {
-//            setupButton(button);
-//            button.setFocusTraversable(false);
-//        });
-
         for (Button btn : d) {
             setupButton(btn);
             btn.setFocusTraversable(false);
         }
+        if(ClientPageController.isSavedGame)
+        {
+            setDefaultButtonByLastPlaying();
+            System.out.println("saved game");
+        }
+
 
         thread = new Thread(new Runnable() {
             @Override
@@ -162,6 +158,15 @@ public class TwoPlayersOnlineController implements Initializable {
                             case"quitPlayer":
                                 handlePlayerWasQuit(allReplyMsg[1]);
                                 break;
+
+                            case "showDialogToAskReplayGame":
+                                handleShowDialogToAskReplayGame();
+                                break;
+
+                            case "decisionToSaveGame":
+                                handleDecisionToSaveGame(allReplyMsg[1]);
+                                break;
+
                         }
 
                     } catch (IOException e) {
@@ -179,14 +184,6 @@ public class TwoPlayersOnlineController implements Initializable {
     public void restartGame(ActionEvent event) {
 
         HandleOnlineSocket.getSendStream().println("requestNewGame___" + Person.getName() + "___" + idAntherPlayer);
-
-        //buttons.forEach(this::resetButton);
-
-//        for (Button btn : d) {
-//            resetButton(btn);
-//        }
-//
-//        winnerText.setText("Tic-Tac-Toe");
 
     }
 
@@ -230,7 +227,6 @@ public class TwoPlayersOnlineController implements Initializable {
 
     }
 
-
     public void handleMovement(String shape, int index) {
         Platform.runLater(() -> {
             d[index].setText(shape);
@@ -239,12 +235,9 @@ public class TwoPlayersOnlineController implements Initializable {
     }
 
     public void handleStatusGame(String status) {
-//        Image onlineImage = new Image("/Images/online.png", 20, 20, false, false);
-//        ImageView onlineIcon = new ImageView(onlineImage);
         stopPlayer = true;
         setEnd(status);
     }
-
 
     public void updateScore() {
         Platform.runLater(() -> {
@@ -272,6 +265,7 @@ public class TwoPlayersOnlineController implements Initializable {
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setDialogPane(ConfirmDialogPane);
             dialog.initStyle(StageStyle.UNDECORATED);
+
             dialog.showAndWait().ifPresent(response -> {
                 int score = Person.getScore()+10;
                 if (response == ButtonType.OK) {
@@ -287,7 +281,6 @@ public class TwoPlayersOnlineController implements Initializable {
             });
         });
     }
-
 
     public void handleDialog(String msg) {
 
@@ -315,6 +308,13 @@ public class TwoPlayersOnlineController implements Initializable {
         });
     }
 
+
+    public void increaseScore()
+    {
+        int score = Person.getScore()+10;
+        Person.setScore(score);
+    }
+
     public void setEnd (String status){
         Platform.runLater(() -> {
         Image WinImage = new Image("/Images/minionsHappy.gif", 355, 265, false, false);
@@ -327,6 +327,7 @@ public class TwoPlayersOnlineController implements Initializable {
         switch (status) {
             case "win":
                 StatusImage = winview;
+                increaseScore();
                 break;
             case "lose":
                 StatusImage = loseview;
@@ -352,71 +353,69 @@ public class TwoPlayersOnlineController implements Initializable {
         });
     }
 
-//    public void checkIfGameIsOver() {
-//        if (gameOver == 0) {
-//            for (int a = 0; a < 8; a++) {
-//
-//                String line;
-//                switch (a) {
-//                    case 0:
-//                        line = button1.getText() + button2.getText() + button3.getText();
-//                        break;
-//                    case 1:
-//                        line = button4.getText() + button5.getText() + button6.getText();
-//                        break;
-//                    case 2:
-//                        line = button7.getText() + button8.getText() + button9.getText();
-//                        break;
-//                    case 3:
-//                        line = button1.getText() + button5.getText() + button9.getText();
-//                        break;
-//                    case 4:
-//                        line = button3.getText() + button5.getText() + button7.getText();
-//                        break;
-//                    case 5:
-//                        line = button1.getText() + button4.getText() + button7.getText();
-//                        break;
-//                    case 6:
-//                        line = button2.getText() + button5.getText() + button8.getText();
-//                        break;
-//                    case 7:
-//                        line = button3.getText() + button6.getText() + button9.getText();
-//                        break;
-//                    default:
-//                        line = null;
-//                        break;
-//                }
-//
-//                //X winner
-//                if (line.equals("XXX")) {
-//                    winnerText.setText("X won!");
-//                    playerTurn = 3;
-//                    player1++;
-//                    label1.setText(Integer.toString(player1));
-//                    gameOver++;
-//                }
-//
-//                //O winner
-//                else if (line.equals("OOO")) {
-//                    winnerText.setText("O won!");
-//                    playerTurn = 3;
-//                    player2++;
-//                    label2.setText(Integer.toString(player2));
-//                    gameOver++;
-//                }
-//            }
-//        }
-//    }
+    @FXML
+    public void onReplyGame()
+    {
+        HandleOnlineSocket.getSendStream().println("requestToSaveGame___"+idAntherPlayer);
+    }
 
-
-
-    public void backToClientPage()
+    public void handleShowDialogToAskReplayGame()
     {
         Platform.runLater(() -> {
-            thread.stop();
-            CommonControllers.gotoStage("ClientPage.fxml", OnlineGameAnchorPane);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dialoguesAndControllers/AcceptInvetation.fxml"));
+            DialogPane ConfirmDialogPane = null;
+            try {
+                ConfirmDialogPane = fxmlLoader.load();
+
+                ConfirmDialogPane.setContentText(nameAntherPlayer +" wants to save the game to play later, Do you want it?");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setDialogPane(ConfirmDialogPane);
+            dialog.initStyle(StageStyle.UNDECORATED);
+            dialog.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    HandleOnlineSocket.getSendStream().println("responseToSaveGame___yes___"+idAntherPlayer);
+                    HandleOnlineSocket.getSendStream().println("saveGameForLater");
+
+                } else if (response == ButtonType.CANCEL) {
+                    /// back to home
+                    HandleOnlineSocket.getSendStream().println("responseToSaveGame___no___"+idAntherPlayer);
+                }
+            });
         });
-        stopThread = true;
+    }
+
+    public void handleDecisionToSaveGame(String res)
+    {
+        if(res.equals("yes"))
+        {
+            // send to server status game
+            backToClientPage();
+        }
+        else
+        {
+            Platform.runLater(() -> {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dialoguesAndControllers/AcceptInvetation.fxml"));
+                DialogPane ConfirmDialogPane = null;
+                try {
+                    ConfirmDialogPane = fxmlLoader.load();
+
+                    ConfirmDialogPane.setContentText(nameAntherPlayer +" refused to save game.");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Dialog<ButtonType> dialog = new Dialog<>();
+                dialog.setDialogPane(ConfirmDialogPane);
+                dialog.initStyle(StageStyle.UNDECORATED);
+                dialog.showAndWait().ifPresent(response -> {
+                    if (response == ButtonType.OK) {
+                    } else if (response == ButtonType.CANCEL) {
+                    }
+                });
+            });
+        }
     }
 
     @FXML
@@ -453,10 +452,50 @@ public class TwoPlayersOnlineController implements Initializable {
     public void OnlineGameCloseButton() {
         CommonControllers.closeWindow(OnlineGameAnchorPane, true);
     }
-    @FXML
-    protected void onReplyGame()
-    {
 
+
+    public void backToClientPage()
+    {
+        Platform.runLater(() -> {
+            thread.stop();
+            CommonControllers.gotoStage("ClientPage.fxml", OnlineGameAnchorPane);
+        });
+        stopThread = true;
     }
 
+    public void setDefaultButtonByLastPlaying()
+    {
+        try {
+            String[] positionPlayer = Game.getPositionPlayer().split("");
+            String[] positionPlayerAnotherPlayer = Game.getPostionAnotherPlayer().split("");
+
+            System.out.println(Game.getPositionPlayer());
+
+            Platform.runLater(() -> {
+                label2.setText(String.valueOf(Game.getScoreAnotherPlayer()));
+                label1.setText(String.valueOf(Game.getScorePlayer()));
+            });
+
+
+
+            // text on button and disable
+
+            for (int i = 1; i < positionPlayer.length; i++) {
+                int index = Integer.parseInt(positionPlayer[i]);
+                handleMovement(positionPlayer[0], index);
+            }
+
+            for (int i = 1; i < positionPlayerAnotherPlayer.length; i++) {
+                int index = Integer.parseInt(positionPlayerAnotherPlayer[i]);
+                handleMovement(positionPlayerAnotherPlayer[0], index);
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println("error "+e);
+            e.printStackTrace();
+        }
+
+
+    }
 }

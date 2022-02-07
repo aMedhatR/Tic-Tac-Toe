@@ -2,7 +2,7 @@ package socket;
 
 public class HandleSession {
 
-    private final String[] cell = new String[9];
+    private String[] cell = new String[9];
     private final boolean continueToPlay = true;
     public int playerId1;
     public int playerId2;
@@ -134,6 +134,14 @@ public class HandleSession {
 
     public Handler getHandlerPlayer2() {
         return handlerPlayer2;
+    }
+
+    public String[] getCell() {
+        return cell;
+    }
+
+    public void setCell(String[] cell) {
+        this.cell = cell;
     }
 
 //    private void replaygame() {

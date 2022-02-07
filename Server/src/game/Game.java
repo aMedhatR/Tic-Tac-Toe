@@ -1,27 +1,31 @@
 package game;
 
 //import org.json.simple.JSONObject;
-import player.Player;
 import java.sql.Timestamp;
 
 public class Game {
 
     private int id;
-    private Player playerOne;
-    private Player playerTwo;
-    private Player winner;
+    private String name;
+    private int playerOneId;
+    private int playerTwoId;
+    private int playerOneScore;
+    private int playerTwoSore;
+    private int winnerId;
     private Timestamp createdAt;
+    private String position1;
+    private String position2;
 //    private GameStatus status;
 //    private String board;
 
     public Game() {
     }
 
-    public Game(Player firstPlayer, Player secondPlayer, String b) {
-        playerOne = firstPlayer;
-        playerTwo = secondPlayer;
+    public Game(int firstPlayer, int secondPlayer, String b) {
+        playerOneId = firstPlayer;
+        playerTwoId = secondPlayer;
 //        board = b;
-        winner = null;
+        winnerId = 0;
         createdAt = new Timestamp(System.currentTimeMillis());
 //        status = GameStatus.REQUEST;
     }
@@ -35,32 +39,65 @@ public class Game {
 ////        status = GameStatus.valueOf(s);
 ////        board = b;
 //    }
-    Game(int id, Player f_player, Player t_player, Player w_player, Timestamp timestamp) {
+    public Game(int id, int playerOneId, int playerTwoId, int winner, Timestamp createdAt) {
         this.id = id;
-        playerOne = f_player;
-        playerTwo = t_player;
-        winner = w_player;
-        createdAt = timestamp;
+        this.playerOneId = playerOneId;
+        this.playerTwoId = playerTwoId;
+        this.winnerId = winner;
+        this.createdAt = createdAt;
     }
 
-    public void setId(int id) {
+    public Game(int playerOneId, int playerTwoId, String position1, String position2) {
+        this.playerOneId = playerOneId;
+        this.playerTwoId = playerTwoId;
+        this.position1 = position1;
+        this.position2 = position2;
+    }
+
+
+    public Game(int playerOneId, int playerTwoId, String position1, String position2,int playerOneScore, int playerTwoSore) {
+        this.playerOneId = playerOneId;
+        this.playerTwoId = playerTwoId;
+        this.position1 = position1;
+        this.position2 = position2;
+        this.playerOneScore = playerOneScore;
+        this.playerTwoSore = playerTwoSore;
+    }
+
+    public void setid(int id) {
         this.id = id;
     }
 
-    public int getId() {
+    public int getid() {
         return id;
     }
 
-    public void setplayerOne(Player p) {
-        playerOne = p;
+    public void setplayerOneId(int p) {
+        playerOneId = p;
     }
 
-    public void setplayerTwo(Player p) {
-        playerTwo = p;
+    public void setplayerTwoId(int p) {
+        playerTwoId = p;
     }
 
-    public void setWinnerPlayer(Player p) {
-        winner = p;
+    public void setWinnerId(int p) {
+        winnerId = p;
+    }
+
+    public void setPosition1(String position1) {
+        this.position1 = position1;
+    }
+
+    public void setPosition2(String position2) {
+        this.position2 = position2;
+    }
+
+    public String getPosition1() {
+        return position1;
+    }
+
+    public String getPosition2() {
+        return position2;
     }
 
     //    public void setBoard(JSONObject cells) {
@@ -74,16 +111,16 @@ public class Game {
         createdAt = new Timestamp(System.currentTimeMillis());
     }
 
-    public Player getplayerOne() {
-        return playerOne;
+    public int getplayerOneId() {
+        return playerOneId;
     }
 
-    public Player getplayerTwo() {
-        return playerTwo;
+    public int getplayerTwoId() {
+        return playerTwoId;
     }
 
-    public Player getWinnerPlayer() {
-        return winner;
+    public int getWinnerId() {
+        return winnerId;
     }
 
     //    public String getBoard() {
@@ -98,6 +135,22 @@ public class Game {
 //    }
     public Timestamp getCreatedAt() {
         return createdAt;
+    }
+
+    public int getPlayerOneScore() {
+        return playerOneScore;
+    }
+
+    public void setPlayerOneScore(int playerOneScore) {
+        this.playerOneScore = playerOneScore;
+    }
+
+    public int getPlayerTwoSore() {
+        return playerTwoSore;
+    }
+
+    public void setPlayerTwoSore(int playerTwoSore) {
+        this.playerTwoSore = playerTwoSore;
     }
 
 //    public GameStatus getGameStatus() {

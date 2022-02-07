@@ -119,6 +119,11 @@ public class signInController implements Initializable {
                         else
                         {
                             Platform.runLater(() -> {
+                                if(allReplyMsg[1].equals("isOnlineInOtherPlace"))
+                                {
+                                    error.setText("Your account is open in other desktop");
+                                }
+                                else
                                 error.setText("Try Again wrong password or username");
                             });
                         }

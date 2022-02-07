@@ -52,7 +52,7 @@
             </ScrollPane>
          </children>
       </AnchorPane>
-      <Button fx:id="btnOnlineGame" layoutX="492.0" layoutY="157.0" mnemonicParsing="false" onMouseClicked="#ClientPageSingleGame" prefHeight="114.0" prefWidth="112.0" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">
+      <Button fx:id="ClientPageSinglePlayerBtn" layoutX="480.0" layoutY="189.0" mnemonicParsing="false" onMouseClicked="#ClientPageSingleGame" prefHeight="114.0" prefWidth="112.0" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -138,7 +138,7 @@
             <Button fx:id="send" layoutX="308.0" layoutY="443.0" mnemonicParsing="false" onMouseClicked="#send" style="-fx-background-color: #21f9fb;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css" text="Send" />
          </children>
       </AnchorPane>
-      <Button fx:id="btnOnlineGame1" layoutX="489.0" layoutY="322.0" mnemonicParsing="false" onMouseClicked="#testbtn2" prefHeight="114.0" prefWidth="112.0" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">
+      <Button fx:id="ClientPageTwoPlayersButton" layoutX="480.0" layoutY="322.0" mnemonicParsing="false" onMouseClicked="#ClientPageTwoPlayers" prefHeight="114.0" prefWidth="112.0" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -177,7 +177,7 @@
             </AnchorPane>
          </graphic>
       </Button>
-      <Button fx:id="btnOnlineGame2" layoutX="485.0" layoutY="458.0" mnemonicParsing="false" onMouseClicked="#btnOnlineGameClientPage" prefHeight="114.0" prefWidth="112.0" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">
+      <Button fx:id="ClientPageOnlineBtn" layoutX="480.0" layoutY="458.0" mnemonicParsing="false" onMouseClicked="#btnOnlineGameClientPage" prefHeight="114.0" prefWidth="112.0" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -217,16 +217,6 @@
          </graphic>
       </Button>
       <Button fx:id="welcomePageExitButton" layoutX="1039.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#clientPageCloseButton" prefHeight="25.0" prefWidth="36.0" styleClass="welcomePageCloseButtonClass" stylesheets="@../cssFiles/Styling.css" text="X">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="btnOnlineGame11" layoutX="492.0" layoutY="271.0" mnemonicParsing="false" onMouseClicked="#testbtn2" prefHeight="51.0" prefWidth="55.0" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css" text="Easy">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="btnOnlineGame111" layoutX="551.0" layoutY="271.0" mnemonicParsing="false" onMouseClicked="#testbtn2" prefHeight="51.0" prefWidth="55.0" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css" text="Hard">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
