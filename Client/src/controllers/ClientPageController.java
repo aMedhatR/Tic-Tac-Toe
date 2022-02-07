@@ -377,7 +377,7 @@ public class ClientPageController implements Initializable {
                 Game.setPostionAnotherPlayer(allReplyMsg[6]);
                 Game.setPositionPlayer(allReplyMsg[7]);
                 isSavedGame = true;
-                CommonControllers.gotoStage("TwoPlayersGame.fxml", ClientScenePane);
+                CommonControllers.gotoStage("TwoPlayersOnline.fxml", ClientScenePane);
             });
         }
     }

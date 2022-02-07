@@ -101,7 +101,10 @@ public class Handler extends Thread {
 //                    case "StopGameThread":
 //                        StopGameThread();
 //                        break;
+                    case "twochat":
+                        sendToAnotherPlayer(Integer.parseInt(allMsg[1]),allMsg[2]);
 
+                      break;
 
                     case "quitFromGame":
                         handlePlayerWantToQuit();
@@ -491,6 +494,13 @@ System.out.println(numberOfX+" : "+numberOfO);
             System.out.println("error : "+e);
             e.printStackTrace();
         }
+
+    }
+    public void sendToAnotherPlayer(int playerid , String msg){
+
+        Handler receiverHandler = handleVectorWithID.get(playerid);
+        receiverHandler.ps.println("msg"+"___"+playerName+" : "+msg);
+        ps.println("msg"+"___"+"You"+" : "+msg);
 
     }
 
