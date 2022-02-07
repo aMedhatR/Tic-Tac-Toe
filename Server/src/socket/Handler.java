@@ -235,6 +235,7 @@ public class Handler extends Thread {
                         res = "___" + leaderBoardArrL.getInt("id") + "___" + leaderBoardArrL.getString("name") +
                                 "___" + leaderBoardArrL.getInt("score") + "___" + leaderBoardArrL.getBoolean("status")
                                 +"___"+ leaderBoardArrL.getBoolean("IsPlaying");
+
                         isleaderboard = leaderBoardArrL.next();
                         res = isleaderboard + res;
                         handler.ps.println(res);
@@ -255,6 +256,19 @@ public class Handler extends Thread {
         } catch (SQLException a) {
         }
         //System.out.println(res);
+    }
+
+
+    // change if playing
+    public void changeIsPlaying(int id, boolean isplaying)
+    {
+        boolean done = playerToDb.IsPlaying(id,isplaying);
+        // Print keys and values
+        System.out.println(done);
+        for (int i : handleVectorWithID.keySet()) {
+            if (id != i)
+                leaderBoard(handleVectorWithID.get(i));
+        }
     }
 
 
@@ -286,6 +300,8 @@ System.out.println(numberOfX+" : "+numberOfO);
             else
                 ps.println("playerTurn___2");
             isPlaying = true;
+
+            changeIsPlaying(id,isPlaying);
         }
         catch (Exception e)
         {
@@ -326,6 +342,9 @@ System.out.println(numberOfX+" : "+numberOfO);
     {
         handleSession.getHandlerPlayer1().isPlaying = false;
         handleSession.getHandlerPlayer2().isPlaying = false;
+        changeIsPlaying(handleSession.playerId2,false);
+        changeIsPlaying(handleSession.playerId1,false);
+
     }
 
     // send invitation to play

@@ -68,6 +68,7 @@ private boolean ServerFlag = false ;
     public void initialize(URL url, ResourceBundle rb) {
         App.setDB();
         GetPlayersForLeaderBoard();
+
     new Thread(new Runnable() {
         @Override
         public void run() {
@@ -160,8 +161,9 @@ public static void update ()
                     while (isleaderboard) {
 
                             addNewLeaderBoardElement(leaderBoardArrL.getString("name"),
-                                    String.valueOf(leaderBoardArrL.getInt("score")),leaderBoardArrL.getBoolean("status")
-                            );
+
+                                    String.valueOf(leaderBoardArrL.getInt("score")),
+                                    leaderBoardArrL.getBoolean("status"),  leaderBoardArrL.getBoolean("IsPlaying"));
 
               //          addNewLeaderBoardElement(leaderBoardArrL.getString("name"), String.valueOf(leaderBoardArrL.getInt("score")),leaderBoardArrL.getBoolean("status"));
                         isleaderboard = leaderBoardArrL.next();
@@ -172,7 +174,7 @@ public static void update ()
             e.printStackTrace();
         }
     }
-    public void addNewLeaderBoardElement(String Name, String Score, boolean Status) {
+    public void addNewLeaderBoardElement(String Name, String Score, boolean Status,boolean isPlaying) {
         Platform.runLater(()->{
 
 
@@ -180,6 +182,8 @@ public static void update ()
         ImageView onlineIcon = new ImageView(onlineImage);
         Image offlineImage = new Image("/images/offline.png", 20, 20, false, false);
         ImageView offlineIcon = new ImageView(offlineImage);
+        Image busyImage = new Image("/Images/busy.png", 20, 20, false, false);
+        ImageView busyIcon = new ImageView(busyImage);
         HBox hbox = new HBox();
         Label NameLabel = new Label(Name);
         NameLabel.setMinWidth(190);
@@ -191,11 +195,16 @@ public static void update ()
         ScoreLabel.setMinHeight(34);
         ScoreLabel.setFont(Font.font(17));
         ImageView StatusImage;
-        if (Status) {
-            StatusImage = onlineIcon;
-        } else {
-            StatusImage = offlineIcon;
-        }
+            if (Status&&isPlaying) {
+                StatusImage=busyIcon;
+            }
+            else if (Status&&!isPlaying) {
+                StatusImage = onlineIcon;
+            }
+            else
+            {
+                StatusImage = offlineIcon;
+            }
 
 
         hbox.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
