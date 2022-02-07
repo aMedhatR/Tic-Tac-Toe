@@ -1,0 +1,71 @@
+.entry-btn
+{
+-fx-background-color :   #4856cf;
+-fx-background-radius :  20;
+}
+.entry-btn:hover
+{
+-fx-background-color : #538bd9 ;
+-fx-background-radius :  20;
+}
+.entry-btn:pressed
+{
+-fx-background-color : #3e97db ;
+-fx-background-radius :  20;
+}
+.WelcomePagePaneclass
+{
+    -fx-background-image:url("../Images/WelcomePageBackground.jpg");
+    -fx-background-size: cover;
+}
+
+
+.welcomePageCloseButtonClass
+{
+-fx-background-color: #46cbfe;
+}
+.signInBack
+{
+    -fx-background-image:url("../Images/signInBG3.jpg");
+    -fx-background-size: cover;
+}
+.inputfields
+{
+    -fx-background-color: #0b1324;
+    -fx-border-color: #21f9fb;
+    -fx-text-fill:#21f9fb;
+}
+.specialButtons
+{
+    -fx-border-radius: 25px;
+    -fx-border-color: #21f9fb;
+    -fx-background-color: transparent;
+    -fx-border-width: 2px;
+    -fx-text-fill:#21f9fb;
+    -fx-font-size: 14px;
+}
+.specialButtons:hover
+{
+    -fx-background-color: #242424;
+}
+.leaderBoard
+{
+    -fx-background-color: #363350;
+    -fx-border-radius: 25px;
+    -fx-border-width: 2px;
+    -fx-border-color: #21f9fb;
+
+}
+.scrollPane
+{
+    -fx-background: inherit;
+    /* -fx-background: #4856cf; */
+    -fx-border-radius: 25px;
+    -fx-border-width: 2px;
+    -fx-border-color: #21f9fb;
+}
+.LeaderScrollVBox
+{
+    -fx-background: transparent;
+
+}

@@ -2,6 +2,7 @@ package socket;
 
 import startServer.App;
 
+import java.io.IOException;
 import java.net.Socket;
 import java.net.ServerSocket;
 
@@ -17,7 +18,7 @@ public class SocketServer {
             System.out.println("Connected to serverSocket");
 
             App.setServerSocket(serverSocket);
-            App.setDB();
+
 
 
             
@@ -32,6 +33,17 @@ public class SocketServer {
 //            serverSocket.close();
         } catch (Exception e) {
             System.out.println("error from serverSocket: " + e);
+           for(Handler hand : Handler.handleVector)
+           {
+               hand.ps.close();
+               try {
+                   hand.dis.close();
+                   hand.socketTo.close();
+               } catch (IOException ex) {
+                   ex.printStackTrace();
+               }
+
+           }
         }
     }
 

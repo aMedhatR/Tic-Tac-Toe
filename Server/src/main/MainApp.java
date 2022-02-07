@@ -11,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
+
+import javafx.stage.StageStyle;
 import socket.SocketServer;
 
 /**
@@ -22,10 +24,14 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxmlFiles/ServerPage.fxml"));
 
-        Scene scene = new Scene(root);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlFiles/ServerPage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("The Fabulous Tic Tac Toe");
+//        Image icon =new Image("");
 
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }
@@ -34,6 +40,8 @@ public class MainApp extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException, Exception {
-            new SocketServer();
+
+       //     new SocketServer();
+            launch();
     }
 }

@@ -1,5 +1,6 @@
 package socket;
 
+import controllers.ServerPageController;
 import player.Player;
 import player.PlayerHandler;
 
@@ -177,7 +178,7 @@ public class Handler extends Thread {
 
     // leader board
     public void RefreshLeaderBoard(int exceptId) {
-
+        ServerPageController.update();
         // Print keys and values
         for (int i : handleVectorWithID.keySet()) {
             if (exceptId != i)
