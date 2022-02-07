@@ -452,11 +452,6 @@ public class TwoPlayerSController implements Initializable {
     public void OnlineGameCloseButton() {
         CommonControllers.closeWindow(OnlineGameAnchorPane, true);
     }
-    @FXML
-    protected void onReplyGame()
-    {
-
-    }
 
     public void backToClientPage()
     {

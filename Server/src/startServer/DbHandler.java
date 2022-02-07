@@ -31,7 +31,7 @@ public class DbHandler {
         try {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/tictactoe",
-                    "postgres", "root");
+                    "postgres", "1571997n");
             System.out.println("Connected to serverSocket db");
         } catch (Exception e) {
             System.out.println("javadb.JavaDB" +e);
