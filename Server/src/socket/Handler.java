@@ -134,6 +134,7 @@ public class Handler extends Thread {
                         break;
 
 
+
                 }
             } catch (IOException ioEs) {
                 System.out.println(" : " + ioEs);
@@ -165,6 +166,7 @@ public class Handler extends Thread {
             this.playerName = resArr[2];
             handleVectorWithID.put(refreshId, this);
             RefreshLeaderBoard(refreshId);
+            handleNotification("Online");
 
         }
 
@@ -173,7 +175,9 @@ public class Handler extends Thread {
     }
 
     public void logOut(String logoutId) {
+
         handleExitPlayer(Integer.parseInt(logoutId));
+        handleNotification("Offline");
     }
 
     public void handleExitPlayer(int logoutId)
@@ -269,8 +273,11 @@ public class Handler extends Thread {
         // Print keys and values
         System.out.println(done);
         for (int i : handleVectorWithID.keySet()) {
-            if (id != i)
+            if (id != i){
                 leaderBoard(handleVectorWithID.get(i));
+            if(!isplaying)
+                handleNotification("Available To Play");
+            }
         }
     }
 
@@ -525,6 +532,12 @@ System.out.println(numberOfX+" : "+numberOfO);
         receiverHandler.ps.println("twochatmsg"+"___"+playerName+" : "+msg);
         ps.println("twochatmsg"+"___"+"You"+" : "+msg);
 
+    }
+    protected void handleNotification(String status){
+        for (int i : handleVectorWithID.keySet()) {
+            if (id != i)
+                handleVectorWithID.get(i).ps.println("notification"+"___"+playerName+" is "+status);
+        }
     }
 
 }
