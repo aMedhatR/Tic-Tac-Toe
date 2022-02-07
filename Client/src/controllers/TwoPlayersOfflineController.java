@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import mainPk.HandleOnlineSocket;
+import person.Person;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -52,23 +54,33 @@ public class TwoPlayersOfflineController implements Initializable {
 
     @FXML
     private  Label label2;
-
+    @FXML
+    private Label yourName;
+@FXML
+private Label homeLabel;
 
     private int player1=0;
     private int player2=0;
     private int playerTurn = 0;
     private int gameOver = 0;
-
+    private boolean isOnline;
     ArrayList<Button> buttons;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        isOnline=false;
         buttons = new ArrayList<>(Arrays.asList(button1,button2,button3,button4,button5,button6,button7,button8,button9));
 
         buttons.forEach(button ->{
             setupButton(button);
             button.setFocusTraversable(false);
+            Platform.runLater(()->{
+                if (Person.getName()!=null) {
+                    yourName.setText(Person.getName());
+                    isOnline=true;
+                }
+            });
         });
     }
 
@@ -97,10 +109,6 @@ public class TwoPlayersOfflineController implements Initializable {
     }
 
     public void setPlayerSymbol(Button button){
-
-
-
-
         if(playerTurn == 1){
             button.setText("X");
             playerTurn = 0;
@@ -108,9 +116,6 @@ public class TwoPlayersOfflineController implements Initializable {
             button.setText("O");
             playerTurn = 1;
         }
-
-
-
 
     }
 
@@ -149,6 +154,11 @@ public class TwoPlayersOfflineController implements Initializable {
                     Platform.runLater(()->{
                     winnerText.setText("O won!");
                     playerTurn = 3;
+                        if (Person.getName()!=null) {
+                            int score = Person.getScore() + 5;
+                            Person.setScore(score);
+                            SendScoreToServer();
+                        }
                     player2+=10;
                     label2.setText(Integer.toString(player2));
                     gameOver++;
@@ -157,19 +167,34 @@ public class TwoPlayersOfflineController implements Initializable {
             }
         }
     }
-    @FXML
-    protected void handleWithDraw()
-    {
 
-    }
     @FXML
     protected void OnlineGameCloseButton()
     {
-        CommonControllers.closeWindow(OnlineGameAnchorPane,false);
+        if (!isOnline) {
+            CommonControllers.closeWindow(OnlineGameAnchorPane, false);
+        }
+        else {
+            HandleOnlineSocket.getSendStream().println("ChangeIsPlaying___false");
+            CommonControllers.gotoStage("ClientPage.fxml", OnlineGameAnchorPane);
+        }
+
+    }
+    public void SendScoreToServer()
+    {
+        HandleOnlineSocket.getSendStream().println("changeScore___5");
     }
     @FXML
     protected void goToHome()
     {
-        CommonControllers.goToHome(OnlineGameAnchorPane);
+        if (!isOnline) {
+            CommonControllers.goToHome(OnlineGameAnchorPane);
+        }
+        else
+        {
+            HandleOnlineSocket.getSendStream().println("ChangeIsPlaying___false");
+            CommonControllers.gotoStage("ClientPage.fxml", OnlineGameAnchorPane);
+
+        }
     }
 }

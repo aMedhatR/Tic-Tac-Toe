@@ -57,12 +57,12 @@ public class ClientPageController implements Initializable {
     private TextField txtfiled;
     @FXML
     private TextArea txtarea;
-
+    boolean StopThread = false;
     public static boolean isSavedGame = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        StopThread=false;
         HandleOnlineSocket.getSendStream().println("leaderBoard___");
         Platform.runLater(() -> {
             CurrentPlayerNameLabel.setText(Person.getName());
@@ -74,7 +74,7 @@ public class ClientPageController implements Initializable {
             @Override
             public void run() {
                 String replyMsg;
-                while (true) {
+                while (true && !StopThread) {
                     try {
 
 
@@ -224,37 +224,32 @@ public class ClientPageController implements Initializable {
     @FXML
 
     protected void ClientPageSingleGame() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dialoguesAndControllers/SendInvetation.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dialoguesAndControllers/AcceptInvetation.fxml"));
         DialogPane ConfirmDialogPane = null;
         try {
             ConfirmDialogPane = fxmlLoader.load();
 
-            ConfirmDialogPane.setContentText("Are You Sure To Send The Invetation to " + playerChosen + " ?");
+            ConfirmDialogPane.setContentText("Are you up for a challenge, Please click ok if you want hard mode, cancel for easy mode ");
         } catch (IOException e) {
             e.printStackTrace();
         }
         Dialog<ButtonType> dialog = new Dialog<>();
-
         dialog.setDialogPane(ConfirmDialogPane);
         dialog.initStyle(StageStyle.UNDECORATED);
         dialog.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.YES) {
-                //send invitaation to trhe speccified mail
+            if (response == ButtonType.OK) {
 
-//                    Thread invitaionThread;
-//                    invitaionThread = new Thread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            String replyMsg;
-                HandleOnlineSocket.getSendStream().println("InvitaionTo___" + SelectedId + "___" + CurrentPlayerNameLabel.getText() + "___" + Person.getId());
-//                        }
-//                    });
-//                    invitaionThread.start();
-            }
-            if (response == ButtonType.CANCEL) {
-                //do NOTHING
-            }
+                HandleOnlineSocket.getSendStream().println("ChangeIsPlaying___true");
+                StopThread();
+                CommonControllers.gotoStage("PlayerBotHard.fxml",ClientScenePane);
 
+            } else if (response == ButtonType.CANCEL) {
+                /// back to home
+
+                HandleOnlineSocket.getSendStream().println("ChangeIsPlaying___true");
+                StopThread();
+                CommonControllers.gotoStage("PlayerBotEasy.fxml",ClientScenePane);
+            }
 
         });
 
@@ -263,7 +258,10 @@ public class ClientPageController implements Initializable {
 
     @FXML
     protected void ClientPageTwoPlayers() {
-        addNewLeaderBoardElement("nora", "100", true,true);
+
+        HandleOnlineSocket.getSendStream().println("ChangeIsPlaying___true");
+        StopThread();
+        CommonControllers.gotoStage("TwoPlayersOffline.fxml",ClientScenePane);
     }
 
     @FXML
@@ -572,5 +570,9 @@ public class ClientPageController implements Initializable {
         });
     }
 
-
+ public void StopThread()
+ {
+     StopThread =true;
+     thread.stop();
+ }
 }
