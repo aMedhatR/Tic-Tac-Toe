@@ -8,6 +8,7 @@ public class Player {
     private String email;
     private int score;
     private boolean status ;
+private boolean IsPlaying;
 
     //used in retrive in signin
     public Player(String name, String password, String email) {
@@ -38,6 +39,12 @@ public class Player {
         this.email = email;
         this.score = score;
     }
+
+    public Player(int id, boolean IsPlaying) {
+        this.id = id;
+        this.IsPlaying = IsPlaying;
+    }
+
 
     Player() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

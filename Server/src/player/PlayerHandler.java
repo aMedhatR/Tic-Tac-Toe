@@ -24,12 +24,12 @@ public class PlayerHandler {
             + " email varchar(100) unique NOT NULL,"
             + " score integer,"
             + " status boolean NOT NULL DEFAULT FALSE,"
+            + " IsPlaying boolean NOT NULL DEFAULT FALSE,"
             + " PRIMARY KEY (id)"
             + ")";
     public static ArrayList<Player> playerslist;
     static DbHandler db = App.getDB();
     private static Map<Integer, Player> players;
-
 
     //    private static final String SQL_UPDATE_TABLE = "ALTER TABLE players ADD"
 //            + " status boolean NOT NULL DEFAULT FALSE";
@@ -175,15 +175,19 @@ public class PlayerHandler {
 
     }
 
-    public void changeStatus(int id) {
+    public boolean changeStatus(int id) {
         try {
             PreparedStatement stmtUpdate = db.connection.prepareStatement("UPDATE players set status=FALSE WHERE id=?");
             stmtUpdate.setInt(1, id);
-            int updataNumber = stmtUpdate.executeUpdate();
+            int isupdated = stmtUpdate.executeUpdate();
+            if (isupdated > 0) {
+                return true;
+            }
         } catch (SQLException e) {
         }
+        return true;
 
-        System.out.println("the player with" + id + "is now offline");
+//        System.out.println("the player with" + id + "is now offline");
     }
     
 
@@ -201,5 +205,18 @@ public class PlayerHandler {
         System.out.println("the player with" + id + "is now offline");
     }
 
-
+    public static boolean IsPlaying(int id, boolean isplaying) {
+        try {
+            PreparedStatement preparedStatement = db.connection.prepareStatement("UPDATE players set IsPlaying=? WHERE id=?");
+            preparedStatement.setBoolean(1, isplaying);
+            preparedStatement.setInt(2, id);
+            int isPlaying = preparedStatement.executeUpdate();
+            if (isPlaying > 0) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
 }
