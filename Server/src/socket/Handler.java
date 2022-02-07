@@ -185,6 +185,8 @@ public class Handler extends Thread {
     public void logOut(String logoutId) {
 
         handleExitPlayer(Integer.parseInt(logoutId));
+
+
     }
 
     public void handleExitPlayer(int logoutId)

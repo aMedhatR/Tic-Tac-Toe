@@ -16,12 +16,10 @@ public class HandleOnlineSocket {
     public HandleOnlineSocket()
     {
         try {
-            mySocket = new Socket("127.0.0.1", 5100);
+            //mySocket = new Socket("127.0.0.1", 5100);
 
 
-           // mySocket = new Socket("197.53.36.187",8080);
-
-            //mySocket = new Socket("154.183.177.17",8080);
+            mySocket = new Socket("154.183.150.115",8080);
 
 
             dis = new DataInputStream(mySocket.getInputStream());
