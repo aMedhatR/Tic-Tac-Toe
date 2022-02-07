@@ -519,7 +519,7 @@ System.out.println(numberOfX+" : "+numberOfO);
     public void sendToAnotherPlayer(int playerid , String msg){
 
         Handler receiverHandler = handleVectorWithID.get(playerid);
-        receiverHandler.ps.println("msg"+"___"+playerName+" : "+msg);
+        receiverHandler.ps.println("twochatmsg"+"___"+playerName+" : "+msg);
         ps.println("msg"+"___"+"You"+" : "+msg);
 
     }
