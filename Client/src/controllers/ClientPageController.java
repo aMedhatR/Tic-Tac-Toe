@@ -566,7 +566,40 @@ public class ClientPageController implements Initializable {
         HandleOnlineSocket.getSendStream().println("chatall" + "___" + txtfiled.getText());
         txtfiled.setText("");
     }
+@FXML
+public void LogoutPlayerName()
+{
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dialoguesAndControllers/AcceptInvetation.fxml"));
+    DialogPane ConfirmDialogPane = null;
+    try {
+        ConfirmDialogPane = fxmlLoader.load();
 
+        ConfirmDialogPane.setContentText("Do you want to log out?");
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    Dialog<ButtonType> dialog = new Dialog<>();
+    dialog.setDialogPane(ConfirmDialogPane);
+    dialog.initStyle(StageStyle.UNDECORATED);
+    dialog.showAndWait().ifPresent(response -> {
+        if (response == ButtonType.OK) {
+
+            HandleOnlineSocket.getSendStream().println("ChangeIsPlaying___false");
+            try {
+                CommonControllers.signOut();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            CommonControllers.goToHome(ClientScenePane);
+
+        } else if (response == ButtonType.CANCEL) {
+
+
+              }
+
+    });
+}
     protected void appendmsg(String msg) {
         Platform.runLater(() -> {
             txtarea.appendText("\n" + msg);

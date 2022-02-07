@@ -63,7 +63,7 @@ private Label homeLabel;
     private int player2=0;
     private int playerTurn = 0;
     private int gameOver = 0;
-    private boolean isOnline;
+    private boolean isOnline =false;
     ArrayList<Button> buttons;
 
 
