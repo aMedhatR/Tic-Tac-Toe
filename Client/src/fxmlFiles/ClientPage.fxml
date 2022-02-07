@@ -133,7 +133,7 @@
                   <Font size="25.0" />
                </font>
             </Label>
-            <TextArea fx:id="txtarea" editable="false" layoutX="19.0" layoutY="88.0" prefHeight="295.0" prefWidth="343.0" />
+            <TextArea fx:id="txtarea" editable="false" layoutX="19.0" layoutY="88.0" prefHeight="295.0" prefWidth="343.0" style="-fx-text-fill: #21f9fb;" styleClass="text-area" stylesheets="@../cssFiles/Styling.css" />
             <TextField fx:id="txtfiled" layoutX="124.0" layoutY="403.0" />
             <Button fx:id="send" layoutX="294.0" layoutY="403.0" mnemonicParsing="false" onMouseClicked="#send" text="Send" />
          </children>
