@@ -76,7 +76,7 @@
             </Label>
             <TextArea fx:id="txtarea" editable="false" layoutX="35.0" layoutY="74.0" prefHeight="354.0" prefWidth="310.0" style="-fx-text-fill: #21f9fb;" stylesheets="@../cssFiles/Styling.css" />
             <TextField fx:id="txtfiled" layoutX="42.0" layoutY="440.0" prefHeight="25.0" prefWidth="249.0" promptText="write your message .." style="-fx-text-fill: #21f9fb; -fx-background-color: #2d2a40; -fx-background-radius: 25;" styleClass="leaderBoard" stylesheets="@../cssFiles/Styling.css" />
-            <Button fx:id="send" layoutX="302.0" layoutY="440.0" mnemonicParsing="false" onMouseClicked="#send" style="-fx-background-color: #21f9fb; -fx-cursor: hand;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css" text="Send" />
+            <Button fx:id="send" defaultButton="true" layoutX="302.0" layoutY="440.0" mnemonicParsing="false" onAction="#send" style="-fx-background-color: #21f9fb; -fx-cursor: hand;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css" text="Send" />
          </children>
       </AnchorPane>
       <Button fx:id="welcomePageExitButton" layoutX="1026.0" layoutY="25.0" mnemonicParsing="false" onMouseClicked="#OnlineGameCloseButton" prefHeight="25.0" prefWidth="36.0" styleClass="welcomePageCloseButtonClass" stylesheets="@../cssFiles/Styling.css" text="X">
