@@ -52,7 +52,7 @@ public class Handler extends Thread {
         while (true) {
             try {
                 String msg = dis.readLine();
-                System.out.println("message from client" + msg);
+                System.out.println("message from client " + msg);
                 String[] allMsg = msg.split("___");
                 switch (allMsg[0]) {
                     case "signUp":
@@ -132,6 +132,15 @@ public class Handler extends Thread {
                     case "InvitaionResponseToSavedGame":
                         InvitaionResponseToSavedGame(allMsg[1], Integer.parseInt(allMsg[2]));
                         break;
+                    case "changeScore":
+                        System.out.println("Handler : changeScore for id : "+id+" "+Integer.parseInt(allMsg[1]));
+                        playerToDb.changeScore(id, Integer.parseInt(allMsg[1]));
+                        break;
+                    case "ChangeIsPlaying":
+                        System.out.println("Handler : Playing Status for id :"+id+" "+Boolean.parseBoolean(allMsg[1]));
+                        changeIsPlaying(id, Boolean.parseBoolean(allMsg[1]));
+                        break;
+
 
 
                 }
@@ -165,6 +174,7 @@ public class Handler extends Thread {
             this.playerName = resArr[2];
             handleVectorWithID.put(refreshId, this);
             RefreshLeaderBoard(refreshId);
+            handleNotification("Online");
 
         }
 
@@ -173,7 +183,9 @@ public class Handler extends Thread {
     }
 
     public void logOut(String logoutId) {
+
         handleExitPlayer(Integer.parseInt(logoutId));
+        handleNotification("Offline");
     }
 
     public void handleExitPlayer(int logoutId)
@@ -266,11 +278,15 @@ public class Handler extends Thread {
     public void changeIsPlaying(int id, boolean isplaying)
     {
         boolean done = playerToDb.IsPlaying(id,isplaying);
+        ServerPageController.update();
         // Print keys and values
         System.out.println(done);
         for (int i : handleVectorWithID.keySet()) {
-            if (id != i)
+            if (id != i){
                 leaderBoard(handleVectorWithID.get(i));
+            if(!isplaying)
+                handleNotification("Available To Play");
+            }
         }
     }
 
@@ -519,19 +535,19 @@ System.out.println(numberOfX+" : "+numberOfO);
         }
 
     }
-
-    public void handleChangeScore(int addScore)
-    {
-
-    }
-
-
+    
     public void sendToAnotherPlayer(int playerid , String msg){
 
         Handler receiverHandler = handleVectorWithID.get(playerid);
         receiverHandler.ps.println("twochatmsg"+"___"+playerName+" : "+msg);
-        ps.println("msg"+"___"+"You"+" : "+msg);
+        ps.println("twochatmsg"+"___"+"You"+" : "+msg);
 
+    }
+    protected void handleNotification(String status){
+        for (int i : handleVectorWithID.keySet()) {
+            if (id != i)
+                handleVectorWithID.get(i).ps.println("notification"+"___"+playerName+" is "+status);
+        }
     }
 
 }

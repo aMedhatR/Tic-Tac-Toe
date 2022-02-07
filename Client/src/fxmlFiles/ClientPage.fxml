@@ -126,7 +126,7 @@
             <Image url="@../Images/OXmEJcAD.gif" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="chatAppToGame" layoutX="677.0" layoutY="105.0" prefHeight="495.0" prefWidth="380.0" style="-fx-background-color: #363350; -fx-border-color: #21f9fb;" styleClass="leaderBoard" stylesheets="@../cssFiles/Styling.css">
+      <AnchorPane fx:id="chatAppToGame" layoutX="677.0" layoutY="105.0" prefHeight="495.0" prefWidth="380.0" style="-fx-background-color: #363350; -fx-border-color: #21f9fb; -fx-background-radius: 27;" styleClass="leaderBoard" stylesheets="@../cssFiles/Styling.css">
          <children>
             <Label layoutX="138.0" layoutY="14.0" text="Chat App" textFill="WHITE">
                <font>
@@ -135,7 +135,7 @@
             </Label>
             <TextArea fx:id="txtarea" editable="false" layoutX="19.0" layoutY="88.0" prefHeight="338.0" prefWidth="343.0" style="-fx-text-fill: #21f9fb;" styleClass="text-area" stylesheets="@../cssFiles/Styling.css" />
             <TextField fx:id="txtfiled" layoutX="30.0" layoutY="441.0" prefHeight="29.0" prefWidth="270.0" promptText="write your message .." style="-fx-text-fill: #21f9fb;" styleClass="leaderBoard" stylesheets="@../cssFiles/Styling.css" />
-            <Button fx:id="send" layoutX="308.0" layoutY="443.0" mnemonicParsing="false" onMouseClicked="#send" style="-fx-background-color: #21f9fb;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css" text="Send" />
+            <Button fx:id="send" defaultButton="true" layoutX="308.0" layoutY="443.0" mnemonicParsing="false" onAction="#send" style="-fx-background-color: #21f9fb; -fx-cursor: hand;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css" text="Send" />
          </children>
       </AnchorPane>
       <Button fx:id="ClientPageTwoPlayersButton" layoutX="480.0" layoutY="322.0" mnemonicParsing="false" onMouseClicked="#ClientPageTwoPlayers" prefHeight="114.0" prefWidth="112.0" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">

@@ -69,22 +69,22 @@
       </GridPane>
       <AnchorPane layoutX="440.0" layoutY="127.0" prefHeight="222.0" prefWidth="254.0">
          <children>
-            <Label layoutX="28.0" layoutY="15.0" text="Player:" textFill="#21f9fb">
+            <Label fx:id="playerlabel" layoutX="28.0" layoutY="15.0" maxWidth="126.0" prefWidth="126.0" text="Player:" textFill="#21f9fb">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="17.0" layoutY="52.0" text="Computer:" textFill="#21f9fb">
+            <Label layoutX="28.0" layoutY="52.0" maxWidth="126.0" prefWidth="126.0" text="Computer:" textFill="#21f9fb">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="label1" layoutX="102.0" layoutY="15.0" prefHeight="26.0" prefWidth="134.0" style="-fx-background-color: #21f9fb; -fx-text-fill: black;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">
+            <Label fx:id="label1" layoutX="154.0" layoutY="15.0" prefHeight="26.0" prefWidth="60.0" style="-fx-background-color: #21f9fb; -fx-text-fill: black;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="label2" layoutX="102.0" layoutY="51.0" prefHeight="26.0" prefWidth="133.0" style="-fx-background-color: #21f9fb;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">
+            <Label fx:id="label2" layoutX="154.0" layoutY="52.0" prefHeight="26.0" prefWidth="60.0" style="-fx-background-color: #21f9fb;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">
                <font>
                   <Font size="16.0" />
                </font>

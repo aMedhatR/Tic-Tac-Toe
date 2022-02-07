@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="EasyBotScenePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="737.0" style="-fx-background-color: #2d2a40; -fx-background-radius: 30;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PlayerBotEasyController">
+<AnchorPane fx:id="EasyBotScenePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="737.0" style="-fx-background-color: #2d2a40; -fx-background-radius: 0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PlayerBotEasyController">
     <children>
         <Text fx:id="winnerText" fill="#21f9fb" layoutX="258.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tic-Tac-Toe" textAlignment="CENTER" wrappingWidth="237.9443359375">
             <font>
@@ -69,27 +69,27 @@
         </GridPane>
         <AnchorPane layoutX="440.0" layoutY="127.0" prefHeight="222.0" prefWidth="254.0">
             <children>
-                <Label layoutX="28.0" layoutY="15.0" text="Player:" textFill="#21f9fb">
+                <Label fx:id="playerlabel" layoutX="28.0" layoutY="15.0" maxWidth="126.0" prefHeight="25.0" prefWidth="126.0" text="Player:" textFill="#21f9fb">
                     <font>
                         <Font size="16.0" />
                     </font>
                 </Label>
-                <Label layoutX="17.0" layoutY="52.0" text="Computer:" textFill="#21f9fb">
+                <Label layoutX="28.0" layoutY="53.0" maxWidth="126.0" prefHeight="25.0" prefWidth="126.0" text="Computer:" textFill="#21f9fb">
                     <font>
                         <Font size="16.0" />
                     </font>
                 </Label>
-                <Label fx:id="label1" layoutX="102.0" layoutY="15.0" prefHeight="26.0" prefWidth="134.0" style="-fx-background-color: #21f9fb; -fx-text-fill: black;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">
+                <Label fx:id="label1" layoutX="158.0" layoutY="15.0" prefHeight="26.0" prefWidth="60.0" style="-fx-background-color: #21f9fb; -fx-text-fill: black;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">
                     <font>
                         <Font size="16.0" />
                     </font>
                 </Label>
-                <Label fx:id="label2" layoutX="102.0" layoutY="51.0" prefHeight="26.0" prefWidth="133.0" style="-fx-background-color: #21f9fb; -fx-text-fill: black;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">
+                <Label fx:id="label2" layoutX="158.0" layoutY="52.0" prefHeight="26.0" prefWidth="60.0" style="-fx-background-color: #21f9fb; -fx-text-fill: black;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">
                     <font>
                         <Font size="16.0" />
                     </font>
                 </Label>
-                <Button layoutX="27.0" layoutY="111.0" mnemonicParsing="false" onAction="#restartGame" prefHeight="26.0" prefWidth="223.0" style="-fx-font-size: 14; -fx-font-weight: bold; -fx-cursor: hand;" styleClass="specialButtons" stylesheets="@../cssFiles/Styling.css" text="New Game" />
+                <Button layoutX="27.0" layoutY="111.0" mnemonicParsing="false" onAction="#restartGame" prefHeight="26.0" prefWidth="223.0" style="-fx-font-size: 14; -fx-font-weight: bold; -fx-cursor: hand; -fx-background-radius: 25;" styleClass="specialButtons" stylesheets="@../cssFiles/Styling.css" text="New Game" />
             </children>
         </AnchorPane>
         <Button fx:id="welcomePageExitButton" layoutX="669.0" layoutY="25.0" mnemonicParsing="false" onMouseClicked="#OnlineGameCloseButton" prefHeight="25.0" prefWidth="36.0" styleClass="welcomePageCloseButtonClass" stylesheets="@../cssFiles/Styling.css" text="X">

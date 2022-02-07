@@ -81,7 +81,7 @@
           <description value="" />
           <database-type value="POSTGRES" />
           <config-type value="BASIC" />
-          <database-version value="14.1" />
+          <database-version value="14.0" />
           <driver-source value="BUILTIN" />
           <driver-library value="" />
           <driver value="" />
