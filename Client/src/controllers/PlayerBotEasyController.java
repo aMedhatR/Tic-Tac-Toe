@@ -1,20 +1,23 @@
 package controllers;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import mainPk.HandleOnlineSocket;
+import person.Person;
 
 import java.net.URL;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class PlayerBotEasyController implements Initializable {
-
     @FXML
     private Button button1;
 
@@ -51,23 +54,34 @@ public class PlayerBotEasyController implements Initializable {
     @FXML
     private  Label label2;
 
+    private boolean IsOnline =true;
+
     private Button computerTurn;
 
     @FXML
     private AnchorPane EasyBotScenePane;
-
+    @FXML
+    private Label playerlabel;
     private Vector<String> vector= new Vector<String>(9);
 
     private int player1 =0;
     private int player2 =0;
     private int playerTurn = 1;
     private int gameOver = 0;
-
+    private boolean isOnline;
     ArrayList<Button> buttons;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        isOnline=false;
+        Platform.runLater(()->{
+            if (Person.getName()!=null) {
+                playerlabel.setText(Person.getName());
+                isOnline=true ;
+            }
+        });
+
         buttons = new ArrayList<>(Arrays.asList(button1,button2,button3,button4,button5,button6,button7,button8,button9));
         buttons.forEach(button ->{
             setupButton(button);
@@ -152,7 +166,12 @@ public class PlayerBotEasyController implements Initializable {
                 if (line.equals("XXX")) {
                     winnerText.setText("X won!");
                     playerTurn = 3;
-                    player1+=10;
+                    if (Person.getName()!=null) {
+                        int score = Person.getScore() + 5;
+                        Person.setScore(score);
+                        SendScoreToServer();
+                    }
+                    player1+=5;
                     label1.setText(Integer.toString(player1));
                     gameOver++;
                 }
@@ -162,17 +181,29 @@ public class PlayerBotEasyController implements Initializable {
                     System.out.println("Hi Failuer");
                     winnerText.setText("O won!");
                     playerTurn = 3;
-                    player2+=10;
+                    player2+=5;
                     label2.setText(Integer.toString(player2));
                     gameOver++;
                 }
             }
         }
     }
-
+public void SendScoreToServer()
+{
+    HandleOnlineSocket.getSendStream().println("changeScore___5");
+}
 @FXML
     protected void OnlineGameCloseButton()
 {
- CommonControllers.closeWindow(EasyBotScenePane,false);
+    if (isOnline) {
+        HandleOnlineSocket.getSendStream().println("ChangeIsPlaying___false");
+        CommonControllers.gotoStage("ClientPage.fxml",EasyBotScenePane);
+    }
+    else
+    {
+
+        CommonControllers.goToHome(EasyBotScenePane);
+    }
+
 }
 }

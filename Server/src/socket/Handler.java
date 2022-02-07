@@ -52,7 +52,7 @@ public class Handler extends Thread {
         while (true) {
             try {
                 String msg = dis.readLine();
-                System.out.println("message from client" + msg);
+                System.out.println("message from client " + msg);
                 String[] allMsg = msg.split("___");
                 switch (allMsg[0]) {
                     case "signUp":
@@ -131,6 +131,14 @@ public class Handler extends Thread {
 
                     case "InvitaionResponseToSavedGame":
                         InvitaionResponseToSavedGame(allMsg[1], Integer.parseInt(allMsg[2]));
+                        break;
+                    case "changeScore":
+                        System.out.println("Handler : changeScore for id : "+id+" "+Integer.parseInt(allMsg[1]));
+                        playerToDb.changeScore(id, Integer.parseInt(allMsg[1]));
+                        break;
+                    case "ChangeIsPlaying":
+                        System.out.println("Handler : Playing Status for id :"+id+" "+Boolean.parseBoolean(allMsg[1]));
+                        changeIsPlaying(id, Boolean.parseBoolean(allMsg[1]));
                         break;
 
 
@@ -270,6 +278,7 @@ public class Handler extends Thread {
     public void changeIsPlaying(int id, boolean isplaying)
     {
         boolean done = playerToDb.IsPlaying(id,isplaying);
+        ServerPageController.update();
         // Print keys and values
         System.out.println(done);
         for (int i : handleVectorWithID.keySet()) {
