@@ -96,7 +96,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btnTwoPlayer" layoutX="302.0" layoutY="150.0" mnemonicParsing="false" prefHeight="190.0" prefWidth="168.0" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">
+      <Button fx:id="btnTwoPlayer" layoutX="302.0" layoutY="150.0" mnemonicParsing="false" onMouseClicked="#homepageTwoPlayersbtn" prefHeight="190.0" prefWidth="168.0" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css">
          <graphic>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>

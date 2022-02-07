@@ -137,12 +137,14 @@ public class ClientPageController implements Initializable {
 
     }
 
-    public void addNewLeaderBoardElement(String Name, String Score, boolean Status) {
+    public void addNewLeaderBoardElement(String Name, String Score, boolean Status ,boolean isPlaying) {
 
         Image onlineImage = new Image("/Images/online.png", 20, 20, false, false);
         ImageView onlineIcon = new ImageView(onlineImage);
         Image offlineImage = new Image("/Images/offline.png", 20, 20, false, false);
         ImageView offlineIcon = new ImageView(offlineImage);
+        Image busyImage = new Image("/Images/busy.png", 20, 20, false, false);
+        ImageView busyIcon = new ImageView(busyImage);
         HBox hbox = new HBox();
         Label NameLabel = new Label(Name);
         NameLabel.setMinWidth(190);
@@ -154,9 +156,16 @@ public class ClientPageController implements Initializable {
         ScoreLabel.setMinHeight(34);
         ScoreLabel.setFont(Font.font(17));
         ImageView StatusImage;
-        if (Status) {
+        if (Status&&isPlaying) {
+            StatusImage=busyIcon;
+
+        }
+        else if (Status&&!isPlaying) {
             StatusImage = onlineIcon;
-        } else {
+
+        }
+        else
+        {
             StatusImage = offlineIcon;
         }
 
@@ -171,7 +180,7 @@ public class ClientPageController implements Initializable {
         hbox.getChildren().add(StatusImage);
 
         hbox.setCursor(Cursor.HAND);
-        if (Status) {
+        if (Status &&!isPlaying) {
             hbox.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
@@ -253,8 +262,8 @@ public class ClientPageController implements Initializable {
     }
 
     @FXML
-    protected void testbtn2() {
-        addNewLeaderBoardElement("nora", "100", false);
+    protected void ClientPageTwoPlayers() {
+        addNewLeaderBoardElement("nora", "100", true,true);
     }
 
     @FXML
@@ -544,7 +553,7 @@ public class ClientPageController implements Initializable {
         //System.out.println("client while loop out Flag :" + Flag);
 
         Platform.runLater(() -> {
-            addNewLeaderBoardElement(allReplyMsg[2], allReplyMsg[3], Boolean.parseBoolean(allReplyMsg[4]));
+            addNewLeaderBoardElement(allReplyMsg[2], allReplyMsg[3], Boolean.parseBoolean(allReplyMsg[4]),Boolean.parseBoolean(allReplyMsg[5]));
             NameIdMap.put(allReplyMsg[2], Integer.parseInt(allReplyMsg[1]));
         });
     }
@@ -562,10 +571,6 @@ public class ClientPageController implements Initializable {
 
         });
     }
-@FXML
-    protected void ClientPageTwoPlayers()
-{
 
-}
 
 }

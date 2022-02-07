@@ -1,5 +1,6 @@
 package controllers;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -42,7 +43,7 @@ public class TwoPlayersOfflineController implements Initializable {
     private Button button9;
 
     @FXML
-    private Text winnerText;
+    private Label winnerText;
 
     @FXML
     private Label label1;
@@ -72,7 +73,10 @@ public class TwoPlayersOfflineController implements Initializable {
     @FXML
     public void restartGame(ActionEvent event) {
         buttons.forEach(this::resetButton);
-        winnerText.setText("Tic-Tac-Toe");
+        Platform.runLater(()->{
+            winnerText.setText("Tic-Tac-Toe");
+
+        });
     }
 
     public void resetButton(Button button){
@@ -127,20 +131,26 @@ public class TwoPlayersOfflineController implements Initializable {
 
                 //X winner
                 if (line.equals("XXX")) {
+                    Platform.runLater(()->{
+
+
                     winnerText.setText("X won!");
                     playerTurn = 3;
                     player1++;
                     label1.setText(Integer.toString(player1));
                     gameOver++;
+                    });
                 }
 
                 //O winner
                 else if (line.equals("OOO")) {
+                    Platform.runLater(()->{
                     winnerText.setText("O won!");
                     playerTurn = 3;
                     player2++;
                     label2.setText(Integer.toString(player2));
                     gameOver++;
+                    });
                 }
             }
         }

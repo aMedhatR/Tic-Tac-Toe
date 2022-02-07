@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class GameHandler {
 
     private static final String SQL_CREATE = "CREATE TABLE RestorG"
@@ -53,17 +52,19 @@ public class GameHandler {
             statment.setInt(3, PlayerTwoId);
             statment.setInt(4, PlayerOneId);
             ResultSet res = statment.executeQuery();
-            if(res.next())
-            game = new Game(
-                    res.getInt("playerOneId")
-                    , res.getInt("playerTwoId")
-                    , res.getString("position1")
-                    , res.getString("position2")
-                    ,res.getInt("playerOneScore")
-                    , res.getInt("playerTwoScore")
-            );
-            else
-                 game = null;
+            if (res.next()) {
+                game = new Game(
+                        res.getInt("playerOneId"),
+                         res.getInt("playerTwoId"),
+                         res.getString("position1"),
+                         res.getString("position2"),
+                         res.getInt("playerOneScore"),
+                         res.getInt("playerTwoScore")
+                );
+        DeleteGame(PlayerOneId, PlayerTwoId);
+            } else {
+                game = null;
+            }
         } catch (SQLException ex) {
             Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -71,6 +72,18 @@ public class GameHandler {
         return game;
     }
 
+    public static void DeleteGame(int PlayerOneId, int PlayerTwoId) {
+        try {
+            PreparedStatement statment = db.connection.prepareStatement("DELETE FROM RestorG WHERE (PlayerOneId=? and PlayerTwoId=?)  or (PlayerOneId=? and PlayerTwoId=?)");
+            statment.setInt(1, PlayerOneId);
+            statment.setInt(2, PlayerTwoId);
+            statment.setInt(3, PlayerTwoId);
+            statment.setInt(4, PlayerOneId);
+            statment.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
     public void CreateDBT() throws SQLException {
         try {
@@ -82,28 +95,6 @@ public class GameHandler {
             e.printStackTrace();
         }
     }
-
-
-
-
-
-
-// private static Game gameObject(ResultSet resultSet) {
-//        try {
-//            return new Game(
-//                    resultSet.getInt("id"),
-//                    PlayerHandler.getPlayer(resultSet.getInt("playerOneId")),
-//                    PlayerHandler.getPlayer(resultSet.getInt("playerTwoId")),
-//                    PlayerHandler.getPlayer(resultSet.getInt("winnerId")),
-//                    resultSet.getTimestamp("created_at")
-//            //                    resultSet.getString("status"),
-//            //                    resultSet.getString("board")
-//            );
-//        } catch (SQLException ex) {
-//            Logger.getLogger(GameHandler.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return null;
-//    }
 
 //    public static void getGames() {
 //        games = new HashMap<>();
@@ -119,9 +110,6 @@ public class GameHandler {
 ////            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //    }
-
-
-
     //    update status
 //    public static Boolean updateGameStatus(int id, String status) {
 //        try {
@@ -181,7 +169,5 @@ public class GameHandler {
         }
         return false;
     }
-
-
 
 }
