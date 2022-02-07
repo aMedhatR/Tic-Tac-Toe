@@ -170,7 +170,7 @@ public class TwoPlayersOnlineController implements Initializable {
                             case "decisionToSaveGame":
                                 handleDecisionToSaveGame(allReplyMsg[1]);
                                 break;
-                            case "msg" :
+                            case "twochatmsg" :
                                 appendmsg(allReplyMsg[1]);
                                 break;
 
