@@ -183,8 +183,11 @@ public class Handler extends Thread {
     }
 
     public void logOut(String logoutId) {
-
+        System.out.println(logoutId);
+        handleNotification("Offline");
         handleExitPlayer(Integer.parseInt(logoutId));
+
+
     }
 
     public void handleExitPlayer(int logoutId)
@@ -198,7 +201,7 @@ public class Handler extends Thread {
         playerToDb.changeStatus(logoutId);
         handleVectorWithID.remove(logoutId);
         RefreshLeaderBoard(logoutId);
-        handleNotification("Offline");
+
         try {
             dis.close();
             ps.close();

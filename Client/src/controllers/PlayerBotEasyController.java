@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import mainPk.HandleOnlineSocket;
 import person.Person;
 
@@ -18,6 +19,8 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class PlayerBotEasyController implements Initializable {
+    private double xOffset = 0;
+    private double yOffset = 0;
     @FXML
     private Button button1;
 
@@ -206,4 +209,18 @@ public void SendScoreToServer()
     }
 
 }
+    @FXML
+    protected void handlePressedAction(MouseEvent event)
+    {
+        xOffset = event.getSceneX();
+        yOffset = event.getSceneY();
+    }
+
+    @FXML
+    protected void handleMovementAction(MouseEvent event)
+    {
+        Stage stage =(Stage)EasyBotScenePane.getScene().getWindow();
+        stage.setX(event.getScreenX() - xOffset);
+        stage.setY(event.getScreenY() - yOffset);
+    }
 }

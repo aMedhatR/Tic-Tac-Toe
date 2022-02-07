@@ -6,8 +6,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import mainPk.HandleOnlineSocket;
 import person.Person;
 
@@ -17,7 +19,8 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class TwoPlayersOfflineController implements Initializable {
-
+    private double xOffset = 0;
+    private double yOffset = 0;
     @FXML
     private Button button1;
     @FXML
@@ -196,5 +199,19 @@ private Label homeLabel;
             CommonControllers.gotoStage("ClientPage.fxml", OnlineGameAnchorPane);
 
         }
+    }
+    @FXML
+    protected void handlePressedAction(MouseEvent event)
+    {
+        xOffset = event.getSceneX();
+        yOffset = event.getSceneY();
+    }
+
+    @FXML
+    protected void handleMovementAction(MouseEvent event)
+    {
+        Stage stage =(Stage)OnlineGameAnchorPane.getScene().getWindow();
+        stage.setX(event.getScreenX() - xOffset);
+        stage.setY(event.getScreenY() - yOffset);
     }
 }

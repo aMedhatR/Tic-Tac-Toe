@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
+import javafx.scene.input.MouseEvent;
 import mainPk.HandleOnlineSocket;
 import mainPk.MainApp;
 import javafx.application.Platform;
@@ -39,6 +40,8 @@ public class SignupController implements Initializable {
      */
     Stage stage;
     Scene scene;
+    private double xOffset = 0;
+    private double yOffset = 0;
     @FXML
     private BorderPane SignUpScenePane;
     @FXML
@@ -250,5 +253,18 @@ public class SignupController implements Initializable {
         CommonControllers.closeWindow(SignUpScenePane,false);
     }
 
+    @FXML
+    protected void handlePressedAction(MouseEvent event)
+    {
+        xOffset = event.getSceneX();
+        yOffset = event.getSceneY();
+    }
 
+    @FXML
+    protected void handleMovementAction(MouseEvent event)
+    {
+        Stage stage =(Stage)SignUpScenePane.getScene().getWindow();
+        stage.setX(event.getScreenX() - xOffset);
+        stage.setY(event.getScreenY() - yOffset);
+    }
 }

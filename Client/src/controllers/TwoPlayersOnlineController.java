@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -23,6 +24,8 @@ import java.util.ResourceBundle;
 public class TwoPlayersOnlineController implements Initializable {
 
     Button[] d = new Button[9];
+    private double xOffset = 0;
+    private double yOffset = 0;
     static Thread thread;
     @FXML
     private AnchorPane OnlineGameAnchorPane;
@@ -532,4 +535,19 @@ private Button withdrawButton;
 
         });
     }
+    @FXML
+    protected void handlePressedAction(MouseEvent event)
+    {
+        xOffset = event.getSceneX();
+        yOffset = event.getSceneY();
+    }
+
+    @FXML
+    protected void handleMovementAction(MouseEvent event)
+    {
+        Stage stage =(Stage)OnlineGameAnchorPane.getScene().getWindow();
+        stage.setX(event.getScreenX() - xOffset);
+        stage.setY(event.getScreenY() - yOffset);
+    }
+
 }
