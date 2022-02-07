@@ -55,6 +55,10 @@ public class TwoPlayersOnlineController implements Initializable {
     private Label playerName;
     @FXML
     private Label label2;
+    @FXML
+    private TextField txtfiled;
+    @FXML
+    private  TextArea  txtarea;
 
     private String replyMsg;
     // information players
@@ -165,6 +169,9 @@ public class TwoPlayersOnlineController implements Initializable {
 
                             case "decisionToSaveGame":
                                 handleDecisionToSaveGame(allReplyMsg[1]);
+                                break;
+                            case "msg" :
+                                appendmsg(allReplyMsg[1]);
                                 break;
 
                         }
@@ -498,5 +505,17 @@ public class TwoPlayersOnlineController implements Initializable {
         }
 
 
+    }
+    @FXML
+    protected void send(){
+        System.out.println("send action");
+        HandleOnlineSocket.getSendStream().println("twochat" + "___" + idAntherPlayer+"___"+ txtfiled.getText());
+        txtfiled.setText("");
+    }
+    protected void appendmsg(String msg) {
+        Platform.runLater(() -> {
+            txtarea.appendText("\n" + msg);
+
+        });
     }
 }
