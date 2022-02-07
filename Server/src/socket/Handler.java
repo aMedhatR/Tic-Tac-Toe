@@ -185,7 +185,6 @@ public class Handler extends Thread {
     public void logOut(String logoutId) {
 
         handleExitPlayer(Integer.parseInt(logoutId));
-        handleNotification("Offline");
     }
 
     public void handleExitPlayer(int logoutId)
@@ -199,6 +198,7 @@ public class Handler extends Thread {
         playerToDb.changeStatus(logoutId);
         handleVectorWithID.remove(logoutId);
         RefreshLeaderBoard(logoutId);
+        handleNotification("Offline");
         try {
             dis.close();
             ps.close();
@@ -282,12 +282,13 @@ public class Handler extends Thread {
         // Print keys and values
         System.out.println(done);
         for (int i : handleVectorWithID.keySet()) {
-            if (id != i){
+            if (id != i)
                 leaderBoard(handleVectorWithID.get(i));
-            if(!isplaying)
-                handleNotification("Available To Play");
-            }
+
+
         }
+        if(!isplaying)
+            handleNotification("Available To Play");
     }
 
 

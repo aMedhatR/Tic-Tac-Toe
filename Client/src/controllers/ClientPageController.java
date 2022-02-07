@@ -575,8 +575,9 @@ public class ClientPageController implements Initializable {
         });
     }
     protected void notification(String notificationBody){
-
-        new Notification(notificationBody);
+        Platform.runLater(() -> {
+            new Notification(notificationBody);
+        });
     }
 
  public void StopThread()
