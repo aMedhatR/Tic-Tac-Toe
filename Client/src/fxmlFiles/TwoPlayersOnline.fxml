@@ -75,7 +75,7 @@
                </font>
             </Label>
             <TextArea layoutX="35.0" layoutY="74.0" prefHeight="354.0" prefWidth="310.0" style="-fx-text-fill: #21f9fb;" stylesheets="@../cssFiles/Styling.css" />
-            <TextField fx:id="txtfiled" layoutX="42.0" layoutY="440.0" prefHeight="25.0" prefWidth="249.0" style="-fx-text-fill: #21f9fb; -fx-background-color: #2d2a40;" styleClass="leaderBoard" stylesheets="@../cssFiles/Styling.css" text="sdsdd" />
+            <TextField fx:id="txtfiled" layoutX="42.0" layoutY="440.0" prefHeight="25.0" prefWidth="249.0" promptText="write your message .." style="-fx-text-fill: #21f9fb; -fx-background-color: #2d2a40;" styleClass="leaderBoard" stylesheets="@../cssFiles/Styling.css" />
             <Button fx:id="send" layoutX="302.0" layoutY="440.0" mnemonicParsing="false" style="-fx-background-color: #21f9fb;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css" text="Send" />
          </children>
       </AnchorPane>
@@ -90,12 +90,12 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <Label fx:id="label1" layoutX="151.0" layoutY="123.0" prefHeight="38.0" prefWidth="48.0" style="-fx-font-size: 25;" styleClass="gameButtonsStyling" stylesheets="@../cssFiles/Styling.css" text="100">
+      <Label fx:id="label1" layoutX="151.0" layoutY="123.0" prefHeight="38.0" prefWidth="48.0" style="-fx-font-size: 25;" styleClass="gameButtonsStyling" stylesheets="@../cssFiles/Styling.css">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="label2" layoutX="444.0" layoutY="123.0" prefHeight="38.0" prefWidth="48.0" style="-fx-font-size: 25; -fx-text-alignment: right;" styleClass="gameButtonsStyling" stylesheets="@../cssFiles/Styling.css" text="900">
+      <Label fx:id="label2" layoutX="444.0" layoutY="123.0" prefHeight="38.0" prefWidth="48.0" style="-fx-font-size: 25; -fx-text-alignment: right;" styleClass="gameButtonsStyling" stylesheets="@../cssFiles/Styling.css">
          <font>
             <Font size="16.0" />
          </font>
