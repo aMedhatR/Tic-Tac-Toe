@@ -24,7 +24,7 @@
                   <Image url="@../Images/518215.png" />
                </image>
             </ImageView>
-            <Button mnemonicParsing="false" onMouseClicked="#onSignInSignUpButton" prefHeight="30.0" prefWidth="116.0" style="-fx-border-radius: 25px; -fx-border-color: #7178d6; -fx-text-fill: white; -fx-border-width: 2px;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css" text="Sign Up" textAlignment="CENTER" textFill="#7178d6">
+            <Button mnemonicParsing="false" onAction="#music" onMouseClicked="#onSignInSignUpButton" prefHeight="30.0" prefWidth="116.0" style="-fx-border-radius: 25px; -fx-border-color: #7178d6; -fx-text-fill: white; -fx-border-width: 2px;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css" text="Sign Up" textAlignment="CENTER" textFill="#7178d6">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -110,7 +110,7 @@
             </VBox>
             <VBox alignment="CENTER">
                <children>
-                  <Button defaultButton="true" mnemonicParsing="false" onAction="#onSignInSignInButton" prefHeight="30.0" prefWidth="116.0" style="-fx-border-radius: 25px; -fx-border-color: #7178d6; -fx-border-width: 2px; -fx-text-fill: white;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css" text="Sign in" textAlignment="CENTER" textFill="#7178d6">
+                  <Button defaultButton="true" mnemonicParsing="false" onAction="#onSignInSignInButton" onMouseClicked="#music" prefHeight="30.0" prefWidth="116.0" style="-fx-border-radius: 25px; -fx-border-color: #7178d6; -fx-border-width: 2px; -fx-text-fill: white;" styleClass="entry-btn" stylesheets="@../cssFiles/Styling.css" text="Sign in" textAlignment="CENTER" textFill="#7178d6">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>

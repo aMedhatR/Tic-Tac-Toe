@@ -2,6 +2,8 @@ package controllers;
 
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import mainPk.HandleOnlineSocket;
 import mainPk.MainApp;
 import javafx.fxml.FXML;
@@ -71,5 +73,12 @@ public class WelcomePageControl  implements Initializable {
         Stage stage =(Stage)WelcomeScenePane.getScene().getWindow();
         stage.setX(event.getScreenX() - xOffset);
         stage.setY(event.getScreenY() - yOffset);
+    }
+    MediaPlayer mediaPlayer;
+    public void music()
+    {
+        Media media= new Media(getClass().getResource("/Audio/click.wav").toExternalForm());
+        mediaPlayer=new MediaPlayer(media);
+        mediaPlayer.play();
     }
 }
