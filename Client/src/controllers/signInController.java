@@ -11,6 +11,8 @@ import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import mainPk.HandleOnlineSocket;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -219,4 +221,12 @@ CommonControllers.gotoStage("signup.fxml",SignInPaneScene);
         stage.setX(event.getScreenX() - xOffset);
         stage.setY(event.getScreenY() - yOffset);
     }
+    MediaPlayer mediaPlayer;
+    public void music()
+    {
+        Media media= new Media(getClass().getResource("/Audio/click.wav").toExternalForm());
+        mediaPlayer=new MediaPlayer(media);
+        mediaPlayer.play();
+    }
+
 }
