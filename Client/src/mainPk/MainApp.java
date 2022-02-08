@@ -17,7 +17,7 @@ import java.nio.file.Paths;
 public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        music();
+    //    music();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlFiles/WelcomePage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("The Fabulous Tic Tac Toe");

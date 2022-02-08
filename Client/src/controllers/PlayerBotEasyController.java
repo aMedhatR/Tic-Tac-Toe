@@ -60,7 +60,7 @@ public class PlayerBotEasyController implements Initializable {
     private boolean IsOnline =true;
 
     private Button computerTurn;
-
+    private boolean gameEnd =false;
     @FXML
     private AnchorPane EasyBotScenePane;
     @FXML
@@ -102,6 +102,7 @@ public class PlayerBotEasyController implements Initializable {
         buttons.forEach(this::resetButton);
         winnerText.setText("Tic-Tac-Toe");
         vector.clear();
+
         for (int i=0;i<9;i++)
         {
             vector.add(String.valueOf(i));
@@ -113,6 +114,7 @@ public class PlayerBotEasyController implements Initializable {
         button.setText("");
         playerTurn = 1;
         gameOver = 0;
+        gameEnd=false;
     }
 
     private void setupButton(Button button) {
@@ -128,25 +130,29 @@ public class PlayerBotEasyController implements Initializable {
     public void setPlayerSymbol(Button button){
         int randomNum;
             button.setText("X");
+        checkIfGameIsOver();
+        if (!gameEnd) {
 
-        System.out.println(vector);
 
-        System.out.println(button.getId().charAt(6));
-        System.out.println(Integer.parseInt(String.valueOf(button.getId().charAt(6)))-1 );
-            vector.remove(String.valueOf(Integer.parseInt(String.valueOf(button.getId().charAt(6)))-1));
             System.out.println(vector);
-            if(vector.size() != 0) {
+
+            System.out.println(button.getId().charAt(6));
+            System.out.println(Integer.parseInt(String.valueOf(button.getId().charAt(6))) - 1);
+            vector.remove(String.valueOf(Integer.parseInt(String.valueOf(button.getId().charAt(6))) - 1));
+            System.out.println(vector);
+            if (vector.size() != 0) {
                 randomNum = ThreadLocalRandom.current().nextInt(0, vector.size());  //0 to 9
 
 
                 computerTurn = buttons.get(Integer.parseInt(vector.get(randomNum)));
                 computerTurn.setText("0");
                 computerTurn.setDisable(true);
-                 System.out.println(vector);
+                System.out.println(vector);
                 vector.remove(randomNum);
-                   System.out.println(vector);
+                System.out.println(vector);
                 System.out.println("For loop");
-    }   //String element = buttons.get(randomNum).getText();
+            }
+        }
     }
 
     public void checkIfGameIsOver(){
@@ -168,7 +174,8 @@ public class PlayerBotEasyController implements Initializable {
                 //X winner
                 if (line.equals("XXX")) {
                     winnerText.setText("X won!");
-                    playerTurn = 3;
+
+                    gameEnd=true;
                     if (Person.getName()!=null) {
                         int score = Person.getScore() + 5;
                         Person.setScore(score);
@@ -176,17 +183,21 @@ public class PlayerBotEasyController implements Initializable {
                     }
                     player1+=5;
                     label1.setText(Integer.toString(player1));
-                    gameOver++;
+
                 }
 
                 //O winner
                 if (line.equals("000")) {
-                    System.out.println("Hi Failuer");
+                    gameEnd=true;
                     winnerText.setText("O won!");
-                    playerTurn = 3;
                     player2+=5;
                     label2.setText(Integer.toString(player2));
-                    gameOver++;
+                }
+                if (gameEnd){
+                    for (int i=0;i<9;i++)
+                    {
+                        buttons.get(i).setDisable(true);
+                    }
                 }
             }
         }

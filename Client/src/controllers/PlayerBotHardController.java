@@ -115,21 +115,21 @@ public class PlayerBotHardController implements Initializable {
         System.out.println(Integer.parseInt(String.valueOf(button.getId().charAt(6))) - 1);
 
         //     vector.remove(String.valueOf(Integer.parseInt(String.valueOf(button.getId().charAt(6)))-1));
-        System.out.println(vector);
-        if (vector.size() != 0) {
+    //    System.out.println(vector);
+       // if (vector.size() != 0) {
             //   randomNum = ThreadLocalRandom.current().nextInt(0, vector.size());  //0 to 9
 
 
             //    computerTurn = buttons.get(Integer.parseInt(vector.get(randomNum)));
-            System.out.println(findBestMove());
+            System.out.println("the best move is: "+findBestMove());
             computerTurn = buttons.get(findBestMove());
             computerTurn.setText("0");
             computerTurn.setDisable(true);
-            System.out.println(vector);
+         //   System.out.println(vector);
             // vector.remove(randomNum);
-            System.out.println(vector);
+        //    System.out.println(vector);
             System.out.println("For loop");
-        }   //String element = buttons.get(randomNum).getText();
+         //String element = buttons.get(randomNum).getText();
     }
 
     public void checkIfGameIsOver() {
@@ -179,7 +179,7 @@ public class PlayerBotHardController implements Initializable {
 
                 //O winner
                 if (line.equals("000")) {
-                    System.out.println("Hi Failuer");
+
                     winnerText.setText("O won!");
                     playerTurn = 3;
                     player2++;
@@ -236,7 +236,9 @@ public class PlayerBotHardController implements Initializable {
             // Traverse all cells
             for (int i = 0; i < 9; i++) {
                 // Check if cell is empty
-                if (buttons.get(i).getText() == "") {
+                if (buttons.get(i).getText().equals("X")||buttons.get(i).getText().equals("0")){}
+                else
+                 {
                     // Make the move
                     buttons.get(i).setText("0");
 
@@ -258,7 +260,9 @@ public class PlayerBotHardController implements Initializable {
             // Traverse all cells
             for (int i = 0; i < 9; i++) {
                 // Check if cell is empty
-                if (buttons.get(i).getText() == "") {
+                if (buttons.get(i).getText().equals("X")||buttons.get(i).getText().equals("0")){}
+                else
+                 {
                     // Make the move for player turn
                     // thus it will continue the tree
                     //and had all the posibilities
@@ -288,20 +292,28 @@ public class PlayerBotHardController implements Initializable {
         for (int i = 0; i < 9; i++) {
             // Check if cell is empty
             System.out.println("buttons.get(i).getText() :" + buttons.get(i).getText());
-            if (Objects.equals(buttons.get(i).getText(), "")) // --> true
+         //   if (Objects.equals(buttons.get(i).getText(), "")) // --> true
+            if (buttons.get(i).getText().equals("X")||buttons.get(i).getText().equals("0")){}
+            else
             // if (buttons.get(i).getText().equals(""))
             {
                 System.out.println("in best move if condition");
                 //before make any move just check if pla
                 // Make the move
-                buttons.get(i).setText("0");
+             //   Platform.runLater(()->{
+                    buttons.get(i).setText("0");
+             //   });
+
 
                 // compute evaluation function for this
                 // move.
                 int moveVal = minimax(0, false);
 
                 // Undo the move
-                buttons.get(i).setText("");
+           //     Platform.runLater(()->{
+                    buttons.get(i).setText("");
+            //    });
+
 
                 // If the value of the current move is
                 // more than the best value, then update
