@@ -270,7 +270,7 @@ private Button withdrawButton;
     public void handlePlayerWasQuit(String msg)
     {
         Platform.runLater(() -> {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dialoguesAndControllers/AcceptInvetation.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dialoguesAndControllers/PleaseChoosePlayer.fxml"));
             DialogPane ConfirmDialogPane = null;
             try {
                 ConfirmDialogPane = fxmlLoader.load();
@@ -289,10 +289,6 @@ private Button withdrawButton;
 
                     Person.setScore(score);
                     backToClientPage();
-                } else if (response == ButtonType.CANCEL) {
-                    /// back to home
-                    backToClientPage();
-                    Person.setScore(score);
                 }
 
             });

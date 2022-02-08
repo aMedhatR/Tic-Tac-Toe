@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import mainPk.HandleOnlineSocket;
 import person.Person;
 
 import java.net.URL;
@@ -57,12 +58,15 @@ public class PlayerBotHardController implements Initializable {
     private int player2;
     private int playerTurn = 1;
     private int gameOver = 0;
+    private boolean isOnline;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        isOnline=false;
         Platform.runLater(()->{
             if (Person.getName()!=null) {
                 playerlabel.setText(Person.getName());
+                isOnline=true ;
             }
         });
         buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
@@ -170,7 +174,12 @@ public class PlayerBotHardController implements Initializable {
                 if (line.equals("XXX")) {
                     winnerText.setText("X won!");
                     playerTurn = 3;
-                    player1++;
+                    player1+=5;
+                    if (Person.getName()!=null) {
+                        int score = Person.getScore() + 5;
+                        Person.setScore(score);
+                        SendScoreToServer();
+                    }
                     label1.setText(Integer.toString(player1));
                     gameOver++;
                     playerWin = true;
@@ -182,7 +191,7 @@ public class PlayerBotHardController implements Initializable {
 
                     winnerText.setText("O won!");
                     playerTurn = 3;
-                    player2++;
+                    player2+=5;
                     label2.setText(Integer.toString(player2));
                     gameOver++;
                     computerWin = true;
@@ -194,9 +203,13 @@ public class PlayerBotHardController implements Initializable {
 
     Boolean isMovesLeft() {
         //used to check if there is enable button and the value inside it is empty
-        for (int i = 0; i < 9; i++)
-            if (buttons.get(i).getText() == "")
+        for (int i = 0; i < 9; i++) {
+            if (buttons.get(i).getText().equals("X")||buttons.get(i).getText().equals("0"))
+            {}
+            else {
                 return true;
+            }
+        }
         return false;
     }
 
@@ -330,11 +343,23 @@ public class PlayerBotHardController implements Initializable {
 
         return bestMove;
     }
-
+    public void SendScoreToServer()
+    {
+        HandleOnlineSocket.getSendStream().println("changeScore___5");
+    }
     @FXML
-    protected void OnlineGameCloseButton() {
+    protected void OnlineGameCloseButton()
+    {
+        if (isOnline) {
+            HandleOnlineSocket.getSendStream().println("ChangeIsPlaying___false");
+            CommonControllers.gotoStage("ClientPage.fxml",HardBotScenePane);
+        }
+        else
+        {
 
-        CommonControllers.gotoStage("ClientPage.fxml",HardBotScenePane);
+            CommonControllers.goToHome(HardBotScenePane);
+        }
+
     }
 
     @FXML
