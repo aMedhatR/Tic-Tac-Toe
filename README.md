@@ -22,7 +22,7 @@ Login/Register                | List online players `Connected to the network`
 Two Players                   | List offline players `Disconnected`
 play online                   | see players status and score
 single player vs Computer     | Activate or disable the server
-Group chat
+Group chat                    | Notification
 Chat betwen Two players 
  ## Built With
 
