@@ -20,7 +20,16 @@ Login/Register                | List online players `Connected to the network`
 Two Players                   | List offline players `Disconnected`
 play online                   | see players status and score
 single player vs Computer     | Activate or disable the server
-              
+ 
+ ## Built With
+
+* JAVA
+* JAVAFX
+* PostgresSQL
+* Socket
+* Scense Builder
+
+
 
 # Contribution
 
