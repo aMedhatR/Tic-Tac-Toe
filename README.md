@@ -1,4 +1,6 @@
 # Tic-Tac-Toy <br>
+[![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://forthebadge.com)
+
 ```
 A network based Tic tac toe game, this implementation was done as the java project
 @ ITI intake 42 by students of the telecom application development track.
@@ -20,7 +22,8 @@ Login/Register                | List online players `Connected to the network`
 Two Players                   | List offline players `Disconnected`
 play online                   | see players status and score
 single player vs Computer     | Activate or disable the server
- 
+Group chat
+Chat betwen Two players 
  ## Built With
 
 * JAVA
@@ -33,10 +36,10 @@ single player vs Computer     | Activate or disable the server
 
 # Contribution
 
+* [Abdelrahman Mostafa Soliman Mostafa](https://github.com/EngAbdelrahmanMostafa)
+* [Nora Alaa Eldin Salama](https://github.com/nora-alaa)
+* [Asmaa Mohammed Ali](https://github.com/AsmaaMohamedAli)
+* [Ahmed Medhat Mohamed ](https://github.com/aMedhatR) 
+* [Essraa Mohamed Hemdan ](https://github.com/essraahemdan) 
 
-`` : [LinkedIn]()
-`` : [LinkedIn]()
-`` : [LinkedIn]()
-`` : [LinkedIn]()
- 
 
