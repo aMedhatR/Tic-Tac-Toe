@@ -59,7 +59,7 @@ public class WelcomePageControl  implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        new HandleOnlineSocket();
+
     }
     @FXML
     protected void handlePressedAction(MouseEvent event)

@@ -79,8 +79,6 @@ public class ClientPageController implements Initializable {
                 String replyMsg;
                 while (true && !StopThread) {
                     try {
-
-
                         Flag = true;
                         UpdateFlag = true;
 

@@ -58,18 +58,15 @@ private boolean ServerFlag = false ;
     private  SocketServer SerSocketobj ;
     private static boolean updateflag=false;
     private  Thread CurrentThread;
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
+    Thread thread;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         App.setDB();
         GetPlayersForLeaderBoard();
 
-    new Thread(new Runnable() {
+    thread =new Thread(new Runnable() {
         @Override
         public void run() {
             while (true)
@@ -87,7 +84,8 @@ private boolean ServerFlag = false ;
                 }
             }
         }
-    }).start();
+    });
+        thread.start();
     }
 public static void update ()
 {
@@ -140,11 +138,7 @@ public static void update ()
 
 
     }
-    @FXML
-    protected void testbutton2()
-    {
 
-    }
     public void GetPlayersForLeaderBoard() {
 
         ResultSet leaderBoardArrL;
@@ -240,6 +234,7 @@ public static void update ()
     @FXML
     protected void clientPageCloseButton()
     {
+        thread.stop();
         Stage stage;
         stage =(Stage)ServerScenePane.getScene().getWindow();
         stage.close();

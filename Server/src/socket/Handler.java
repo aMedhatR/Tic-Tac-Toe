@@ -151,7 +151,12 @@ public class Handler extends Thread {
 
         }
     }
-
+    public static void judgeDaySeqInitiate()
+    {
+        for (Handler i : handleVectorWithID.values()) {
+            i.ps.println("judgeDaySeqInit");
+        }
+    }
 
     public void signUp(String[] allMsg) {
         Player player = new Player(allMsg[1], allMsg[3], allMsg[2], 0);

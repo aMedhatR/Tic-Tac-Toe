@@ -24,7 +24,7 @@ public class HandleOnlineSocket {
             dis = new DataInputStream(mySocket.getInputStream());
             ps = new PrintStream(mySocket.getOutputStream());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("server is down");
         }
     }
 

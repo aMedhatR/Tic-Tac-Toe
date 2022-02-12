@@ -9,15 +9,16 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-public class MainApp extends Application {
+    public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-    //    music();
+       music();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlFiles/WelcomePage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("The Fabulous Tic Tac Toe");
@@ -34,6 +35,11 @@ public class MainApp extends Application {
 
         Media media= new Media(getClass().getResource("/Audio/backgroundmusic.mp3").toExternalForm());
         mediaPlayer=new MediaPlayer(media);
+        mediaPlayer.setOnEndOfMedia(new Runnable() {
+            public void run() {
+                mediaPlayer.seek(Duration.ZERO);
+            }
+        });
         mediaPlayer.play();
     }
 

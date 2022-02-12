@@ -63,27 +63,31 @@ public class CommonControllers {
 
     public static void goToHome(AnchorPane pane) {
         try {
-            HandleOnlineSocket.getReceiveStream().close();
-
-            HandleOnlineSocket.getSendStream().close();
-            HandleOnlineSocket.getMySocket().close();
+            if ( HandleOnlineSocket.getMySocket()!=null) {
+                HandleOnlineSocket.getReceiveStream().close();
+                HandleOnlineSocket.getSendStream().close();
+                HandleOnlineSocket.getMySocket().close();
+            }
+            gotoStage("WelcomePage.fxml", pane);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("server is down");
         }
-        gotoStage("WelcomePage.fxml", pane);
+     //  gotoStage("WelcomePage.fxml", pane);
 
     }
 
     public static void goToHome(BorderPane pane) {
         try {
+            if ( HandleOnlineSocket.getMySocket()!=null) {
             HandleOnlineSocket.getReceiveStream().close();
-
             HandleOnlineSocket.getSendStream().close();
             HandleOnlineSocket.getMySocket().close();
+            }
+            gotoStage("WelcomePage.fxml", pane);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("server is down");
         }
-        gotoStage("WelcomePage.fxml", pane);
+       // gotoStage("WelcomePage.fxml", pane);
 
     }
 
@@ -122,5 +126,9 @@ public class CommonControllers {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public static void serverIsDown()
+    {
+
     }
 }
