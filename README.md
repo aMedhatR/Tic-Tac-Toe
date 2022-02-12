@@ -1,4 +1,4 @@
-# Tic-Tac-Toy <br>
+# Tic-Tac-Toe <br>
 [![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://forthebadge.com)
 
 ```
@@ -29,7 +29,7 @@ Chat betwen Two players
 * JAVA
 * JAVAFX
 * PostgresSQL
-* Socket
+* Socket Programming
 * Scense Builder
 
 
