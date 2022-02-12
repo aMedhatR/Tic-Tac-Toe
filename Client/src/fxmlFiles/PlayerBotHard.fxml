@@ -37,7 +37,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Button layoutX="27.0" layoutY="111.0" mnemonicParsing="false" onAction="#restartGame" prefHeight="26.0" prefWidth="223.0" style="-fx-font-size: 14; -fx-font-weight: bold; -fx-cursor: hand;" styleClass="specialButtons" stylesheets="@../cssFiles/Styling.css" text="New Game" />
+            <Button fx:id="newGameButton" layoutX="27.0" layoutY="111.0" mnemonicParsing="false" onAction="#restartGame" prefHeight="26.0" prefWidth="223.0" style="-fx-font-size: 14; -fx-font-weight: bold; -fx-cursor: hand;" styleClass="specialButtons" stylesheets="@../cssFiles/Styling.css" text="New Game" />
          </children>
       </AnchorPane>
       <Button fx:id="welcomePageExitButton" layoutX="669.0" layoutY="25.0" mnemonicParsing="false" onMouseClicked="#OnlineGameCloseButton" prefHeight="25.0" prefWidth="36.0" styleClass="welcomePageCloseButtonClass" stylesheets="@../cssFiles/Styling.css" text="X">

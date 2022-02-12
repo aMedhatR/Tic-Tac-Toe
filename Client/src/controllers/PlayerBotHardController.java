@@ -41,6 +41,8 @@ public class PlayerBotHardController implements Initializable {
     private BorderPane root;
     private double xOffset = 0;
     private double yOffset = 0;
+    @FXML
+    private Button newGameButton;
 
     @FXML
     private Text winnerText;
@@ -122,6 +124,7 @@ public class PlayerBotHardController implements Initializable {
     }
 
     private void runGameLoop() {
+        newGameButton.setDisable(true);
         gameTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -142,7 +145,7 @@ public class PlayerBotHardController implements Initializable {
      */
     private void endGame() {
         gameTimer.stop();
-
+        newGameButton.setDisable(false);
         Mark winner = board.getWinningMark();
         if (winner==O)
         {
