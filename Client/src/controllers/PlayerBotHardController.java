@@ -124,11 +124,12 @@ public class PlayerBotHardController implements Initializable {
     }
 
     private void runGameLoop() {
-        newGameButton.setDisable(true);
+      //  newGameButton.setDisable(true);
         gameTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 if (board.isGameOver()) {
+                    System.out.println("here for ever");
                     endGame();
                 } else {
                     if (board.isCrossTurn()) {
@@ -145,7 +146,7 @@ public class PlayerBotHardController implements Initializable {
      */
     private void endGame() {
         gameTimer.stop();
-        newGameButton.setDisable(false);
+    //    newGameButton.setDisable(false);
         Mark winner = board.getWinningMark();
         if (winner==O)
         {
@@ -179,8 +180,9 @@ public class PlayerBotHardController implements Initializable {
             BoardAnchorPane.getChildren().clear();
             BoardAnchorPane.getChildren().add(generateGUI());
         });
-        winnerText.setText("Tic-Tac-Toe");
 
+        endGame();
+        winnerText.setText("Tic-Tac-Toe");
         runGameLoop();
     }
 

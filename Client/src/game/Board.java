@@ -14,6 +14,7 @@ public class Board {
     private boolean gameOver;
     private int availableMoves = BOARD_WIDTH * BOARD_WIDTH;
     public static boolean AnotherGameToggle =true;
+    //public static boolean GameInterrupt =false;
 
     public Board() {
         board = new Mark[BOARD_WIDTH][BOARD_WIDTH];
@@ -177,4 +178,6 @@ public class Board {
     public Mark getWinningMark() {
         return winningMark;
     }
+
+
 }
