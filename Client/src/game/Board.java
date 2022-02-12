@@ -10,12 +10,14 @@ public class Board {
     private final Mark[][] board;
     private Mark winningMark;
     private final int BOARD_WIDTH = 3;
-    private boolean crossTurn, gameOver;
+    private boolean crossTurn;
+    private boolean gameOver;
     private int availableMoves = BOARD_WIDTH * BOARD_WIDTH;
+    public static boolean AnotherGameToggle =true;
 
     public Board() {
         board = new Mark[BOARD_WIDTH][BOARD_WIDTH];
-        crossTurn = true;
+        crossTurn = AnotherGameToggle ;
         gameOver = false;
         winningMark = BLANK;
         initialiseBoard();

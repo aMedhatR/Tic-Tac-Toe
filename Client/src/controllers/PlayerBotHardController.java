@@ -171,11 +171,13 @@ public class PlayerBotHardController implements Initializable {
     }
 
     private void resetGame() {
+        Board.AnotherGameToggle=!Board.AnotherGameToggle;
         Platform.runLater(() -> {
             BoardAnchorPane.getChildren().clear();
             BoardAnchorPane.getChildren().add(generateGUI());
         });
         winnerText.setText("Tic-Tac-Toe");
+
         runGameLoop();
     }
 
