@@ -3,14 +3,12 @@ package controllers;
 import game.Game;
 import helper.Notification;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.Cursor;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,34 +24,28 @@ import person.Person;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 
 public class ClientPageController implements Initializable {
     public static Thread thread;
-    private String SingleEasyHard = "";
-    Stage stage;
-    Scene scene;
+
     boolean Flag;
     boolean UpdateFlag;
     private String playerChosen = "0";
     @FXML
     private VBox VboxScrollPaneLeaderBoard;
-    @FXML
-    private Label testcolorforanother;
+
     @FXML
     private AnchorPane ClientScenePane;
-    @FXML
-    private ScrollPane ScrollPaneLeaderBoard;
-    private boolean LeaderBoardChoiceFlag;
+
     private int SelectedId;
     private HashMap<String, Integer> NameIdMap;
     @FXML
     private Label CurrentPlayerNameLabel;
     @FXML
     private Label CurrentPlayerScoreLabel;
-    @FXML
-    private AnchorPane chatAppToGame;
     @FXML
     private TextField txtfiled;
     @FXML
@@ -73,61 +65,58 @@ public class ClientPageController implements Initializable {
         });
 
         NameIdMap = new HashMap<>();
-        thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String replyMsg;
-                while (true && !StopThread) {
-                    try {
-                        Flag = true;
-                        UpdateFlag = true;
+        thread = new Thread(() -> {
+            String replyMsg;
+            while (!StopThread) {
+                try {
+                    Flag = true;
+                    UpdateFlag = true;
 
-                        while (Flag) {
-                            replyMsg = HandleOnlineSocket.getReceiveStream().readLine();
+                    while (Flag) {
+                        replyMsg = HandleOnlineSocket.getReceiveStream().readLine();
 
-                            System.out.println(replyMsg);
+                        System.out.println(replyMsg);
 
-                            if (replyMsg.equals("false")) {
-                                break;
-                            }
-                            String[] allReplyMsg = replyMsg.split("___");
-                            switch (allReplyMsg[0]) {
-                                case "InvetationFrom":
-                                    invitationHandler(allReplyMsg);
-                                    break;
-                                case "ResponsetoInvetation":
-                                    responseHandler(allReplyMsg);
-                                    break;
-                                case "msg":
-                                    appendmsg(allReplyMsg[1]);
-
-                                    break;
-
-                                case "responseSearchIfThereIsSavedGame":
-                                    handleResponseSearchIfThereIsSavedGame(allReplyMsg[1]);
-                                    break;
-
-                                case "invitationHandlerToSavedGame":
-                                    invitationHandlerToSavedGame(allReplyMsg);
-                                    break;
-                                case "responseHandlerToSavedGame":
-                                    responseHandlerToSavedGame(allReplyMsg);
-                                    break;
-                                case "notification":
-                                    notification(allReplyMsg[1]);
-                                    break;
-                                default:
-                                    updateLeaderboardHandler(allReplyMsg);
-                                    break;
-
-                            }
+                        if (replyMsg.equals("false")) {
+                            break;
                         }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        //System.out.println(e);
-                    } finally {
-                        // thread.stop();
+                        String[] allReplyMsg = replyMsg.split("___");
+                        switch (allReplyMsg[0]) {
+                            case "InvetationFrom":
+                                invitationHandler(allReplyMsg);
+                                break;
+                            case "ResponsetoInvetation":
+                                responseHandler(allReplyMsg);
+                                break;
+                            case "msg":
+                                appendmsg(allReplyMsg[1]);
+
+                                break;
+
+                            case "responseSearchIfThereIsSavedGame":
+                                handleResponseSearchIfThereIsSavedGame(allReplyMsg[1]);
+                                break;
+
+                            case "invitationHandlerToSavedGame":
+                                invitationHandlerToSavedGame(allReplyMsg);
+                                break;
+                            case "responseHandlerToSavedGame":
+                                responseHandlerToSavedGame(allReplyMsg);
+                                break;
+                            case "notification":
+                                notification(allReplyMsg[1]);
+                                break;
+                            default:
+                                updateLeaderboardHandler(allReplyMsg);
+                                break;
+
+                        }
                     }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    //System.out.println(e);
+                } finally {
+                    // thread.stop();
                 }
             }
         });
@@ -163,7 +152,7 @@ public class ClientPageController implements Initializable {
         if (Status && isPlaying) {
             StatusImage = busyIcon;
 
-        } else if (Status && !isPlaying) {
+        } else if (Status) {
             StatusImage = onlineIcon;
 
         } else {
@@ -182,22 +171,19 @@ public class ClientPageController implements Initializable {
 
         hbox.setCursor(Cursor.HAND);
         if (Status && !isPlaying) {
-            hbox.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    for (int i = 0; i < VboxScrollPaneLeaderBoard.getChildren().size(); i++) {
-                        if (i % 2 == 0) {
-                            ((HBox) VboxScrollPaneLeaderBoard.getChildren().get(i)).setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
-                        }
+            hbox.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> {
+                for (int i = 0; i < VboxScrollPaneLeaderBoard.getChildren().size(); i++) {
+                    if (i % 2 == 0) {
+                        ((HBox) VboxScrollPaneLeaderBoard.getChildren().get(i)).setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
                     }
-                    hbox.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
-                    //System.out.println(((Label) hbox.getChildren().get(0)).getText());
-                    playerChosen = ((Label) hbox.getChildren().get(0)).getText();
-                    UpdateSelectedPlayerId(playerChosen, NameIdMap);
-                    //System.out.println("mouse click detected! " + mouseEvent.getSource());
-
-
                 }
+                hbox.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+                //System.out.println(((Label) hbox.getChildren().get(0)).getText());
+                playerChosen = ((Label) hbox.getChildren().get(0)).getText();
+                UpdateSelectedPlayerId(playerChosen, NameIdMap);
+                //System.out.println("mouse click detected! " + mouseEvent.getSource());
+
+
             });
         }
         VboxScrollPaneLeaderBoard.getChildren().add(hbox);
@@ -211,7 +197,7 @@ public class ClientPageController implements Initializable {
     protected boolean checkForCheckedPlayers() {
         //System.out.println("no player has been chosen");
         //System.out.println("the chosen player is " + playerChosen);
-        return playerChosen != "0";
+        return !Objects.equals(playerChosen, "0");
     }
 
     protected void UpdateSelectedPlayerId(String Name, HashMap<String, Integer> map) {
@@ -278,7 +264,7 @@ public class ClientPageController implements Initializable {
                 dialog.initStyle(StageStyle.UNDECORATED);
                 dialog.showAndWait().ifPresent(response -> {
                     if (response == ButtonType.OK) {
-                        //do something
+                        dialog.close();
                     }
 
                 });
@@ -338,9 +324,7 @@ public class ClientPageController implements Initializable {
             dialog.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.OK) {
                     //System.out.println("trying to send response");
-                    Platform.runLater(() -> {
-                        HandleOnlineSocket.getSendStream().println("InvitaionResponseToSavedGame___" + "yes" + "___" + allReplyMsg[2]);
-                    });
+                    Platform.runLater(() -> HandleOnlineSocket.getSendStream().println("InvitaionResponseToSavedGame___" + "yes" + "___" + allReplyMsg[2]));
                     // CommonControllers.gotoStage("TwoPlayersGame.fxml",ClientScenePane);
                 } else if (response == ButtonType.CANCEL) {
                     //System.out.println("trying to send response");
@@ -361,13 +345,15 @@ public class ClientPageController implements Initializable {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                failDialogPane.setContentText("the invitation to " + allReplyMsg[2] + " been declined ");
+                if (failDialogPane != null) {
+                    failDialogPane.setContentText("the invitation to " + allReplyMsg[2] + " been declined ");
+                }
                 Dialog<ButtonType> dialog = new Dialog<>();
                 dialog.setDialogPane(failDialogPane);
                 dialog.initStyle(StageStyle.UNDECORATED);
                 dialog.showAndWait().ifPresent(response -> {
                     if (response == ButtonType.OK) {
-                        //do something
+                        dialog.close();
                     }
 
                 });
@@ -413,7 +399,7 @@ public class ClientPageController implements Initializable {
                         HandleOnlineSocket.getSendStream().println("InvitaionTo___" + SelectedId + "___" + CurrentPlayerNameLabel.getText() + "___" + Person.getId());
                     }
                     if (response == ButtonType.CANCEL) {
-                        //do NOTHING
+                        dialog.close();
                     }
                 });
             } else {
@@ -425,7 +411,7 @@ public class ClientPageController implements Initializable {
                     dialog.initStyle(StageStyle.UNDECORATED);
                     dialog.showAndWait().ifPresent(response -> {
                         if (response == ButtonType.OK) {
-                            //do something
+                            dialog.close();
                         }
 
                     });
@@ -496,13 +482,15 @@ public class ClientPageController implements Initializable {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                failDialogPane.setContentText("the invitation to" + allReplyMsg[2] + " been declined ");
+                if (failDialogPane != null) {
+                    failDialogPane.setContentText("the invitation to" + allReplyMsg[2] + " been declined ");
+                }
                 Dialog<ButtonType> dialog = new Dialog<>();
                 dialog.setDialogPane(failDialogPane);
                 dialog.initStyle(StageStyle.UNDECORATED);
                 dialog.showAndWait().ifPresent(response -> {
                     if (response == ButtonType.OK) {
-                        //do something
+                        dialog.close();
                     }
 
                 });
@@ -517,7 +505,9 @@ public class ClientPageController implements Initializable {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                failDialogPane.setContentText("the invitation to" + allReplyMsg[2] + " has been  accepted ");
+                if (failDialogPane != null) {
+                    failDialogPane.setContentText("the invitation to" + allReplyMsg[2] + " has been  accepted ");
+                }
                 Dialog<ButtonType> dialog = new Dialog<>();
                 dialog.setDialogPane(failDialogPane);
                 dialog.initStyle(StageStyle.UNDECORATED);
@@ -537,10 +527,7 @@ public class ClientPageController implements Initializable {
     public void updateLeaderboardHandler(String[] allReplyMsg) {
         if (UpdateFlag) {
             //System.out.println("second loop after update flag");
-            Platform.runLater(() -> {
-                VboxScrollPaneLeaderBoard.getChildren().clear();
-
-            });
+            Platform.runLater(() -> VboxScrollPaneLeaderBoard.getChildren().clear());
             UpdateFlag = false;
         }
         if (allReplyMsg[0].equals("rue"))
@@ -589,25 +576,18 @@ public class ClientPageController implements Initializable {
                 CommonControllers.goToHome(ClientScenePane);
 
             } else if (response == ButtonType.CANCEL) {
-
-
+                dialog.close();
             }
 
         });
     }
 
     protected void appendmsg(String msg) {
-        Platform.runLater(() -> {
-            txtarea.appendText("\n" + msg);
-
-
-        });
+        Platform.runLater(() -> txtarea.appendText("\n" + msg));
     }
 
     protected void notification(String notificationBody) {
-        Platform.runLater(() -> {
-            new Notification(notificationBody);
-        });
+        Platform.runLater(() -> new Notification(notificationBody));
     }
 
     public void StopThread() {

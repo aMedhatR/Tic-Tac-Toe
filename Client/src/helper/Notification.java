@@ -1,6 +1,5 @@
 package helper;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

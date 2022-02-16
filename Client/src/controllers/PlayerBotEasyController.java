@@ -1,11 +1,9 @@
 package controllers;
 
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -15,10 +13,14 @@ import mainPk.HandleOnlineSocket;
 import person.Person;
 
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.ResourceBundle;
+import java.util.Vector;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class PlayerBotEasyController implements Initializable {
+    public Button welcomePageExitButton;
     private double xOffset = 0;
     private double yOffset = 0;
     @FXML
@@ -57,19 +59,16 @@ public class PlayerBotEasyController implements Initializable {
     @FXML
     private  Label label2;
 
-    private boolean IsOnline =true;
 
-    private Button computerTurn;
     private boolean gameEnd =false;
     @FXML
     private AnchorPane EasyBotScenePane;
     @FXML
     private Label playerlabel;
-    private Vector<String> vector= new Vector<String>(9);
+    private Vector<String> vector= new Vector<>(9);
 
     private int player1 =0;
     private int player2 =0;
-    private int playerTurn = 1;
     private int gameOver = 0;
     private boolean isOnline;
     ArrayList<Button> buttons;
@@ -98,7 +97,7 @@ public class PlayerBotEasyController implements Initializable {
     }
 
     @FXML
-    void restartGame(ActionEvent event) {
+    void restartGame() {
         buttons.forEach(this::resetButton);
         winnerText.setText("Tic-Tac-Toe");
         vector.clear();
@@ -112,7 +111,7 @@ public class PlayerBotEasyController implements Initializable {
     public void resetButton(Button button){
         button.setDisable(false);
         button.setText("");
-        playerTurn = 1;
+
         gameOver = 0;
         gameEnd=false;
     }
@@ -144,7 +143,7 @@ public class PlayerBotEasyController implements Initializable {
                 randomNum = ThreadLocalRandom.current().nextInt(0, vector.size());  //0 to 9
 
 
-                computerTurn = buttons.get(Integer.parseInt(vector.get(randomNum)));
+                Button computerTurn = buttons.get(Integer.parseInt(vector.get(randomNum)));
                 computerTurn.setText("0");
                 computerTurn.setDisable(true);
                 System.out.println(vector);

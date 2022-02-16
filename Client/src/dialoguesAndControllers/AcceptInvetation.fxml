@@ -4,15 +4,15 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 
-<DialogPane fx:id="invetationAccDialog" contentText="Would You Like to Accept The Invetation?" expanded="true" focusTraversable="true" style="-fx-background-color: skyblue;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-   <buttonTypes>
-      <ButtonType fx:constant="OK" />
-      <ButtonType fx:constant="CANCEL" />
-   </buttonTypes>
+<DialogPane fx:id="invetationAccDialog" contentText="Would You Like to Accept The Invetation?" expanded="true"
+            focusTraversable="true" style="-fx-background-color: skyblue;" xmlns="http://javafx.com/javafx/8.0.311"
+            xmlns:fx="http://javafx.com/fxml/1">
    <opaqueInsets>
-      <Insets />
+      <Insets/>
    </opaqueInsets>
    <cursor>
-      <Cursor fx:constant="HAND" />
+      <Cursor fx:constant="HAND"/>
    </cursor>
+   <ButtonType fx:constant="OK"/>
+   <ButtonType fx:constant="CANCEL"/>
 </DialogPane>

@@ -4,32 +4,32 @@
  */
 package controllers;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.application.Platform;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import mainPk.HandleOnlineSocket;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import mainPk.HandleOnlineSocket;
 import person.Person;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.Objects;
+import java.util.ResourceBundle;
 
 /**
  *
  * @author nora
  */
 public class signInController implements Initializable {
-    Stage stage;
-    Scene scene;
+
+    public Button welcomePageExitButton;
     Thread thread;
     private double xOffset = 0;
     private double yOffset = 0;
@@ -59,17 +59,15 @@ public class signInController implements Initializable {
     @FXML
     protected void onSignInSignInButton()
     {
-        boolean checkValidName = false;
-        boolean checkValidPassword = false;
+        boolean checkValidName;
+        boolean checkValidPassword;
 
         String userNameTxt = username.getText().trim();
         String passwordTxt = password.getText().trim();
 
         if (userNameTxt.isEmpty()) {
             checkValidName = false;
-            Platform.runLater(() -> {
-                errorUsername.setText("Username is required");
-            });
+            Platform.runLater(() -> errorUsername.setText("Username is required"));
         } else {
             checkValidName = true;
             errorUsername.setText("");
@@ -78,14 +76,10 @@ public class signInController implements Initializable {
 
         if (passwordTxt.isEmpty()) {
             checkValidPassword = false;
-            Platform.runLater(() -> {
-                errorPassword.setText("Password is required");
-            });
+            Platform.runLater(() -> errorPassword.setText("Password is required"));
         } else if (passwordTxt.length() < 8) {
             checkValidPassword = false;
-            Platform.runLater(() -> {
-                errorPassword.setText("Password must be at least 8");
-            });
+            Platform.runLater(() -> errorPassword.setText("Password must be at least 8"));
         } else {
             checkValidPassword = true;
             errorPassword.setText("");
@@ -98,46 +92,40 @@ public class signInController implements Initializable {
             HandleOnlineSocket.getSendStream().println("signIn___"+userNameTxt+"___"+passwordTxt);
             // get data from server
             // to not hold the screen in gui client => open it in anther thread
-            thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    String replyMsg;
-                    try {
-                        replyMsg = HandleOnlineSocket.getReceiveStream().readLine();
-                        System.out.println(replyMsg);
-                        String[] allReplyMsg = replyMsg.split("___");
-                        if(allReplyMsg[0].equals("true"))
+            thread = new Thread(() -> {
+                String replyMsg;
+                try {
+                    replyMsg = HandleOnlineSocket.getReceiveStream().readLine();
+                    System.out.println(replyMsg);
+                    String[] allReplyMsg = replyMsg.split("___");
+                    if(allReplyMsg[0].equals("true"))
+                    {
+                        try {
+                            Person.setId(Integer.parseInt(allReplyMsg[1]));
+                            Person.setName(allReplyMsg[2]);
+                            Person.setScore(Integer.parseInt(allReplyMsg[3]));
+                        }catch(Exception e)
                         {
-                            try {
-                                Person.setId(Integer.parseInt(allReplyMsg[1]));
-                                Person.setName(allReplyMsg[2]);
-                                Person.setScore(Integer.parseInt(allReplyMsg[3]));
-                            }catch(Exception e)
+                            System.out.println(e);
+                        }
+                        Platform.runLater(this::goToClientPage);
+                    }
+                    else
+                    {
+                        Platform.runLater(() -> {
+                            if(allReplyMsg[1].equals("isOnlineInOtherPlace"))
                             {
-                                System.out.println(e);
+                                error.setText("Your account is open in other desktop");
                             }
-                            Platform.runLater(() -> {
-
-                                goToClientPage();
-                            });
-                        }
-                        else
-                        {
-                            Platform.runLater(() -> {
-                                if(allReplyMsg[1].equals("isOnlineInOtherPlace"))
-                                {
-                                    error.setText("Your account is open in other desktop");
-                                }
-                                else
-                                error.setText("Try Again wrong password or username");
-                            });
-                        }
-
-                    } catch (IOException ex) {
+                            else
+                            error.setText("Try Again wrong password or username");
+                        });
                     }
-                    finally {
-                        thread.stop();
-                    }
+
+                } catch (IOException ex) {
+                }
+                finally {
+                    thread.stop();
                 }
             });
 
@@ -225,7 +213,7 @@ CommonControllers.gotoStage("signup.fxml",SignInPaneScene);
     MediaPlayer mediaPlayer;
     public void music()
     {
-        Media media= new Media(getClass().getResource("/Audio/click.wav").toExternalForm());
+        Media media= new Media(Objects.requireNonNull(getClass().getResource("/Audio/click.wav")).toExternalForm());
         mediaPlayer=new MediaPlayer(media);
         mediaPlayer.play();
     }

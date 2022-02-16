@@ -3,30 +3,23 @@ package controllers;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.PrintStream;
-import java.net.Socket;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.regex.Pattern;
-
-import javafx.scene.input.MouseEvent;
-import mainPk.HandleOnlineSocket;
-import mainPk.MainApp;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import mainPk.HandleOnlineSocket;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 /**
  * FXML Controller class
@@ -35,6 +28,8 @@ import javafx.stage.Stage;
  */
 public class SignupController implements Initializable {
 
+    public Button welcomePageExitButton;
+    public Button signUp;
     /**
      * Initializes the controller class.
      */
@@ -75,12 +70,12 @@ public class SignupController implements Initializable {
     }
 
     @FXML
-    protected void onSignUpPageSignUpButton() throws IOException {
+    protected void onSignUpPageSignUpButton() {
 
-        boolean checkValidName = false;
-        boolean checkValidEmail = false;
-        boolean checkValidPassword = false;
-        boolean checkValidConfirmPassword = false;
+        boolean checkValidName;
+        boolean checkValidEmail;
+        boolean checkValidPassword;
+        boolean checkValidConfirmPassword;
 
         String userNameTxt = username.getText().trim();
         String emailTxt = email.getText().trim();
@@ -91,9 +86,7 @@ public class SignupController implements Initializable {
 
         if (userNameTxt.isEmpty()) {
             checkValidName = false;
-            Platform.runLater(() -> {
-                errorUsername.setText("Username is required");
-            });
+            Platform.runLater(() -> errorUsername.setText("Username is required"));
         } else {
             checkValidName = true;
             errorUsername.setText("");
@@ -101,14 +94,10 @@ public class SignupController implements Initializable {
 
         if (emailTxt.isEmpty()) {
             checkValidEmail = false;
-            Platform.runLater(() -> {
-                errorEmail.setText("Email is required");
-            });
+            Platform.runLater(() -> errorEmail.setText("Email is required"));
         } else if (!Pattern.matches(regexMail, email.getText())) {
             checkValidEmail = false;
-            Platform.runLater(() -> {
-                errorEmail.setText("Please enter a valid mail");
-            });
+            Platform.runLater(() -> errorEmail.setText("Please enter a valid mail"));
         } else {
             checkValidEmail = true;
             errorEmail.setText("");
@@ -117,14 +106,10 @@ public class SignupController implements Initializable {
 
         if (passwordTxt.isEmpty()) {
             checkValidPassword = false;
-            Platform.runLater(() -> {
-                errorPassword.setText("Password is required");
-            });
+            Platform.runLater(() -> errorPassword.setText("Password is required"));
         } else if (passwordTxt.length() < 8) {
             checkValidPassword = false;
-            Platform.runLater(() -> {
-                errorPassword.setText("Password must be at least 8");
-            });
+            Platform.runLater(() -> errorPassword.setText("Password must be at least 8"));
         } else {
             checkValidPassword = true;
             errorPassword.setText("");
@@ -132,14 +117,10 @@ public class SignupController implements Initializable {
 
         if (confirmPasswordTxt.isEmpty()) {
             checkValidConfirmPassword = false;
-            Platform.runLater(() -> {
-                errorConfirmPassword.setText("Confirm Password is required");
-            });
+            Platform.runLater(() -> errorConfirmPassword.setText("Confirm Password is required"));
         } else if (!confirmPasswordTxt.equals(passwordTxt)) {
             checkValidConfirmPassword = false;
-            Platform.runLater(() -> {
-                errorConfirmPassword.setText("Please check your password");
-            });
+            Platform.runLater(() -> errorConfirmPassword.setText("Please check your password"));
         } else {
             checkValidConfirmPassword = true;
             errorConfirmPassword.setText("");
@@ -154,43 +135,34 @@ public class SignupController implements Initializable {
 
             // get data from server
             // to not hold the screen in gui client => open it in anther thread
-             thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                        String replyMsg;
-                        try {
-                            replyMsg = HandleOnlineSocket.getReceiveStream().readLine();
-                            System.out.println(replyMsg);
-                            String[] allReplyMsg = replyMsg.split("___");
-                            if(allReplyMsg[0].equals("true"))
-                            {
-                                Platform.runLater(() -> {
-                                    onSignUpPageSignInButton();
-                                });
-                            }
-                            else
-                            {
-                                if(allReplyMsg[1].equals("name"))
-                                {
-                                    Platform.runLater(() -> {
-                                        errorUsername.setText("Name "+allReplyMsg[2]);
-                                    });
-                                }
-                                else if(allReplyMsg[1].equals("email"))
-                                {
-                                    Platform.runLater(() -> {
-                                        errorEmail.setText("Email "+allReplyMsg[2]);
-                                    });
-                                }
-                            }
+             thread = new Thread(() -> {
+                     String replyMsg;
+                     try {
+                         replyMsg = HandleOnlineSocket.getReceiveStream().readLine();
+                         System.out.println(replyMsg);
+                         String[] allReplyMsg = replyMsg.split("___");
+                         if(allReplyMsg[0].equals("true"))
+                         {
+                             Platform.runLater(this::onSignUpPageSignInButton);
+                         }
+                         else
+                         {
+                             if(allReplyMsg[1].equals("name"))
+                             {
+                                 Platform.runLater(() -> errorUsername.setText("Name "+allReplyMsg[2]));
+                             }
+                             else if(allReplyMsg[1].equals("email"))
+                             {
+                                 Platform.runLater(() -> errorEmail.setText("Email "+allReplyMsg[2]));
+                             }
+                         }
 
-                        } catch (IOException ex) {
-                        }
-                        finally {
-                                thread.stop();
-                        }
-                }
-            });
+                     } catch (IOException ex) {
+                     }
+                     finally {
+                             thread.stop();
+                     }
+             });
 
             thread.start();
 //            new Thread(new Runnable() {
