@@ -5,17 +5,15 @@ import game.Board;
 import game.Mark;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -34,15 +32,16 @@ public class PlayerBotHardController implements Initializable {
 
     private static GridPane gameBoard;
     private static Board board;
+    public Button newGameButton;
+    public Button welcomePageExitButton;
     private AnimationTimer gameTimer;
-    private MenuBar menuBar;
-    private Menu gameMenu;
-    private MenuItem newGameOption;
-    private BorderPane root;
+
+
+
+
     private double xOffset = 0;
     private double yOffset = 0;
-    @FXML
-    private Button newGameButton;
+
 
     @FXML
     private Text winnerText;
@@ -52,15 +51,15 @@ public class PlayerBotHardController implements Initializable {
     private Label label2;
     @FXML
     private Label playerlabel;
-    private Button computerTurn;
+
     @FXML
     private AnchorPane HardBotScenePane;
     @FXML
     private AnchorPane BoardAnchorPane;
-    private final boolean IsOnline = true;
+
     private int player1;
     private int player2;
-    private AnchorPane anchorPane;
+
     private boolean isOnline;
 
     /**
@@ -187,7 +186,7 @@ public class PlayerBotHardController implements Initializable {
     }
 
     @FXML
-    void restartGame(ActionEvent event) {
+    void restartGame() {
         resetGame();
     }
 

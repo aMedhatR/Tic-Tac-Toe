@@ -1,14 +1,12 @@
 package controllers;
 
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import mainPk.HandleOnlineSocket;
 import person.Person;
@@ -19,6 +17,9 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class TwoPlayersOfflineController implements Initializable {
+    public Button welcomePageExitButton;
+    public Label playerName;
+    public Label homeLabel;
     private double xOffset = 0;
     private double yOffset = 0;
     @FXML
@@ -59,8 +60,7 @@ public class TwoPlayersOfflineController implements Initializable {
     private  Label label2;
     @FXML
     private Label yourName;
-@FXML
-private Label homeLabel;
+
 
     private int player1=0;
     private int player2=0;
@@ -88,12 +88,9 @@ private Label homeLabel;
     }
 
     @FXML
-    public void restartGame(ActionEvent event) {
+    public void restartGame() {
         buttons.forEach(this::resetButton);
-        Platform.runLater(()->{
-            winnerText.setText("Tic-Tac-Toe");
-
-        });
+        Platform.runLater(()-> winnerText.setText("Tic-Tac-Toe"));
     }
 
     public void resetButton(Button button){
@@ -125,18 +122,17 @@ private Label homeLabel;
     public void checkIfGameIsOver(){
         if(gameOver == 0) {
             for (int a = 0; a < 8; a++) {
-
-                     String line ;
-                    switch (a) {
-                        case 0 : line=button1.getText() + button2.getText() + button3.getText();break;
-                        case 1 : line= button4.getText() + button5.getText() + button6.getText();break;
-                        case 2 : line=button7.getText() + button8.getText() + button9.getText();break;
-                        case 3 : line=button1.getText() + button5.getText() + button9.getText();break;
-                        case 4 : line=button3.getText() + button5.getText() + button7.getText();break;
-                        case 5 : line=button1.getText() + button4.getText() + button7.getText();break;
-                        case 6 : line=button2.getText() + button5.getText() + button8.getText();break;
-                        case 7 : line=button3.getText() + button6.getText() + button9.getText();break;
-                        default : line=null;break;
+                String line ;
+                switch (a) {
+                    case 0 : line=button1.getText() + button2.getText() + button3.getText();break;
+                    case 1 : line= button4.getText() + button5.getText() + button6.getText();break;
+                    case 2 : line=button7.getText() + button8.getText() + button9.getText();break;
+                    case 3 : line=button1.getText() + button5.getText() + button9.getText();break;
+                    case 4 : line=button3.getText() + button5.getText() + button7.getText();break;
+                    case 5 : line=button1.getText() + button4.getText() + button7.getText();break;
+                    case 6 : line=button2.getText() + button5.getText() + button8.getText();break;
+                    case 7 : line=button3.getText() + button6.getText() + button9.getText();break;
+                    default : line=null;break;
                 };
 
                 //X winner

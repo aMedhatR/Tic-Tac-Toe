@@ -4,24 +4,20 @@
  */
 package controllers;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import javafx.scene.control.Dialog;
-import javafx.scene.control.DialogPane;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.StageStyle;
-import mainPk.HandleOnlineSocket;
-import mainPk.MainApp;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * FXML Controller class
@@ -29,6 +25,13 @@ import javafx.stage.Stage;
  * @author asmaaMohamed
  */
 public class HomeController implements Initializable {
+    public Button btnSinglePlayer;
+    public Label labSinglePlayer;
+    public Button welcomePageExitButton;
+    public Button btnOnlineGame;
+    public Circle circleOnlineGame;
+    public Button btnTwoPlayer;
+    public Label txtAlert;
     @FXML
     private AnchorPane HomePagepaneScene;
     Stage stage;

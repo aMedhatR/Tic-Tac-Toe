@@ -2,7 +2,6 @@ package controllers;
 
 import game.Game;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,6 +22,9 @@ import java.util.ResourceBundle;
 
 public class TwoPlayersOnlineController implements Initializable {
 
+    public AnchorPane chatAppToGame;
+    public Button welcomePageExitButton;
+    public Label CurrentPlayerNameLabel;
     Button[] d = new Button[9];
     private double xOffset = 0;
     private double yOffset = 0;
@@ -110,84 +112,81 @@ private Button withdrawButton;
         }
 
 
-        thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                HandleOnlineSocket.getSendStream().println("startGame");
-                while (true && !stopThread) {
-                    try {
-                        System.out.println("---------------------" + "repeat");
-                        replyMsg = HandleOnlineSocket.getReceiveStream().readLine();
-                        String[] allReplyMsg = replyMsg.split("___");
-                        System.out.println("message from server: " + replyMsg);
-                        switch (allReplyMsg[0]) {
+        thread = new Thread(() -> {
+            HandleOnlineSocket.getSendStream().println("startGame");
+            while (!stopThread) {
+                try {
+                    System.out.println("---------------------" + "repeat");
+                    replyMsg = HandleOnlineSocket.getReceiveStream().readLine();
+                    String[] allReplyMsg = replyMsg.split("___");
+                    System.out.println("message from server: " + replyMsg);
+                    switch (allReplyMsg[0]) {
 
-                            case "informationAnotherPlayer":
-                                nameAntherPlayer = allReplyMsg[2];
-                                idAntherPlayer = Integer.parseInt(allReplyMsg[1]);
+                        case "informationAnotherPlayer":
+                            nameAntherPlayer = allReplyMsg[2];
+                            idAntherPlayer = Integer.parseInt(allReplyMsg[1]);
 
-                                Platform.runLater(() -> {
-                                    yourName.setText(Person.getName());
-                                    playerName.setText(nameAntherPlayer);
-                                });
+                            Platform.runLater(() -> {
+                                yourName.setText(Person.getName());
+                                playerName.setText(nameAntherPlayer);
+                            });
 
-                                break;
+                            break;
 
-                            case "tartSet":
-                                playerTurn = Integer.parseInt(allReplyMsg[2]);
+                        case "tartSet":
+                            playerTurn = Integer.parseInt(allReplyMsg[2]);
 
-                                shapePlayer = allReplyMsg[3];
+                            shapePlayer = allReplyMsg[3];
 
 
-                                break;
-                            case "playerTurn":
-                                whoPlayerTurn = Integer.parseInt(allReplyMsg[1]);
-                                if (whoPlayerTurn == playerTurn) Platform.runLater(() -> turnWho.setText("Your turn"));
-                                else Platform.runLater(() -> turnWho.setText(nameAntherPlayer + " turn"));
-                                break;
-                            case "move":
-                                handleMovement(allReplyMsg[1], Integer.parseInt(allReplyMsg[2]));
-                                break;
-                            case "status":
-                                handleStatusGame(allReplyMsg[1]);
-                                break;
-                            case "reset":
-                                //StopGameThread();
-                                break;
-                            case "requestNewGameFrom":
-                                requestNewGameFrom(allReplyMsg[1]);
-                                break;
+                            break;
+                        case "playerTurn":
+                            whoPlayerTurn = Integer.parseInt(allReplyMsg[1]);
+                            if (whoPlayerTurn == playerTurn) Platform.runLater(() -> turnWho.setText("Your turn"));
+                            else Platform.runLater(() -> turnWho.setText(nameAntherPlayer + " turn"));
+                            break;
+                        case "move":
+                            handleMovement(allReplyMsg[1], Integer.parseInt(allReplyMsg[2]));
+                            break;
+                        case "status":
+                            handleStatusGame(allReplyMsg[1]);
+                            break;
+                        case "reset":
+                            //StopGameThread();
+                            break;
+                        case "requestNewGameFrom":
+                            requestNewGameFrom(allReplyMsg[1]);
+                            break;
 
-                            case "responseToNewGame":
-                                responseToNewGame(allReplyMsg[1]);
-                                break;
+                        case "responseToNewGame":
+                            responseToNewGame(allReplyMsg[1]);
+                            break;
 
-                            case "updateScore":
-                                scorePlayer1 = Integer.parseInt(allReplyMsg[1]);
-                                scorePlayer2 = Integer.parseInt(allReplyMsg[2]);
-                                updateScore();
-                                break;
-                            case"quitPlayer":
-                                handlePlayerWasQuit(allReplyMsg[1]);
-                                break;
+                        case "updateScore":
+                            scorePlayer1 = Integer.parseInt(allReplyMsg[1]);
+                            scorePlayer2 = Integer.parseInt(allReplyMsg[2]);
+                            updateScore();
+                            break;
+                        case"quitPlayer":
+                            handlePlayerWasQuit(allReplyMsg[1]);
+                            break;
 
-                            case "showDialogToAskReplayGame":
-                                handleShowDialogToAskReplayGame();
-                                break;
+                        case "showDialogToAskReplayGame":
+                            handleShowDialogToAskReplayGame();
+                            break;
 
-                            case "decisionToSaveGame":
-                                handleDecisionToSaveGame(allReplyMsg[1]);
-                                break;
-                            case "twochatmsg" :
-                                appendmsg(allReplyMsg[1]);
-                                break;
+                        case "decisionToSaveGame":
+                            handleDecisionToSaveGame(allReplyMsg[1]);
+                            break;
+                        case "twochatmsg" :
+                            appendmsg(allReplyMsg[1]);
+                            break;
 
-                        }
-
-                    } catch (IOException e) {
-                        System.out.println("---------------------" + e);
-                        e.printStackTrace();
                     }
+
+                } catch (IOException e) {
+                    System.out.println("---------------------" + e);
+                    e.printStackTrace();
                 }
             }
         });
@@ -196,7 +195,7 @@ private Button withdrawButton;
 
 
     @FXML
-    public void restartGame(ActionEvent event) {
+    public void restartGame() {
 
         HandleOnlineSocket.getSendStream().println("requestNewGame___" + Person.getName() + "___" + idAntherPlayer);
 
@@ -224,9 +223,7 @@ private Button withdrawButton;
     }
 
     private void setupButton(Button button) {
-        button.setOnMouseClicked(mouseEvent -> {
-            setPlayerSymbol(button);
-        });
+        button.setOnMouseClicked(mouseEvent -> setPlayerSymbol(button));
     }
 
     public void setPlayerSymbol(Button button) {
@@ -237,8 +234,6 @@ private Button withdrawButton;
             HandleOnlineSocket.getSendStream().println("updateGame___" + shapePlayer + "___" + index);
             button.setDisable(true);
             //checkIfGameIsOver();
-        } else if (playerTurn != whoPlayerTurn) {
-
         }
 
 
@@ -337,25 +332,25 @@ private Button withdrawButton;
         Image drawImage = new Image("/Images/minionsDraw.gif", 355, 265, false, false);
         ImageView drawview = new ImageView(drawImage);
         ImageView StatusImage = null;
-        switch (status) {
-            case "win":
-                StatusImage = winview;
-                increaseScore();
-                SaveGameForLater.setDisable(true);
-                withdrawButton.setDisable(true);
-                break;
-            case "lose":
-                StatusImage = loseview;
-                SaveGameForLater.setDisable(true);
-                withdrawButton.setDisable(true);
-                break;
-            case "draw":
-                StatusImage = drawview;
-                SaveGameForLater.setDisable(true);
-                withdrawButton.setDisable(true);
-                break;
+            switch (status) {
+                case "win":
+                    StatusImage = winview;
+                    increaseScore();
+                    SaveGameForLater.setDisable(true);
+                    withdrawButton.setDisable(true);
+                    break;
+                case "lose":
+                    StatusImage = loseview;
+                    SaveGameForLater.setDisable(true);
+                    withdrawButton.setDisable(true);
+                    break;
+                case "draw":
+                    StatusImage = drawview;
+                    SaveGameForLater.setDisable(true);
+                    withdrawButton.setDisable(true);
+                    break;
 
-        }
+            }
         FXMLLoader loadDialog =new FXMLLoader(getClass().getResource("/dialoguesAndControllers/WinLoseDrawDialog.fxml"));
             Stage endStage =new Stage();
         try {
@@ -430,7 +425,7 @@ private Button withdrawButton;
                 dialog.initStyle(StageStyle.UNDECORATED);
                 dialog.showAndWait().ifPresent(response -> {
                     if (response == ButtonType.OK) {
-                    } else if (response == ButtonType.CANCEL) {
+                        dialog.close();
                     }
                 });
             });
@@ -460,6 +455,7 @@ private Button withdrawButton;
                     backToClientPage();
                 } else if (response == ButtonType.CANCEL) {
                     /// back to home
+                    dialog.close();
                 }
             });
         });
@@ -526,10 +522,7 @@ private Button withdrawButton;
     }
 
     protected void appendmsg(String msg) {
-        Platform.runLater(() -> {
-            txtarea.appendText("\n" + msg);
-
-        });
+        Platform.runLater(() -> txtarea.appendText("\n" + msg));
     }
     @FXML
     protected void handlePressedAction(MouseEvent event)

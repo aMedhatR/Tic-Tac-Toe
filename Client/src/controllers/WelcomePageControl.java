@@ -1,37 +1,26 @@
 package controllers;
 
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import mainPk.HandleOnlineSocket;
-import mainPk.MainApp;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class WelcomePageControl  implements Initializable {
-    @FXML
-    private Label welcomeText;
-    @FXML
-    private Button welcomePageExitButton;
+
+
+    public Button welcomePageExitButton;
     @FXML
     private AnchorPane WelcomeScenePane;
     private double xOffset = 0;
     private double yOffset = 0;
-
-    Stage stage;
-    Scene scene;
     @FXML
     protected void onWelcomeCloseButtonClick() {
         CommonControllers.closeWindow(WelcomeScenePane,false);
@@ -50,7 +39,7 @@ public class WelcomePageControl  implements Initializable {
     }
 
     @FXML
-    protected void onWelcomeGuestButtonClick() throws IOException {
+    protected void onWelcomeGuestButtonClick() {
 
          CommonControllers.gotoStage("Home.fxml",WelcomeScenePane);
 
@@ -77,7 +66,7 @@ public class WelcomePageControl  implements Initializable {
     MediaPlayer mediaPlayer;
     public void music()
     {
-        Media media= new Media(getClass().getResource("/Audio/click.wav").toExternalForm());
+        Media media= new Media(Objects.requireNonNull(getClass().getResource("/Audio/click.wav")).toExternalForm());
         mediaPlayer=new MediaPlayer(media);
         mediaPlayer.play();
     }
