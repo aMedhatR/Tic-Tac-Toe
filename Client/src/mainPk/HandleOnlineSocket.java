@@ -11,7 +11,7 @@ public class HandleOnlineSocket {
     private static DataInputStream dis;
     private static PrintStream ps;
     public static String remoteIP;
-    public static Integer portNumber;
+    public static String portNumber;
 
     public HandleOnlineSocket()
     {
@@ -19,7 +19,7 @@ public class HandleOnlineSocket {
             if(remoteIP.equals(null)) {
                 mySocket = new Socket("127.0.0.1", 5100);
             }
-            else  mySocket = new Socket(remoteIP, portNumber);
+            else  mySocket = new Socket(remoteIP, Integer.parseInt(portNumber));
 
             //  mySocket = new Socket("154.183.150.115",8080);
 
