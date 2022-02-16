@@ -139,8 +139,8 @@ public class WelcomePageControl implements Initializable {
         Optional<Pair<String, String>> result = dialog.showAndWait();
 
         result.ifPresent(connectToServer -> {
-            String portNum = connectToServer.getKey();
-            String remoteIP = connectToServer.getValue();
+            String remoteIP = connectToServer.getKey();
+            String portNum = connectToServer.getValue();
             HandleOnlineSocket.setvaluePortNumber(portNum);
             HandleOnlineSocket.setRemoteIP(remoteIP);
         });
