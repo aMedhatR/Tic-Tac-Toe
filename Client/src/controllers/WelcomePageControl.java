@@ -6,7 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -26,6 +27,8 @@ public class WelcomePageControl implements Initializable {
 
     public Button welcomePageExitButton;
     MediaPlayer mediaPlayer;
+    public TextField remoteIPAddressField;
+    public TextField PortField;
     @FXML
     private AnchorPane WelcomeScenePane;
     private double xOffset = 0;

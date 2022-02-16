@@ -36,7 +36,7 @@ public class PlayerBotHardController implements Initializable {
     public Button welcomePageExitButton;
     private AnimationTimer gameTimer;
 
-
+    private boolean interruptFlag;
 
 
     private double xOffset = 0;
@@ -147,20 +147,16 @@ public class PlayerBotHardController implements Initializable {
         gameTimer.stop();
     //    newGameButton.setDisable(false);
         Mark winner = board.getWinningMark();
-        if (winner==O)
-        {
-            player1+=10;
-            System.out.println(player1);
-            if (isOnline) {
-                SendScoreToServer();
+        if (!interruptFlag) {
+            if (winner == O) {
+                player1 += 10;
+                if (isOnline) {
+                    SendScoreToServer();
+                }
+            } else if (winner == X) {
+                player2 += 10;
             }
         }
-        else if (winner==X)
-        {
-            System.out.println(player1);
-            player2+=10;
-        }
-
         winnerText.setText("Tic-Tac-Toe");
         if (winner == Mark.BLANK) {
             winnerText.setText("Draw!");
@@ -187,7 +183,9 @@ public class PlayerBotHardController implements Initializable {
 
     @FXML
     void restartGame() {
+        interruptFlag=true;
         resetGame();
+        interruptFlag=false;
     }
 
     public void SendScoreToServer() {

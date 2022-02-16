@@ -17,7 +17,7 @@ public class HandleOnlineSocket {
     {
         try {
             mySocket = new Socket(remoteIP, Integer.parseInt(portNumber));
-            System.out.println(remoteIP+"   "+portNumber);
+
             dis = new DataInputStream(mySocket.getInputStream());
             ps = new PrintStream(mySocket.getOutputStream());
         } catch (IOException e) {
