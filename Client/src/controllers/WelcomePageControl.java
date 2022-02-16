@@ -3,6 +3,7 @@ package controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
@@ -17,6 +18,8 @@ public class WelcomePageControl  implements Initializable {
 
 
     public Button welcomePageExitButton;
+    public TextField remoteIPAddressField;
+    public TextField PortField;
     @FXML
     private AnchorPane WelcomeScenePane;
     private double xOffset = 0;

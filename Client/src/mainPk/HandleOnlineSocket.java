@@ -16,10 +16,12 @@ public class HandleOnlineSocket {
     public HandleOnlineSocket()
     {
         try {
-            if(remoteIP.equals(null)) {
-                mySocket = new Socket("127.0.0.1", 5100);
-            }
-            else  mySocket = new Socket(remoteIP, Integer.parseInt(portNumber));
+            mySocket = new Socket("127.0.0.1", 5100);
+//            if(remoteIP.equals(null)) {
+//                System.out.println("remote is null");
+//                mySocket = new Socket("127.0.0.1", 5100);
+//            }
+//            else  mySocket = new Socket(remoteIP, Integer.parseInt(portNumber));
 
             //  mySocket = new Socket("154.183.150.115",8080);
 
