@@ -10,13 +10,18 @@ public class HandleOnlineSocket {
     private static Socket mySocket;
     private static DataInputStream dis;
     private static PrintStream ps;
+    public static String remoteIP;
+    public static Integer portNumber;
 
     public HandleOnlineSocket()
     {
         try {
-            mySocket = new Socket("127.0.0.1", 5100);
+            if(remoteIP.equals(null)) {
+                mySocket = new Socket("127.0.0.1", 5100);
+            }
+            else  mySocket = new Socket(remoteIP, portNumber);
 
-          //  mySocket = new Socket("154.183.150.115",8080);
+            //  mySocket = new Socket("154.183.150.115",8080);
 
 
             dis = new DataInputStream(mySocket.getInputStream());

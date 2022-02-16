@@ -4,73 +4,67 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="WelcomeScenePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity" onMouseDragged="#handleMovementAction" onMousePressed="#handlePressedAction"
-            prefHeight="450.0" prefWidth="780.0" style="-fx-background-color: black;" styleClass="WelcomePagePaneclass"
-            stylesheets="@../cssFiles/Styling.css" xmlns="http://javafx.com/javafx/8.0.171"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WelcomePageControl">
+<AnchorPane fx:id="WelcomeScenePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#handleMovementAction" onMousePressed="#handlePressedAction" prefHeight="450.0" prefWidth="780.0" style="-fx-background-color: black;" styleClass="WelcomePagePaneclass" stylesheets="@../cssFiles/Styling.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WelcomePageControl">
    <Text layoutX="65.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Fabulous">
       <font>
-         <Font name="Broadway" size="57.0"/>
+         <Font name="Broadway" size="57.0" />
       </font>
       <effect>
-         <Bloom/>
+         <Bloom />
       </effect>
       <fill>
-         <LinearGradient endX="0.8714285714285714" endY="0.4333333333333334" startX="0.23809523809523805"
-                         startY="0.2095238095238095">
+         <LinearGradient endX="0.8714285714285714" endY="0.4333333333333334" startX="0.23809523809523805" startY="0.2095238095238095">
             <stops>
-               <Stop color="WHITE"/>
-               <Stop color="WHITE" offset="0.007662835249042145"/>
-               <Stop color="#0bff00" offset="1.0"/>
+               <Stop color="WHITE" />
+               <Stop color="WHITE" offset="0.007662835249042145" />
+               <Stop color="#0bff00" offset="1.0" />
             </stops>
          </LinearGradient>
       </fill>
    </Text>
-   <Text fill="#00ff3c" layoutX="390.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tic Tac Toe"
-         textAlignment="CENTER">
+   <Text fill="#00ff3c" layoutX="390.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tic Tac Toe" textAlignment="CENTER">
       <font>
-         <Font name="Brush Script MT Italic" size="67.0"/>
+         <Font name="Brush Script MT Italic" size="67.0" />
       </font>
       <effect>
-         <Glow/>
+         <Glow />
       </effect>
    </Text>
-   <Button layoutX="221.0" layoutY="315.0" mnemonicParsing="false" onAction="#music"
-           onMouseClicked="#onWelcomeSignInButtonClick" prefHeight="25.0" prefWidth="154.0"
-           style="-fx-background-radius: 25;" styleClass="specialButtons" stylesheets="@../cssFiles/Styling.css"
-           text="Sign In">
+   <Button layoutX="221.0" layoutY="315.0" mnemonicParsing="false" onAction="#music" onMouseClicked="#onWelcomeSignInButtonClick" prefHeight="25.0" prefWidth="154.0" style="-fx-background-radius: 25;" styleClass="specialButtons" stylesheets="@../cssFiles/Styling.css" text="Sign In">
       <cursor>
-         <Cursor fx:constant="HAND"/>
+         <Cursor fx:constant="HAND" />
       </cursor>
    </Button>
-   <Button fx:id="welcomePageExitButton" layoutX="736.0" layoutY="7.0" mnemonicParsing="false"
-           onMouseClicked="#onWelcomeCloseButtonClick" prefHeight="25.0" prefWidth="36.0"
-           styleClass="welcomePageCloseButtonClass" stylesheets="@../cssFiles/Styling.css" text="X">
+   <Button fx:id="welcomePageExitButton" layoutX="736.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#onWelcomeCloseButtonClick" prefHeight="25.0" prefWidth="36.0" styleClass="welcomePageCloseButtonClass" stylesheets="@../cssFiles/Styling.css" text="X">
       <cursor>
-         <Cursor fx:constant="HAND"/>
+         <Cursor fx:constant="HAND" />
       </cursor>
    </Button>
-   <Button layoutX="406.0" layoutY="316.0" mnemonicParsing="false" onAction="#music"
-           onMouseClicked="#onWelcomeSignUpButtonClick" prefHeight="25.0" prefWidth="154.0"
-           style="-fx-background-radius: 25;" styleClass="specialButtons" stylesheets="@../cssFiles/Styling.css"
-           text="Sign Up">
+   <Button layoutX="406.0" layoutY="316.0" mnemonicParsing="false" onAction="#music" onMouseClicked="#onWelcomeSignUpButtonClick" prefHeight="25.0" prefWidth="154.0" style="-fx-background-radius: 25;" styleClass="specialButtons" stylesheets="@../cssFiles/Styling.css" text="Sign Up">
       <cursor>
-         <Cursor fx:constant="HAND"/>
+         <Cursor fx:constant="HAND" />
       </cursor>
    </Button>
-   <Button layoutX="313.0" layoutY="360.0" mnemonicParsing="false" onAction="#music"
-           onMouseClicked="#onWelcomeGuestButtonClick" prefHeight="25.0" prefWidth="154.0"
-           style="-fx-background-radius: 25;" styleClass="specialButtons" stylesheets="@../cssFiles/Styling.css"
-           text="Play As a Guest">
+   <Button layoutX="313.0" layoutY="360.0" mnemonicParsing="false" onAction="#music" onMouseClicked="#onWelcomeGuestButtonClick" prefHeight="25.0" prefWidth="154.0" style="-fx-background-radius: 25;" styleClass="specialButtons" stylesheets="@../cssFiles/Styling.css" text="Play As a Guest">
       <cursor>
-         <Cursor fx:constant="HAND"/>
+         <Cursor fx:constant="HAND" />
       </cursor>
+   </Button>
+   <Button layoutX="702.0" layoutY="394.0" mnemonicParsing="false" onMouseClicked="#addIPandPort" style="-fx-background-color: #0bff00;">
+      <graphic>
+         <ImageView fitHeight="27.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../Images/playing-online.png" />
+            </image>
+         </ImageView>
+      </graphic>
    </Button>
 </AnchorPane>

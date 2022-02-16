@@ -70,4 +70,9 @@ public class WelcomePageControl  implements Initializable {
         mediaPlayer=new MediaPlayer(media);
         mediaPlayer.play();
     }
+    @FXML
+    protected void addIPandPort()
+    {
+
+    }
 }
