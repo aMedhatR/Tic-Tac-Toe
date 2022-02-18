@@ -23,6 +23,8 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+import static mainPk.HandleOnlineSocket.getMySocket;
+
 /**
  *
  * @author nora
@@ -52,7 +54,9 @@ public class signInController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        new HandleOnlineSocket();
+        if (getMySocket()==null) {
+            new HandleOnlineSocket();
+        }
     }
 
 

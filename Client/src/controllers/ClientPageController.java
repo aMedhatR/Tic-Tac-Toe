@@ -106,6 +106,9 @@ public class ClientPageController implements Initializable {
                             case "notification":
                                 notification(allReplyMsg[1]);
                                 break;
+                            case"judgeDaySeqInit":
+                                selfDestruction();
+                                break;
                             default:
                                 updateLeaderboardHandler(allReplyMsg);
                                 break;
@@ -560,6 +563,7 @@ public class ClientPageController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setDialogPane(ConfirmDialogPane);
         dialog.initStyle(StageStyle.UNDECORATED);
@@ -581,7 +585,37 @@ public class ClientPageController implements Initializable {
 
         });
     }
+    public void selfDestruction() {
+        Platform.runLater(()->{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dialoguesAndControllers/PleaseChoosePlayer.fxml"));
+        DialogPane ConfirmDialogPane = null;
+        try {
+            ConfirmDialogPane = fxmlLoader.load();
+            ConfirmDialogPane.setContentText("Server is Down please try to login again");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setDialogPane(ConfirmDialogPane);
+        dialog.initStyle(StageStyle.UNDECORATED);
+        dialog.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+
+                HandleOnlineSocket.getSendStream().println("ChangeIsPlaying___false");
+                try {
+                    CommonControllers.signOut();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                CommonControllers.goToHome(ClientScenePane);
+
+            }
+
+        });
+});
+    }
     protected void appendmsg(String msg) {
         Platform.runLater(() -> txtarea.appendText("\n" + msg));
     }

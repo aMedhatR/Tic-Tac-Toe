@@ -151,8 +151,11 @@ public class PlayerBotHardController implements Initializable {
             if (winner == O) {
                 player1 += 10;
                 if (isOnline) {
+                    int score = Person.getScore() + 10;
+                    Person.setScore(score);
                     SendScoreToServer();
                 }
+
             } else if (winner == X) {
                 player2 += 10;
             }

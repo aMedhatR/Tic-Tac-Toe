@@ -25,12 +25,14 @@ import socket.SocketServer;
 import startServer.App;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import static java.lang.Thread.sleep;
+import static socket.Handler.judgeDaySeqInitiate;
 
 /**
  *
@@ -102,6 +104,7 @@ public static void update ()
                 Image ServerOnImage = new Image("/images/serverOn.png", 70, 61, false, false);
 
                 buttonServerImage.setImage(ServerOnImage);
+
             });
             CurrentThread = new Thread(new Runnable() {
                 @Override
@@ -117,6 +120,7 @@ public static void update ()
         else
         {
             Platform.runLater(()->{
+                judgeDaySeqInitiate();
                 ServerButtonLabel.setText("Server Is Off");
                 Image ServerOffImage = new Image("/images/serverOff.png", 70, 61, false, false);
                 buttonServerImage.setImage(ServerOffImage);
@@ -167,13 +171,16 @@ public static void update ()
     }
     public void addNewLeaderBoardElement(String Name, String Score, boolean Status,boolean isPlaying) {
         Platform.runLater(()->{
-
-
-        Image onlineImage = new Image("/images/online.png", 20, 20, false, false);
+          
+        ClassLoader loader = this.getClass().getClassLoader();
+		InputStream onlineImage1 = loader.getResourceAsStream( "images/online.png");
+        InputStream offlineImage1 = loader.getResourceAsStream( "images/offline.png");
+        InputStream busyImage1 = loader.getResourceAsStream( "images/busy.png");
+        Image onlineImage = new Image(onlineImage1, 20, 20, false, false);
         ImageView onlineIcon = new ImageView(onlineImage);
-        Image offlineImage = new Image("/images/offline.png", 20, 20, false, false);
+        Image offlineImage = new Image(offlineImage1, 20, 20, false, false);
         ImageView offlineIcon = new ImageView(offlineImage);
-        Image busyImage = new Image("/Images/busy.png", 20, 20, false, false);
+        Image busyImage = new Image(busyImage1, 20, 20, false, false);
         ImageView busyIcon = new ImageView(busyImage);
         HBox hbox = new HBox();
         Label NameLabel = new Label(Name);

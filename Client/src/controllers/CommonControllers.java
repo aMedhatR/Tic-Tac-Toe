@@ -62,6 +62,7 @@ public class CommonControllers {
                 HandleOnlineSocket.getReceiveStream().close();
                 HandleOnlineSocket.getSendStream().close();
                 HandleOnlineSocket.getMySocket().close();
+                HandleOnlineSocket.setMySocket(null);
             }
             gotoStage("WelcomePage.fxml", pane);
         } catch (IOException e) {
@@ -77,10 +78,15 @@ public class CommonControllers {
             HandleOnlineSocket.getReceiveStream().close();
             HandleOnlineSocket.getSendStream().close();
             HandleOnlineSocket.getMySocket().close();
+            HandleOnlineSocket.setMySocket(null);
             }
             gotoStage("WelcomePage.fxml", pane);
         } catch (IOException e) {
             System.out.println("server is down");
+        }
+        catch (Exception exp)
+        {
+            System.out.println(exp);
         }
        // gotoStage("WelcomePage.fxml", pane);
 
@@ -122,8 +128,17 @@ public class CommonControllers {
             e.printStackTrace();
         }
     }
-    public static void serverIsDown()
+    public static void serverIsDown(AnchorPane pane)
     {
-
+        try {
+           signOut();
+            goToHome(pane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex);
+        }
     }
 }
