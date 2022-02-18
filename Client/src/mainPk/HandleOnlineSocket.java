@@ -8,6 +8,11 @@ import java.net.Socket;
 public class HandleOnlineSocket {
 
     private static Socket mySocket;
+
+    public static void setMySocket(Socket mySocket) {
+        HandleOnlineSocket.mySocket = mySocket;
+    }
+
     private static DataInputStream dis;
     private static PrintStream ps;
     private static String remoteIP ="127.0.0.1";

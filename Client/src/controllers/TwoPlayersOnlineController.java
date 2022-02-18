@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static controllers.CommonControllers.serverIsDown;
+
 public class TwoPlayersOnlineController implements Initializable {
 
     public AnchorPane chatAppToGame;
@@ -180,6 +182,9 @@ private Button withdrawButton;
                             break;
                         case "twochatmsg" :
                             appendmsg(allReplyMsg[1]);
+                            break;
+                        case"judgeDaySeqInit":
+                            selfDestruction();
                             break;
 
                     }
@@ -523,6 +528,37 @@ private Button withdrawButton;
 
     protected void appendmsg(String msg) {
         Platform.runLater(() -> txtarea.appendText("\n" + msg));
+    }
+    public void selfDestruction() {
+        Platform.runLater(()->{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dialoguesAndControllers/PleaseChoosePlayer.fxml"));
+            DialogPane ConfirmDialogPane = null;
+            try {
+                ConfirmDialogPane = fxmlLoader.load();
+                ConfirmDialogPane.setContentText("Server is Down please try to login again");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setDialogPane(ConfirmDialogPane);
+            dialog.initStyle(StageStyle.UNDECORATED);
+            dialog.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+
+                    HandleOnlineSocket.getSendStream().println("ChangeIsPlaying___false");
+                    try {
+                        CommonControllers.signOut();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    CommonControllers.goToHome(chatAppToGame);
+
+                }
+
+            });
+        });
     }
     @FXML
     protected void handlePressedAction(MouseEvent event)

@@ -21,6 +21,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
+import static mainPk.HandleOnlineSocket.getMySocket;
+
 /**
  * FXML Controller class
  *
@@ -61,7 +63,11 @@ public class SignupController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        if (getMySocket()==null) {
+            System.out.println("new scocket is open");
+            new HandleOnlineSocket();
+        }
+
     }
     @FXML
     protected void goToHome() {

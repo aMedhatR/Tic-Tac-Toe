@@ -15,6 +15,7 @@ import java.sql.SQLException;
 
 import javafx.stage.StageStyle;
 import socket.SocketServer;
+import startServer.App;
 
 /**
  *
@@ -44,6 +45,7 @@ public class MainApp extends Application {
     public static void main(String[] args) throws SQLException, Exception {
 
        //     new SocketServer();
+            
             launch();
     }
 }
